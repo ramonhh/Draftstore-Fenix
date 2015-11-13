@@ -7,51 +7,67 @@
   <ui:composition template="template/modelo.xhtml"> 
 
     <ui:define name="content">
-
+      
+      <!--Steps-->
       <div class="ui basic segment center aligned">
-        <div class="ui ordered steps">
+        <div class="ui three steps">
           <div class="completed step">
+            <i class="map marker icon"></i>
             <div class="content">
               <div class="title">Endereço</div>
+              <div class="description">Informe onde será entregue a compra</div>
             </div>
           </div>
-          <div class=" active step">
+          <div class="active step">
+            <i class="truck icon"></i>
             <div class="content">
-              <div class="title">Entrega</div>                           
+              <div class="title">Entrega</div>    
+              <div class="description">Indique as opções para a entrega</div>
             </div>
           </div>
-          <div class="step">
+          <div class="disabled step">
+            <i class="credit card icon"></i>
             <div class="content">
               <div class="title">Pagamento</div>
+              <div class="description">Escolha a forma de pagamento</div>
             </div>
           </div>
         </div>
       </div>
+      
+      
       <div class="ui basic segment">      
         <div class="ui grid">
-          <div class="ui basic container">
+          <div class="ui container">
+
+            <h1 class="ui center aligned header">
+              Como você deseja que seja entregue?
+            </h1>
+
             <h2 class="ui header">
-              Escolha as opções de entrega
+              <i class="map marker icon"></i>
+              <div class="content">
+                Para o endereço
+                <div class="sub header">
+                  #{enderecoBean.enderecoSelecionado.rua}, 
+                  #{enderecoBean.enderecoSelecionado.numero},
+                  #{enderecoBean.enderecoSelecionado.bairro},
+                  CEP #{enderecoBean.enderecoSelecionado.cep},
+                  #{enderecoBean.enderecoSelecionado.cidade}, 
+                  #{enderecoBean.enderecoSelecionado.estado} - 
+                  <a href="compra_endereco.xhtml">Alterar endereço</a></div>
+                </div>
             </h2>
-            <h3 class="ui header">
-              Para o endereço
-              <div class="sub header">
-                #{enderecoBean.enderecoSelecionado.rua}, 
-                #{enderecoBean.enderecoSelecionado.numero},
-                #{enderecoBean.enderecoSelecionado.bairro},
-                CEP #{enderecoBean.enderecoSelecionado.cep},
-                #{enderecoBean.enderecoSelecionado.cidade}, 
-                #{enderecoBean.enderecoSelecionado.estado} - 
-                <a href="compra_endereco.xhtml">Alterar endereço</a></div>
-            </h3>
           </div>
+
         </div>
       </div>
       <div class="ui container">
         <div class="ui segment">
           <div class="ui grid">
             <div class="eight wide column">
-              <h3 class="ui header">Produto </h3>
+              <h3 class="ui header">Produto</h3>
+              
               <div class="card">
                 <div class="content">
                   <img class="left floated tiny ui image" src="imagens/produtos/controlexbox.jpg"/>
@@ -63,29 +79,14 @@
                   </div>                                       
                 </div>
               </div>
+              
             </div>
             <div class="ui basic divider vertical"> </div>
             <div class="eight wide column">
               <div class="ui basic segment">
                 <h3>Tipo de entrega</h3>
-
-                <!--                                <div class="ui form">
-                                                    <div class="inline field">
-                                                        <input type="radio" > <span class="entrega">Entrega em até 15 dias úteis </span></input>
-                
-                                                    </div>
-                                                    <div class="inline field">
-                                                        <input type="radio" > <span class="entrega">Entrega em até 10 dias úteis </span></input>
-                                                    </div>
-                                                </div>-->
                 <h:selectOneRadio value="#{enderecoBean.tipoEntrega}" layout="pageDirection" 
                                   styleClass="ui celled table">
-<!--                  <div class="inline field">
-                  <f:selectItem itemValue="15" itemLabel="Entrega em até 15 dias úteis" class="entrega"/>
-                  </div>
-                  <div class="inline field">
-                  <f:selectItem itemValue="15" itemLabel="Entrega em até 15 dias úteis" class="entrega"/>
-                  </div>-->
                   <f:selectItem itemValue="10" itemLabel="Entrega em até 10 dias úteis"/>
                   <f:selectItem itemValue="15" itemLabel="Entrega em até 15 dias úteis"/>
                 </h:selectOneRadio>
@@ -94,12 +95,15 @@
           </div>
         </div>
       </div>
+      
       <div class="ui basic segment">
+        
         <div class="ui container right aligned">
           <a href="compra_pagamento.xhtml"> 
-            <div class="ui bottom button blue">                            
+            <button class="ui huge labeled icon bottom button blue">  
+              <i class="right arrow icon"></i>
               Continuar
-            </div>
+            </button>
           </a>
         </div>
       </div>

@@ -8,25 +8,32 @@
 
         <ui:define name="content">
 
-            <div class="ui basic segment center aligned">
-                <div class="ui ordered steps">
-                    <div class="completed step">
-                        <div class="content">
-                            <div class="title">Endereço</div>
-                        </div>
-                    </div>
-                    <div class="completed step">
-                        <div class="content">
-                            <div class="title">Entrega</div>
-                        </div>
-                    </div>
-                    <div class="active step">
-                        <div class="content">
-                            <div class="title">Pagamento</div>
-                        </div>
-                    </div>
-                </div>
+            <!--Steps-->
+      <div class="ui basic segment center aligned">
+        <div class="ui three steps">
+          <div class="completed step">
+            <i class="map marker icon"></i>
+            <div class="content">
+              <div class="title">Endereço</div>
+              <div class="description">Informe onde será entregue a compra</div>
             </div>
+          </div>
+          <div class="completed step">
+            <i class="truck icon"></i>
+            <div class="content">
+              <div class="title">Entrega</div>    
+              <div class="description">Indique as opções para a entrega</div>
+            </div>
+          </div>
+          <div class="active step">
+            <i class="credit card icon"></i>
+            <div class="content">
+              <div class="title">Pagamento</div>
+              <div class="description">Escolha a forma de pagamento</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
             <div class="ui container">
                 <h3 class="ui header">Resumo da compra</h3>

@@ -125,7 +125,7 @@ public class CarrinhoBean implements Serializable {
                 return -1;
             }
 
-            valor += pc.getProduto().getCusto().floatValue() * pc.getQuantidade();
+            valor += pc.getProduto().getPrecoVenda().floatValue() * pc.getQuantidade();
         }
 
         return valor;

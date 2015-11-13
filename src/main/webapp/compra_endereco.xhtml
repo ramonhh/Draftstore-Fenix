@@ -8,28 +8,36 @@
   <ui:composition template="template/modelo.xhtml"> 
 
     <ui:define name="content">
+      
+      
+      <!--Steps-->
       <div class="ui basic segment center aligned">
-        <div class="ui ordered steps">
+        <div class="ui three steps">
           <div class="active step">
+            <i class="map marker icon"></i>
             <div class="content">
               <div class="title">Endereço</div>
-
+              <div class="description">Informe onde será entregue a compra</div>
             </div>
           </div>
-          <div class="step">
+          <div class="disabled step">
+            <i class="truck icon"></i>
             <div class="content">
-              <div class="title">Entrega</div>
-
+              <div class="title">Entrega</div>    
+              <div class="description">Indique as opções para a entrega</div>
             </div>
           </div>
-          <div class="step">
+          <div class="disabled step">
+            <i class="credit card icon"></i>
             <div class="content">
               <div class="title">Pagamento</div>
-
+              <div class="description">Escolha a forma de pagamento</div>
             </div>
           </div>
         </div>
       </div>
+      
+      
       <div class="ui container center aligned">
         <div class="ui basic segment">
           <h2 class="ui header"> Escolha um endereço para entrega</h2>
@@ -90,8 +98,6 @@
         </div>
       </div>
 </h:form>
-
-
 
       <div class="ui  modal endereco">
         <div class="header">Cadastrar Endereço</div>
