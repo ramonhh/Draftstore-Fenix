@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="template/modelo.xhtml"> 
+
+        <ui:define name="content">
+
+            <div class="ui basic segment center aligned">
+                <div class="ui ordered steps">
+                    <div class="completed step">
+                        <div class="content">
+                            <div class="title">Endereço</div>
+                        </div>
+                    </div>
+                    <div class="completed step">
+                        <div class="content">
+                            <div class="title">Entrega</div>
+                        </div>
+                    </div>
+                    <div class="active step">
+                        <div class="content">
+                            <div class="title">Pagamento</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui container">
+                <h3 class="ui header">Resumo da compra</h3>
+                <div class="ui segment">
+
+                    <div class="ui grid"> 
+                        <div class="eight wide column">
+                            <h3 class="ui header">Produto </h3>
+                            <div class="card">
+                                <div class="content">
+                                    <img class="left floated tiny ui image" src="imagens/produtos/controlexbox.jpg"/>
+                                    <h4 class="ui header">
+                                        Console Playstation 4 500GB - Sony
+                                    </h4>
+                                    <div class="ui meta">
+                                        Quantidade: 1
+                                    </div>                                       
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui basic divider vertical"> </div>
+                        <div class="eight wide column">
+                            <div class="ui basic segment">
+                                <h5>Subtotal:	R$ 1.882,24</h5>
+                                    <h5>  Valor do frete:	R$ 10,05</h5>
+                                    <div class="ui basic segment right aligned">
+                                <h3 class="ui header">  Valor total: R$ 649,00 
+                                    <div class="sub header">em até 10x de R$ 64,90 sem juros</div></h3>
+                                    </div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="ui container">
+                <h3 class="ui header">Escolha a forma de pagamento</h3>     
+                <div class="ui segment">
+                    <form class="ui form">
+                        <h4 class="ui dividing header">Cartão de Crédito</h4>
+                        <div class="fields">
+                            <div class="field eight wide">
+                                <label>
+                                    Número do cartão
+                                </label>
+                                <input type="text"/>
+                            </div>
+                            <div class="field eight wide">
+                                <label>
+                                    Nome do titular
+                                </label>
+                                <input type="text"/>
+                            </div>
+                        </div>
+                        <div class="fields">
+                            <div class="field four wide">
+                                <label>Data de Validade</label>
+                                <input type="month"/>
+                            </div>
+                            <div class="field four wide">
+                                <label>Código de segurança</label>
+                                <input type="text"/>
+                            </div>
+
+                            <div class="field eight wide">
+                                <label>CPF ou CNPJ do Titular</label>
+                                <input type="text"/>
+                            </div>
+                        </div>
+                        <div class="fields">
+                            <div class="field eight wide">
+                                <label>Número de parcelas</label>
+                                <select>
+                                    <option value="" selected="true" disabled="true">Selecione</option>
+                                    <option value="">1X</option>
+                                    <option value="">2X</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                  
+<!--                <a href="compra_sucesso.xhtml">
+                  
+                    <div class="ui bottom button blue">Finalizar compra</div>
+                  </div>
+                </a>-->
+                <div class="ui basic segment right aligned">
+                <h:form>
+                  <h:commandButton action="#{carrinhoBean.finalizarCompra()}"
+                                   value="Finalizar compra"
+                                   styleClass="ui bottom button blue">
+                  </h:commandButton>
+                </h:form>
+                </div>
+            </div>                  
+
+            <script>
+                $('.menu .item')
+                        .tab()
+                        ;
+            </script>
+        </ui:define>
+    </ui:composition>
+</html>
+
