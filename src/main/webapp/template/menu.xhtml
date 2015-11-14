@@ -67,7 +67,7 @@
                                     </c:when>
                                     <c:otherwise>
                                       <!--Utilizar o item abaixo para quando o usuario NÃO ESTIVER LOGADO-->                            
-                                      <a class="ui item" id="btnLogin">
+                                      <a class="ui item" herf="login.xhtml">
                                           <div class="column">
                                               <i class="sign in icon"></i>
                                               Login ou Cadastre-se
@@ -192,53 +192,7 @@
                 </div>
             </div> 
         </div>
-        <div class="ui segment login modal">
-            <div class="ui centered grid stackable">
-                <div class="eight wide column">
-                    <div class="ui header aligned center">    
-                        <h2>
-                            <i class="sign in icon"></i>
-                            <div class="content">
-                                Entrar
-                            </div>
-                        </h2>
-                    </div>
-                    <!--<div class="ui form">-->
-                      <h:form prependId="false" id="loginForm" styleClass="ui form">
-                        <div class="field">
-                            <label>Usuário</label>
-                            <div class="ui left icon input">
-                                <!--<input type="text" placeholder="Username"/>-->
-                                <h:inputText value="#{usuarioBean.email}" id="nome"/>
-                                <i class="user icon"></i>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Senha</label>
-                            <div class="ui left icon input">
-                                <!--<input type="password" placeholder="******"/>-->
-                                <h:inputSecret value="#{usuarioBean.senha}" id="senha"/>
-                                <i class="lock icon"></i>
-                            </div>
-                        </div>
-                        <!--<div class="ui blue submit button">Login</div>-->
-                        <h:commandButton id="button" value="Login" 
-                                         action="#{usuarioBean.efetuarLogin()}"
-                                         styleClass="ui blue submit button"/>
-                      </h:form>
-                    <!--</div>-->
-                </div>
-                <div class="ui basic horizontal divider">
-                    Ou
-                </div>
-                <div class="eight wide column aligned center ">
-                    <a href="cadastro.xhtml"><button class="ui medium green button">         
-                            <i class="add user icon"></i>
-                            Cadastre-se
-                        </button></a>
-                </div>
-            </div>
-        </div>
+       
         <script>
             $(function () {
 

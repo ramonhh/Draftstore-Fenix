@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="template/modelo.xhtml">
+        <ui:define name="content">
+            <div class="ui segment">
+                  <h2 class="ui dividing header">Login</h2>
+                <br/>
+            <div class="ui grid"> 
+                <div class="ui basic container segment">
+                    <h:form class="ui form">
+                        <div class="field eight wide">
+                            <strong> <h:outputLabel value="Email"/></strong>
+                            <h:inputText value="#{usuarioBean.email}"></h:inputText>
+                        </div>
+                        <div class="field eight wide">
+                            <strong> <h:outputLabel value="Senha"/></strong>
+                            <h:inputSecret value="#{usuarioBean.senha}"/>
+                        </div>
+                        <div class="ui basic segment">
+                            <h:commandButton action="#{usuarioBean.efetuarLogin()}" styleClass="ui button large" value="Entrar"/>
+                        </div>
+
+                    </h:form>
+
+                    <a class="ui item" href="cadastro.xhtml">
+                        <div class="bottom button">
+                            <i class="sign in icon"></i>
+                            Cadastre-se
+                        </div>
+                    </a>
+                </div></div>
+        </div>
+        </ui:define>
+    </ui:composition>
+</html>
+
