@@ -25,101 +25,101 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Wilson A. Oliveira
+ * @author ramonhonorio
  */
 @Entity
 @Table(name = "TB_CATEGORIA")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
-    @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria"),
-    @NamedQuery(name = "Categoria.findByNomeCategoria", query = "SELECT c FROM Categoria c WHERE c.nomeCategoria = :nomeCategoria")})
+  @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
+  @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria"),
+  @NamedQuery(name = "Categoria.findByNomeCategoria", query = "SELECT c FROM Categoria c WHERE c.nomeCategoria = :nomeCategoria")})
 public class Categoria implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID_CATEGORIA")
-    private Integer idCategoria;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "NOME_CATEGORIA")
-    private String nomeCategoria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkCategoria")
-    private Collection<Produto> produtoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkCategoria")
-    private Collection<Subcategoria> subcategoriaCollection;
+  private static final long serialVersionUID = 1L;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Basic(optional = false)
+  @Column(name = "ID_CATEGORIA")
+  private Integer idCategoria;
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 50)
+  @Column(name = "NOME_CATEGORIA")
+  private String nomeCategoria;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkCategoria")
+  private Collection<Subcategoria> subcategoriaCollection;
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkCategoria")
+  private Collection<Produto> produtoCollection;
 
-    public Categoria() {
-    }
+  public Categoria() {
+  }
 
-    public Categoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
-    }
+  public Categoria(Integer idCategoria) {
+    this.idCategoria = idCategoria;
+  }
 
-    public Categoria(Integer idCategoria, String nomeCategoria) {
-        this.idCategoria = idCategoria;
-        this.nomeCategoria = nomeCategoria;
-    }
+  public Categoria(Integer idCategoria, String nomeCategoria) {
+    this.idCategoria = idCategoria;
+    this.nomeCategoria = nomeCategoria;
+  }
 
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
+  public Integer getIdCategoria() {
+    return idCategoria;
+  }
 
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
-    }
+  public void setIdCategoria(Integer idCategoria) {
+    this.idCategoria = idCategoria;
+  }
 
-    public String getNomeCategoria() {
-        return nomeCategoria;
-    }
+  public String getNomeCategoria() {
+    return nomeCategoria;
+  }
 
-    public void setNomeCategoria(String nomeCategoria) {
-        this.nomeCategoria = nomeCategoria;
-    }
+  public void setNomeCategoria(String nomeCategoria) {
+    this.nomeCategoria = nomeCategoria;
+  }
 
-    @XmlTransient
-    public Collection<Produto> getProdutoCollection() {
-        return produtoCollection;
-    }
+  @XmlTransient
+  public Collection<Subcategoria> getSubcategoriaCollection() {
+    return subcategoriaCollection;
+  }
 
-    public void setProdutoCollection(Collection<Produto> produtoCollection) {
-        this.produtoCollection = produtoCollection;
-    }
+  public void setSubcategoriaCollection(Collection<Subcategoria> subcategoriaCollection) {
+    this.subcategoriaCollection = subcategoriaCollection;
+  }
 
-    @XmlTransient
-    public Collection<Subcategoria> getSubcategoriaCollection() {
-        return subcategoriaCollection;
-    }
+  @XmlTransient
+  public Collection<Produto> getProdutoCollection() {
+    return produtoCollection;
+  }
 
-    public void setSubcategoriaCollection(Collection<Subcategoria> subcategoriaCollection) {
-        this.subcategoriaCollection = subcategoriaCollection;
-    }
+  public void setProdutoCollection(Collection<Produto> produtoCollection) {
+    this.produtoCollection = produtoCollection;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idCategoria != null ? idCategoria.hashCode() : 0);
-        return hash;
-    }
+  @Override
+  public int hashCode() {
+    int hash = 0;
+    hash += (idCategoria != null ? idCategoria.hashCode() : 0);
+    return hash;
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categoria)) {
-            return false;
-        }
-        Categoria other = (Categoria) object;
-        if ((this.idCategoria == null && other.idCategoria != null) || (this.idCategoria != null && !this.idCategoria.equals(other.idCategoria))) {
-            return false;
-        }
-        return true;
+  @Override
+  public boolean equals(Object object) {
+    // TODO: Warning - this method won't work in the case the id fields are not set
+    if (!(object instanceof Categoria)) {
+      return false;
     }
+    Categoria other = (Categoria) object;
+    if ((this.idCategoria == null && other.idCategoria != null) || (this.idCategoria != null && !this.idCategoria.equals(other.idCategoria))) {
+      return false;
+    }
+    return true;
+  }
 
-    @Override
-    public String toString() {
-        return "com.wrm.draftstore.common.entidades.Categoria[ idCategoria=" + idCategoria + " ]";
-    }
-    
+  @Override
+  public String toString() {
+    return "com.wrm.draftstore.common.entidades.Categoria[ idCategoria=" + idCategoria + " ]";
+  }
+  
 }
