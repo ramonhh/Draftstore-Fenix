@@ -56,10 +56,15 @@ public class CarrinhoBean implements Serializable {
 
         if (pc == null) {
             this.itensMap.put(produto, new ProdutoCarrinho(produto, new Date()));
+            this.quantidadeItensMap++;
         } else {
-            pc.setQuantidade(pc.getQuantidade() + 1);
+            if (produto.getQuantidade() > pc.getQuantidade()) {
+                pc.setQuantidade(pc.getQuantidade() + 1);
+
+                this.quantidadeItensMap++;
+            }
+            this.animarCarrinho();
         }
-        this.quantidadeItensMap++;
     }
 
     public boolean removerProduto(Produto produto) {
@@ -100,7 +105,7 @@ public class CarrinhoBean implements Serializable {
     }
 
     public void animarCarrinho() {
-        String script = "animacaoAdicionouItens(" + this.quantidadeItensMap + ")";
+        String script = "$('#labelCarrinho').change();";
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(script);
     }
 

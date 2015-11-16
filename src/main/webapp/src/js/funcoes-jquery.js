@@ -19,7 +19,7 @@ $(function () { // Abreviação para $(document).ready(function() { ... });
                 ;
     });
 //    Quando clicar no carrinho fazer uma animacao
-    $('.addCarrinho').click(function () {
+    $('#labelCarrinho').change(function () {
         $(this).blur();
         var qtd = parseInt($('#labelCarrinho').text());
         animacaoAdicionouItens(qtd);
@@ -45,10 +45,10 @@ $(function () { // Abreviação para $(document).ready(function() { ... });
                 .sidebar('toggle')
                 ;
     });
-     //Função para os tabs da pagina do perfil
+    //Função para os tabs da pagina do perfil
     $('.ui.vertical.fluid.tabular.menu .item').tab();
-    
- });
+
+});
 
 function animacaoAdicionouItens(quantidade) {
 //    Testando uma animacao na contagem xD
@@ -59,7 +59,7 @@ function animacaoAdicionouItens(quantidade) {
     }
 
     $('#labelCarrinho')
-            .text(quantidade + 1)
+            .text(quantidade)
             .transition('jiggle');
 }
 function animacaoMobile(quantidade) {
@@ -71,6 +71,6 @@ function animacaoMobile(quantidade) {
     }
 
     $('#labelCarrinho2')
-            .text(quantidade + 1)
+            .text(quantidade)
             .transition('jiggle');
 }
