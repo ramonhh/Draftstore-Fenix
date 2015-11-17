@@ -61,8 +61,15 @@ public class EnderecoBean implements Serializable {
         this.tipoEntrega = tipoEntrega;
     }
     
-    public void salvarEndereco() {
-        enderecoService.incluir(novoEndereco);
+    public String salvarEndereco() {
+        System.out.println("Logradouro:"+novoEndereco.getRua());
+        System.out.println("IDUSUARIO:"+novoEndereco.getFkUsuario());
+        if (novoEndereco != null) {
+            enderecoService.incluir(novoEndereco);
+        } else {
+            System.out.println("Endereço não salvo.");
+        }
+        return "perfil.xhtml?faces-redirect=true";
     }
 
     public Endereco getEnderecoSelecionado() {
@@ -83,6 +90,11 @@ public class EnderecoBean implements Serializable {
     public String selecionarEndereco(Endereco e){
         enderecoSelecionado = e;
         return "compra_confirmarEndereco.xhtml?faces-redirect=true";
+    }
+    
+    public String removerEndereco(Endereco e) {
+        enderecoService.remover(e.getIdEndereco().longValue());
+        return "perfil.xhtml?faces-redirect=true";
     }
     
 }
