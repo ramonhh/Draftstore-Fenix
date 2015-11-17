@@ -81,7 +81,7 @@
                                         <h:panelGroup layout="block" 
                                                       id="labelCarrinho" 
                                                       styleClass="ui label #{carrinhoBean.itens.size() == 0 ? 'hidden' : ''} ">
-                                            #{carrinhoBean.itens.size()}
+                                            #{carrinhoBean.itens.size()-1}
                                         </h:panelGroup>
                                     </div>
                                 </h:outputLink>
@@ -95,31 +95,31 @@
                     <!--Menu das compras-->
                     <br/>
                     <div class="ui grid centered">
-                <div class="ui steps centered">
-                    
-                    <div class="active step">
-                        <i class="truck icon"></i>
-                        <div class="content">
-                            <div class="title">Endereço</div>
-                            <div class="description">Escolha sua opção de endereço</div>
-                        </div>
-                    </div>
+                        <div class="ui steps centered">
 
-                    <div class="step">
-                        <i class="payment icon"></i>
-                        <div class="content">
-                            <div class="title">Pagamento</div>
-                            <div class="description">Formas de Pagamento</div>
+                            <div class="active step">
+                                <i class="truck icon"></i>
+                                <div class="content">
+                                    <div class="title">Endereço</div>
+                                    <div class="description">Escolha sua opção de endereço</div>
+                                </div>
+                            </div>
+
+                            <div class="step">
+                                <i class="payment icon"></i>
+                                <div class="content">
+                                    <div class="title">Pagamento</div>
+                                    <div class="description">Formas de Pagamento</div>
+                                </div>
+                            </div>
+                            <div class="disabled step">
+                                <i class="checkmark icon"></i>
+                                <div class="content">
+                                    <div class="title">Finalize a compra</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="disabled step">
-                        <i class="checkmark icon"></i>
-                        <div class="content">
-                            <div class="title">Finalize a compra</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
                 </div>
             </div>
 
