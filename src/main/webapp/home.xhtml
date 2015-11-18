@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
     </h:head>
@@ -73,21 +74,33 @@
                                         <!--Preco-->
                                         <div class="text center aligned">
                                             <div class="ui tiny horizontal statistic">
-                                                De <h:outputText value="#{item.precoVenda}">
-                                                    <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
-                                                </h:outputText> por
-                                                <div class="label">
-                                                    R$
-                                                </div>
-                                                <div class="value">
-                                                    <h:outputText value="#{item.precoVenda}">
+                                                <h:panelGrid rendered="#{item.dataValida}">
+                                                    De <h:outputText value="#{item.precoVenda}">
                                                         <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
                                                     </h:outputText>
-                                                </div>
+                                                    por
+                                                    <div class="label">
+                                                        R$
+                                                    </div>
+                                                    <div class="value">
+                                                        <h:outputText value="#{item.precoPromo}">
+                                                            <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
+                                                        </h:outputText>
+                                                    </div>
+                                                </h:panelGrid>
+                                                <h:panelGrid rendered="#{not item.dataValida}">
+                                                    por
+                                                    <div class="label">
+                                                        R$
+                                                    </div>
+                                                    <div class="value">
+                                                        <h:outputText value="#{item.precoVenda}">
+                                                        </h:outputText>
+                                                    </div>
+                                                </h:panelGrid>
                                             </div>
                                         </div>
                                     </div>
-
                                     <p:commandButton id="teste" styleClass="ui bottom blue attached button addCarrinho"
                                                      value="Adicionar ao carrinho"
                                                      actionListener="#{carrinhoBean.adicionar(item)}"
@@ -109,4 +122,3 @@
     </h:body>
 
 </html>
-
