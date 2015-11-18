@@ -7,6 +7,7 @@ package com.wrm.draftstore.common.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -55,6 +56,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produto.findByDataEventoIni", query = "SELECT p FROM Produto p WHERE p.dataEventoIni = :dataEventoIni"),
     @NamedQuery(name = "Produto.findByDataEventoFim", query = "SELECT p FROM Produto p WHERE p.dataEventoFim = :dataEventoFim")})
 public class Produto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -277,6 +279,19 @@ public class Produto implements Serializable {
         this.dataEventoFim = dataEventoFim;
     }
 
+    public boolean isDataValida() {
+        Date dataAtual = Calendar.getInstance().getTime();
+        if (dataAtual.compareTo(getDataEventoIni()) > 0 && dataAtual.compareTo(getDataEventoFim()) < 0) {
+            return true;
+        } else if (dataAtual.compareTo(getDataEventoIni()) == 0 && dataAtual.compareTo(getDataEventoFim()) < 0) {
+            return true;
+        } else if (dataAtual.compareTo(getDataEventoIni()) > 0 && dataAtual.compareTo(getDataEventoFim()) == 0) {
+            return true;
+        } else {
+            return dataAtual.compareTo(getDataEventoIni()) == 0 && dataAtual.compareTo(getDataEventoFim()) == 0;
+        }
+    }
+
     @XmlTransient
     public Collection<ItemVenda> getItemVendaCollection() {
         return itemVendaCollection;
@@ -342,5 +357,5 @@ public class Produto implements Serializable {
     public String toString() {
         return "com.wrm.draftstore.common.entidades.Produto[ idProduto=" + idProduto + " ]";
     }
-    
+
 }
