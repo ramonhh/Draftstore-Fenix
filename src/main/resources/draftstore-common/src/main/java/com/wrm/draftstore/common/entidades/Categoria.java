@@ -6,9 +6,7 @@
 package com.wrm.draftstore.common.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,12 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
     @NamedQuery(name = "Categoria.findByIdCategoria", query = "SELECT c FROM Categoria c WHERE c.idCategoria = :idCategoria"),
-    @NamedQuery(name = "Categoria.findByNomeCategoria", query = "SELECT c FROM Categoria c WHERE c.nomeCategoria = :nomeCategoria")})
+    @NamedQuery(name = "Categoria.findByNomeCategoria", query = "SELECT c FROM Categoria c WHERE c.nomeCategoria = :nomeCategoria"),
+    @NamedQuery(name = "Categoria.findByIcon", query = "SELECT c FROM Categoria c WHERE c.icon = :icon")})
 public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,10 +43,11 @@ public class Categoria implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "NOME_CATEGORIA")
     private String nomeCategoria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkCategoria")
-    private Collection<Produto> produtoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkCategoria")
-    private Collection<Subcategoria> subcategoriaCollection;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "ICON")
+    private String icon;
 
     public Categoria() {
     }
@@ -58,9 +56,10 @@ public class Categoria implements Serializable {
         this.idCategoria = idCategoria;
     }
 
-    public Categoria(Integer idCategoria, String nomeCategoria) {
+    public Categoria(Integer idCategoria, String nomeCategoria, String icon) {
         this.idCategoria = idCategoria;
         this.nomeCategoria = nomeCategoria;
+        this.icon = icon;
     }
 
     public Integer getIdCategoria() {
@@ -79,22 +78,12 @@ public class Categoria implements Serializable {
         this.nomeCategoria = nomeCategoria;
     }
 
-    @XmlTransient
-    public Collection<Produto> getProdutoCollection() {
-        return produtoCollection;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setProdutoCollection(Collection<Produto> produtoCollection) {
-        this.produtoCollection = produtoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Subcategoria> getSubcategoriaCollection() {
-        return subcategoriaCollection;
-    }
-
-    public void setSubcategoriaCollection(Collection<Subcategoria> subcategoriaCollection) {
-        this.subcategoriaCollection = subcategoriaCollection;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     @Override
