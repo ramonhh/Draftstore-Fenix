@@ -4,35 +4,56 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="template/modelo.xhtml">
+
         <ui:define name="content">
             <div class="ui segment">
-                  <h2 class="ui dividing header">Login</h2>
+                <h2 class="ui header">Login</h2>
                 <br/>
-            <div class="ui grid"> 
-                <div class="ui basic container segment">
-                    <h:form class="ui form">
-                        <div class="field eight wide">
-                            <strong> <h:outputLabel value="Email"/></strong>
-                            <h:inputText value="#{usuarioBean.email}"></h:inputText>
+                <div class="ui two column middle aligned very relaxed stackable grid">
+                    <div class="column">
+                        <div class="ui form">
+                            <h:form class="ui form">                   
+                            <div class="field">
+                                <label>Email</label>
+                                <div class="ui left icon input">
+                                    <h:inputText value="#{usuarioBean.email}"></h:inputText>                
+                                        <i class="user icon"></i>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Password</label>
+                                <div class="ui left icon input">
+                                    <h:inputSecret value="#{usuarioBean.senha}"/>
+                                        <i class="lock icon"></i>
+                                </div>
+                            </div>
+                            <div class="ui basic center aligned segment">
+                                <h:commandButton action="#{usuarioBean.efetuarLogin()}" styleClass="ui big green button" value="Entrar"/>
+                            </div>
+                                </h:form>
                         </div>
-                        <div class="field eight wide">
-                            <strong> <h:outputLabel value="Senha"/></strong>
-                            <h:inputSecret value="#{usuarioBean.senha}"/>
+                    </div>
+                    <div class="ui vertical divider">
+                        Ou
+                    </div>
+                    <div class="center aligned column">
+                        <div class="">
+                            <i class="blue massive users icon"></i>
                         </div>
-                        <div class="ui basic segment">
-                            <h:commandButton action="#{usuarioBean.efetuarLogin()}" styleClass="ui button large" value="Entrar"/>
+                        <br/>
+                        <div class="">
+                            <h3>Ainda não possui uma conta? Não perca essa oportunidade!</h3>
                         </div>
-
-                    </h:form>
-
-                    <a class="ui item" href="cadastro.xhtml">
-                        <div class="bottom button">
-                            <i class="sign in icon"></i>
+                        <br/>
+                        <a href="cadastro.xhtml"> 
+                        <div class="ui big green labeled icon button">
+                            <i class="signup icon"></i>
                             Cadastre-se
                         </div>
-                    </a>
-                </div></div>
-        </div>
+                        </a>
+                    </div>
+                </div> 
+            </div>
         </ui:define>
     </ui:composition>
 </html>
