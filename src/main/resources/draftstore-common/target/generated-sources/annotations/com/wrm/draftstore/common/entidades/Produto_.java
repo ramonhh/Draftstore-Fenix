@@ -12,7 +12,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-11-13T20:41:58")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-11-17T22:33:32")
 @StaticMetamodel(Produto.class)
 public class Produto_ { 
 
@@ -25,15 +25,16 @@ public class Produto_ {
     public static volatile SingularAttribute<Produto, String> descricaoImagem;
     public static volatile SingularAttribute<Produto, String> modelo;
     public static volatile SingularAttribute<Produto, String> descricao;
-    public static volatile SingularAttribute<Produto, Date> dataEvento;
     public static volatile SingularAttribute<Produto, BigDecimal> percentualLucro;
     public static volatile SingularAttribute<Produto, String> marca;
     public static volatile SingularAttribute<Produto, String> nomeUsuario;
     public static volatile SingularAttribute<Produto, Integer> idProduto;
     public static volatile SingularAttribute<Produto, String> nomeFornecedor;
     public static volatile CollectionAttribute<Produto, ItemVenda> itemVendaCollection;
+    public static volatile SingularAttribute<Produto, Date> dataEventoIni;
     public static volatile SingularAttribute<Produto, BigDecimal> custo;
     public static volatile SingularAttribute<Produto, Categoria> fkCategoria;
+    public static volatile SingularAttribute<Produto, Date> dataEventoFim;
     public static volatile SingularAttribute<Produto, Integer> quantidade;
     public static volatile SingularAttribute<Produto, Date> dataCriacao;
 

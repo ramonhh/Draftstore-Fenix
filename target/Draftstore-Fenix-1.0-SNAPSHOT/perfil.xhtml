@@ -7,6 +7,8 @@
       xmlns:p="http://primefaces.org/ui">
   <ui:composition template="template/modelo.xhtml"> 
     <ui:define name="content">
+      
+      <!--Header Minha Conta-->
       <div class="ui clearing segment">
         <h2 class="ui header left floated">
           <i class="settings icon"></i>
@@ -14,24 +16,22 @@
             Minha conta
           </div>
         </h2>
-
-        <!--              <div class="ui right floated button">
-                        Logout
-                      </div>-->
+        
+        <!--Botao Logout-->
         <h:form id="formLogout">
           <p:commandButton action="#{usuarioBean.efetuarLogout()}"
                            value="Sair" 
                            styleClass="ui right floated icon button inverted red"
                            icon="fa fa-fw fa-shopping-cart"/>
         </h:form>
-        <!--            <button class="ui right floated labeled icon button inverted red">
-                      <i class="sign out icon"></i>
-                      Sair
-                    </button>-->
+        
       </div>
+      
+      <!--Conteudo da pagina-->
       <div class="ui segment">
-
         <div class="ui grid">
+          
+          <!--Tabs-->
           <div class="four wide column">
             <div class="ui vertical fluid tabular menu">
               <div class="item active" data-tab="tab-name">Dados Pessoais</div>
@@ -39,8 +39,12 @@
               <div class="item" data-tab="tab-name3">Endereços</div>
             </div>
           </div>
+          
+          <!--Conteudo-->
           <div class="twelve wide stretched column">
             <div class="ui segment">
+              
+              <!--Tab Dados Pessoais-->
               <div class="ui tab active" data-tab="tab-name">
                 <div class="ui basic segment">
                   <h1 class="ui header">
@@ -59,7 +63,7 @@
                       <f:selectItem itemLabel="Masculino" itemValue="M"/>
                     </h:selectOneMenu>
                   </div>
-                  <label>Data de Nascimento (COM PROBLEMA)</label>
+                  <label>Data de Nascimento</label>
                   <div class="field">
                     <!--<input type="date" name="dtNascimento" placeholder="dd/MM/yyyy"/>-->
                     <p:calendar pattern="dd/MM/yyyy" value="#{usuarioBean.usuarioLogado.dtNascimento}"/>
@@ -86,6 +90,8 @@
                   </button>
                 </h:form>
               </div>
+              
+              <!--Tab Pedidos-->
               <div class="ui tab" data-tab="tab-name2">
                 <div class="ui basic segment">
                   <h1 class="ui header">
@@ -112,6 +118,7 @@
                 </div>
               </div>
 
+              <!--Tab Enderecos-->
               <div class="ui tab" data-tab="tab-name3">
                 <h:form id="adicionarEndereco">
                   <div class="ui basic segment center aligned">
@@ -148,10 +155,15 @@
                                                 </a>-->
 
                               <div class="ui icon buttons">
+                                <p:commandButton id="editarEndereco" action="#{enderecoBean.editarEndereco(endereco)}" 
+                                           value="Editar" 
+                                           styleClass="ui yellow button"
+                                           icon="fa fa-fw fa-edit"/>
                                 <p:commandButton id="removerEndereco" action="#{enderecoBean.removerEndereco(endereco)}" 
                                            value="Remover" 
                                            styleClass="ui red button"
                                            icon="fa fa-fw fa-trash"/>
+                                
                                 
                                 
 <!--                                <div class="ui yellow button">
@@ -261,7 +273,7 @@
 
                         </div>
                       </div>
-                      <div class="ui basic segment center aligned">
+                      <div class="ui basic segment center middle aligned">
                         <div class="ui buttons">
 
                           <p:commandButton action="#{enderecoBean.salvarEndereco()}" 
@@ -276,6 +288,7 @@
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>

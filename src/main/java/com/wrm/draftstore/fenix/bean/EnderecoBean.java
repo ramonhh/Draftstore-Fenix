@@ -62,8 +62,8 @@ public class EnderecoBean implements Serializable {
     }
     
     public String salvarEndereco() {
-        System.out.println("Logradouro:"+novoEndereco.getRua());
-        System.out.println("IDUSUARIO:"+novoEndereco.getFkUsuario());
+//        System.out.println("Logradouro:"+novoEndereco.getRua());
+//        System.out.println("IDUSUARIO:"+novoEndereco.getFkUsuario());
         if (novoEndereco != null) {
             enderecoService.incluir(novoEndereco);
         } else {
@@ -97,4 +97,8 @@ public class EnderecoBean implements Serializable {
         return "perfil.xhtml?faces-redirect=true";
     }
     
+    public String editarEndereco(Endereco e){
+        enderecoService.alterar(e);
+        return "perfil.xhtml?faces-redirect=true";
+    }
 }
