@@ -93,4 +93,15 @@ public class ProdutoServiceJPAImpl implements ProdutoService {
     }
   }
 
+    @Override
+    public List<Produto> obterPorCategoria(int idCategoria, int offset, int quantidade) {
+        EntityManager em = emFactory.createEntityManager();
+        Query query = em.createNamedQuery("Produto.findByCategoria")
+                .setParameter("idCategoria", idCategoria)
+                .setFirstResult(offset)
+                .setMaxResults(quantidade);
+        List<Produto> resultados = query.getResultList();
+        em.close();
+        return resultados;
+    }
 }

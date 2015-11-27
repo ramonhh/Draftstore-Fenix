@@ -30,7 +30,7 @@ public class CategoriaServiceJPAImpl implements Serializable{
     Query query = em.createNamedQuery("Categoria.findAll");
     List<Categoria> resultados = query.getResultList();
       for (int i = 0; i < resultados.size(); i++) {
-          System.out.println("Categoria e nome: ");
+          System.out.println("Categoria e nome: " + resultados.get(i).getNomeCategoria());
       }
     em.close();
     return resultados;

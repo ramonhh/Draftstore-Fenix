@@ -5,7 +5,9 @@
  */
 package com.wrm.draftstore.fenix.bean;
 
+import com.wrm.draftstore.common.entidades.Categoria;
 import com.wrm.draftstore.common.entidades.Produto;
+import com.wrm.draftstore.common.service.ProdutoService;
 import com.wrm.draftstore.common.service.jpaimpl.ProdutoServiceJPAImpl;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -32,7 +34,8 @@ public class ProdutoBean implements Serializable {
 //  private List<Produto> ofertasSemana = new ProdutoServiceFakeImpl().listar(0, 10);
   
   // Produtos JPA
-  private List<Produto> ofertasSemana = new ProdutoServiceJPAImpl().listar(0, 10);
+  private ProdutoService produtoService = new ProdutoServiceJPAImpl();
+  private List<Produto> ofertasSemana = produtoService.listar(0, 10);
   
   private Produto produtoDetalhe;
   
@@ -63,6 +66,10 @@ public class ProdutoBean implements Serializable {
 
   public void setProdutoDetalhe(Produto produtoDetalhe) {
     this.produtoDetalhe = produtoDetalhe;
+  }
+  
+  public List<Produto> getProdutosPorCategoria(Categoria categoria){
+      return this.produtoService.obterPorCategoria(categoria.getIdCategoria(), 0, 10);
   }
   
 }

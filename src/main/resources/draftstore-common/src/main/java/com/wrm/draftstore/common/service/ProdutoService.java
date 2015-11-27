@@ -6,6 +6,7 @@
 package com.wrm.draftstore.common.service;
 
 
+import com.wrm.draftstore.common.entidades.Categoria;
 import com.wrm.draftstore.common.entidades.Produto;
 import java.util.List;
 
@@ -18,6 +19,8 @@ public interface ProdutoService {
   public List<Produto> listar(int offset, int quantidade);
   
   public Produto obter(Long idProduto);
+  
+  public List<Produto> obterPorCategoria(int idCategoria, int offset, int quantidade);
   
   public void incluir(Produto p);
   
