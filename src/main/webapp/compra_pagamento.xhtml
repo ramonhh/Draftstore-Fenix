@@ -60,8 +60,7 @@
                                 <h5>Subtotal:	R$ 1.882,24</h5>
                                     <h5>  Valor do frete:	R$ 10,05</h5>
                                     <div class="ui basic segment right aligned">
-                                <h3 class="ui header">  Valor total: R$ 649,00 
-                                    <div class="sub header">em até 10x de R$ 64,90 sem juros</div></h3>
+                                <h3 class="ui header">  Valor total: R$ 649,00</h3>
                                     </div>
                                     </div>
                         </div>
@@ -73,50 +72,39 @@
 
             <div class="ui container">
                 <h3 class="ui header">Escolha a forma de pagamento</h3>     
-                <div class="ui segment">
-                    <form class="ui form">
-                        <h4 class="ui dividing header">Cartão de Crédito</h4>
-                        <div class="fields">
-                            <div class="field eight wide">
-                                <label>
-                                    Número do cartão
-                                </label>
-                                <input type="text"/>
-                            </div>
-                            <div class="field eight wide">
-                                <label>
-                                    Nome do titular
-                                </label>
-                                <input type="text"/>
-                            </div>
-                        </div>
-                        <div class="fields">
-                            <div class="field four wide">
-                                <label>Data de Validade</label>
-                                <input type="month"/>
-                            </div>
-                            <div class="field four wide">
-                                <label>Código de segurança</label>
-                                <input type="text"/>
-                            </div>
+                    <div class="ui top attached tabular menu">
+                        <a class="item active" data-tab="boleto">Boleto Bancário</a>
+                        <a class="item" data-tab="cartao">Cartão de Crédito</a>
+                      </div>
+                      <div class="ui bottom attached tab segment active" data-tab="boleto">
+                          <div class="ui grid">
+                          <div class="four wide column center aligned">
+                          <h3 class="ui icon header">
+                              <i class="barcode icon"></i>
+                              <div class="content">
+                                  Boleto Bancário
+                                  </div>
+                            </h3>
+                          </div>
+                          <div class="ten wide column">
+                          <h4 class="ui">Pagamento à vista R$ #{carrinhoBean.precoTotal}<div class="content"> </div></h4>
+                          <div class="ui bulleted list">
+                                <div class="item">Importante: Verifique a data de vencimento informada no boleto. 
+                                                    O prazo para pagamento do boleto é 1 dia útil. Em caso de não pagamento 
+                                                    do boleto até a data de vencimento, o pedido será automaticamente cancelado.</div>
+                                <div class="item">O prazo de entrega informado durante a compra é contado a partir da confirmação do pagamento
+                                                    pelo banco, o que pode levar até 2 dias úteis.</div>
+                                <div class="item">O pagamento do boleto pode ser efetuado pela internet, utilizando o código de barras, ou 
+                                    diretamente em bancos, lotéricas e correios, apresentando o boleto impresso.
+                                </div>
+                              </div>
+                          </div>
 
-                            <div class="field eight wide">
-                                <label>CPF ou CNPJ do Titular</label>
-                                <input type="text"/>
-                            </div>
-                        </div>
-                        <div class="fields">
-                            <div class="field eight wide">
-                                <label>Número de parcelas</label>
-                                <select>
-                                    <option value="" selected="true" disabled="true">Selecione</option>
-                                    <option value="">1X</option>
-                                    <option value="">2X</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                              </div>
+                      </div>
+                      <!--<div class="ui bottom attached tab segment" data-tab="cartao">
+                        Em breve :)
+                      </div>-->
                   
 <!--                <a href="compra_sucesso.xhtml">
                   

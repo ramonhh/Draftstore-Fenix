@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
         <meta charset="utf-8" />
@@ -101,27 +102,26 @@
                         <!--Fim menu principal-->
                     </div>
                     <!--Fim container menu principal-->
-
+                    <h:form>
                     <!--Menu das categorias-->
                     <div class="container">
                         <nav class="ui labeled small icon borderless menu centered grid inverted grey secondary">
-                            <a class="item">
-                                <i class="desktop icon"></i>Computadores montados
-                            </a>
-                            <a class="item">
-                                <i class="laptop icon"></i>Notebooks
-                            </a>
-                            <a class="item">
-                                <i class="disk outline icon"></i>Componentes de hardware
-                            </a>
-                            <a class="item">
-                                <i class="game icon"></i>Acessórios para games
-                            </a>
-                            <a class="item">
-                                <i class="plug icon"></i>Periféricos
-                            </a>
+                            
+                                
+                                
+                                <ui:repeat value="#{categoriaBean.categorias}" var="categoria" varStatus="status">
+                                    <h:commandLink styleClass="item" 
+                                                     action="#{categoriaBean.irParaListagem(categoria)}">
+                                        <i class="#{categoria.icon}"></i>
+                                        #{categoria.nomeCategoria}
+                                    </h:commandLink>
+                                    
+                                </ui:repeat>
+                            
+                                
                         </nav>
                     </div>
+                    </h:form>
                 </div>
             </div>
             <div class="ui mobile tablet only row">
@@ -210,4 +210,6 @@
         </script>
     </ui:composition>
 </html>
+
+
 
