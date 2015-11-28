@@ -6,7 +6,12 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-  
+    
+    <head>
+    <h:outputStylesheet library="css" name="estiloDraftstore/style.css"/>
+    <link href="${facesContext.externalContext.requestContextPath}/css/estiloDraftstore.css" rel="stylesheet" type="text/css" media="screen" />  
+    </head>
+    
     <h:body>
         <ui:composition template="template/modelo.xhtml">
             <ui:define name="content">
@@ -22,92 +27,102 @@
                 -->
                 <br/>
                 <h:form prependId="false">
-                    <div class="ui middle aligned massive animated list">
-                      <ui:repeat value="#{carrinhoBean.itensMapKeys}" var="item" varStatus="status">
-                            <div class="item">
-
-                                <div class="left floated content">
-                                    <img class="ui left floated avatar image" 
+                    <table class="ui tablet stackable table">
+                        <thead>
+                            <tr class="center aligned">
+                                <th>Produto</th>
+                                <th>Nome do Produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço</th>
+                                <th>Opções</th>
+                            </tr>
+                        </thead>
+                        <ui:repeat value="#{carrinhoBean.itensMapKeys}" var="item" varStatus="status">
+                        <tbody>
+                            <tr class="item center aligned">
+                                
+                                <td>
+                                    <img class="ui small left floated avatar image" 
                                          src="#{item.caminhoImagem}"/>
+                                </td>
+                                
+                                <td>
                                     <h:outputText value="#{item.modelo}"/>
-<!--                                    <div class="content">
-                                      <h:outputText value="#{item.modelo}"/>
-                                    </div>-->
-                                </div>
-                              
-                              <!--Div com elementos alinhados a direita-->
-                                <div class="right floated content">
-                                  
-                                  <!--Spinner quantidade-->
-                                  <p:outputPanel>
+                                </td>
+                                
+                                <td>
                                     <p:spinner id="ajaxSpinner" 
-                                               value="#{carrinhoBean.itensMap[item].quantidade}"
-                                                valueChangeListener="#{carrinhoBean.handleChange}"
-                                                min="1"
-                                                max="100"
-                                                styleClass="qtdSpinner">
-                                         <p:ajax 
-                                           update="valorTotal labelCarrinho"
-                                           process="@this" />
-                                    </p:spinner>
-                                  </p:outputPanel>
-                                  
-                                  <!--Ver detalhes de um produto-->
+                                                   value="#{carrinhoBean.itensMap[item].quantidade}"
+                                                   valueChangeListener="#{carrinhoBean.handleChange}"
+                                                   min="1"
+                                                   max="100"
+                                                   styleClass="qtdSpinner">
+                                            <p:ajax 
+                                                update="valorTotal labelCarrinho"
+                                                process="@this" />
+                                        </p:spinner>
+                                </td>
+                                
+                                <td>
+                                    R$ <h:outputText value="#{item.precoVenda}"/>
+                                </td>
+                                
+                                <td class="ui floated right">
                                     <p:button styleClass="ui button inverted blue"
                                               value="Detalhes" 
                                               outcome="detalhe.xhtml"
                                               icon="fa fa-fw fa-list-alt">
-                                      <f:param name="id" value="#{item.idProduto}"/>
+                                        <f:param name="id" value="#{item.idProduto}"/>
                                     </p:button>
 
-                                  <!--Remover produto do carrinho-->
+                                    <!--Remover produto do carrinho-->
                                     <p:commandButton styleClass="ui button inverted red"
                                                      value="Remover" 
                                                      action="#{carrinhoBean.removerProduto(item)}"
                                                      update="valorTotal"
                                                      icon="fa fa-fw fa-shopping-cart" ajax="false">
                                     </p:commandButton>
+                                </td>
+                            </tr>
+                        </tbody>
+                            </ui:repeat>
+                    </table>
+                    
+                    <c:choose>
+                        <c:when test="#{carrinhoBean.quantidadeItensMap > 0}">
+                            <div class="ui right aligned grid">
+                                <div class="center aligned two column row">
+                                    <div class="column">
+                                        <h3> <h:outputLabel value="Total: "/> 
+                                            <h:outputText id="valorTotal" value="#{carrinhoBean.precoTotal}">
+                                                <f:convertNumber type="currency" locale="pt_BR" />
+                                            </h:outputText> </h3>
+                                    </div>
+                                    <div class="column">                           
+                                        <p:commandButton class="ui yellow button"
+                                                         value="Limpar carrinho" 
+                                                         action="#{carrinhoBean.limparCarrinho()}"                                                 
+                                                         icon="fa fa-fw fa-eraser" ajax="false">
+                                        </p:commandButton>
+                                        <p:commandButton styleClass="ui button blue"
+                                                         value="Prosseguir compra" 
+                                                         action="#{carrinhoBean.prosseguirCompra(usuarioBean.usuarioLogado)}"                                                 
+                                                         icon="fa fa-check" ajax="false">
+                                        </p:commandButton>
+
+                                    </div>
                                 </div>
                             </div>
-                        </ui:repeat>
-                        <br></br>
-                    </div>
-                  <c:choose>
-                    <c:when test="#{carrinhoBean.quantidadeItensMap > 0}">
-                    <div class="ui right aligned grid">
-                      <div class="center aligned two column row">
-                          <div class="column">
+                        </c:when>
+                        <c:otherwise>
+                            <div class="ui center aligned grid">
+                                <div class="center aligned row">
+                                    <h1>O carrinho está vazio.</h1>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
 
-                              <h3> <h:outputLabel value="Total: "/> 
-                                  <h:outputText id="valorTotal" value="#{carrinhoBean.precoTotal}">
-                                      <f:convertNumber type="currency" locale="pt_BR" />
-                                  </h:outputText> </h3>
-                              </div>
-                          <div class="column">                           
-                                  <p:commandButton class="ui yellow button"
-                                                   value="Limpar carrinho" 
-                                                   action="#{carrinhoBean.limparCarrinho()}"                                                 
-                                                   icon="fa fa-fw fa-eraser" ajax="false">
-                                  </p:commandButton>
-                                  <p:commandButton styleClass="ui button inverted blue"
-                                                   value="Prosseguir compra" 
-                                                   action="#{carrinhoBean.prosseguirCompra(usuarioBean.usuarioLogado)}"                                                 
-                                                   icon="fa fa-fw fa-list-alt" ajax="false">
-                                  </p:commandButton>
-
-                          </div>
-                      </div>
-                    </div>
-                    </c:when>
-                    <c:otherwise>
-                      <div class="ui center aligned grid">
-                        <div class="center aligned row">
-                          <h1>O carrinho está vazio.</h1>
-                        </div>
-                      </div>
-                    </c:otherwise>
-                  </c:choose>
-                    
                 </h:form>
                 <br/>
                 <br/>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
+    </h:head>
+
+    <h:body>
+        <ui:composition template="template/modelo.xhtml">
+            <ui:define name="content">
+                <h:form prependId="false">
+                    <!--Header-->
+                    <h2 class="ui top center aligned header grey">
+                        <div class='ui label huge fluid'>
+                            <i class="star icon"/>
+                            Categoria Selecionada:
+                        </div>
+                    </h2>
+
+                    <!--Grid dos cards dos produtos-->
+                    <div class="ui special cards five column stackable grid center aligned">
+                        <!--Linha-->
+                        <ui:repeat value="listagemCategoria" var="item" varStatus="status">
+
+
+                                </div>
+                            </div>
+                            <!-- Fim do card -->
+
+                        </ui:repeat>
+
+                    </div>
+                    <!--Fim do grid-->
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>
+
+
