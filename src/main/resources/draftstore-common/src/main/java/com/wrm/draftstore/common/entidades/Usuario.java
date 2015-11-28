@@ -8,6 +8,7 @@ package com.wrm.draftstore.common.entidades;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +22,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidationException;
+import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -48,26 +53,22 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.realizarLogin", query = "SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha")})
 
 public class Usuario implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuario")
-    private Collection<Carrinho> carrinhoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuario")
-    private Collection<Cartao> cartaoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+//    @Basic(optional = false)
     @Column(name = "ID_USUARIO")
     private Integer idUsuario;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 250)
+//    @Basic(optional = false)
+//    @NotNull
+//    @Size(min = 1, max = 250)
     @Column(name = "NOME")
     private String nome;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 500)
+//    @Basic(optional = false)
+//    @NotNull
+//    @Size(min = 1, max = 500)
     @Column(name = "EMAIL")
     private String email;
     @Size(max = 8)
@@ -76,42 +77,51 @@ public class Usuario implements Serializable {
     @Size(max = 250)
     @Column(name = "SENHA")
     private String senha;
-    @Basic(optional = false)
-    @NotNull
+//    @Basic(optional = false)
+//    @NotNull
     @Column(name = "DATA_CRIACAO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCriacao;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 11)
+//    @Basic(optional = false)
+//    @NotNull
+//    @Size(min = 1, max = 20)
     @Column(name = "CPF")
     private String cpf;
-    @Basic(optional = false)
-    @NotNull
+//    @Basic(optional = false)
+//    @NotNull
     @Column(name = "DT_NASCIMENTO")
     @Temporal(TemporalType.DATE)
     private Date dtNascimento;
     @Column(name = "SEXO")
     private Character sexo;
-    @Size(max = 9)
+//    @Size(max = 9)
     @Column(name = "CELULAR")
     private String celular;
     @OneToMany(mappedBy = "fkUsuario")
     private Collection<Endereco> enderecoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuario")
+    private Collection<Carrinho> carrinhoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuario")
+    private Collection<Cartao> cartaoCollection;
 
-    public Usuario() {}
+    public Usuario() {
+    }
 
     public Usuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String nome, String email, Date dataCriacao, String cpf, Date dtNascimento) {
+    public Usuario(Integer idUsuario, String nome, String email, String telefone, String senha, Date dataCriacao, String cpf, Date dtNascimento, Character sexo, String celular) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
         this.dataCriacao = dataCriacao;
         this.cpf = cpf;
         this.dtNascimento = dtNascimento;
+        this.sexo = sexo;
+        this.celular = celular;
     }
 
     public Integer getIdUsuario() {
@@ -203,6 +213,24 @@ public class Usuario implements Serializable {
         this.enderecoCollection = enderecoCollection;
     }
 
+    @XmlTransient
+    public Collection<Carrinho> getCarrinhoCollection() {
+        return carrinhoCollection;
+    }
+
+    public void setCarrinhoCollection(Collection<Carrinho> carrinhoCollection) {
+        this.carrinhoCollection = carrinhoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Cartao> getCartaoCollection() {
+        return cartaoCollection;
+    }
+
+    public void setCartaoCollection(Collection<Cartao> cartaoCollection) {
+        this.cartaoCollection = cartaoCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -226,24 +254,6 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "com.wrm.draftstore.common.entidades.Usuario[ idUsuario=" + idUsuario + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Carrinho> getCarrinhoCollection() {
-        return carrinhoCollection;
-    }
-
-    public void setCarrinhoCollection(Collection<Carrinho> carrinhoCollection) {
-        this.carrinhoCollection = carrinhoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Cartao> getCartaoCollection() {
-        return cartaoCollection;
-    }
-
-    public void setCartaoCollection(Collection<Cartao> cartaoCollection) {
-        this.cartaoCollection = cartaoCollection;
     }
 
 }

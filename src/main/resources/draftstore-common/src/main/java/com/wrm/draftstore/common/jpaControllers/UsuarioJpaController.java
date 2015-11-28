@@ -18,9 +18,16 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 /**
  *
@@ -98,6 +105,19 @@ public class UsuarioJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
+        } catch (ConstraintViolationException ex) {
+            ConstraintViolationException cve = (ConstraintViolationException) ex;
+            for (ConstraintViolation cv : cve.getConstraintViolations()) {
+                System.out.println("CONSTRAINT VIOLOATION : " + cv.toString());
+            }
+        } catch (Exception ex) {
+            if (ex instanceof ConstraintViolationException) {
+                ConstraintViolationException cve = (ConstraintViolationException) ex;
+                for (ConstraintViolation cv : cve.getConstraintViolations()) {
+                  System.out.println("CONSTRAINT VIOLOATION : " + cv.toString());
+                 }
+              }
+            System.out.println("PORRA");
         } finally {
             if (em != null) {
                 em.close();
@@ -303,9 +323,9 @@ public class UsuarioJpaController implements Serializable {
         } finally {
             em.close();
         }
-        
+
     }
-    
+
     public Usuario realizarLogin(String email, String senha) {
         EntityManager em = getEntityManager();
         //    EntityManager em = emFactory.createEntityManager();
@@ -321,5 +341,5 @@ public class UsuarioJpaController implements Serializable {
         em.close();
         return resultado;
     }
-    
+
 }
