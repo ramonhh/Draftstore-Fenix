@@ -6,7 +6,9 @@
 package com.wrm.draftstore.common.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,10 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,6 +45,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Endereco.findByUser", query = "SELECT e FROM Usuario u JOIN u.enderecoCollection e WHERE u.idUsuario = :idUsuario")})
 
 public class Endereco implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkEndereco")
+    private Collection<CarrinhoVenda> carrinhoVendaCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -200,6 +206,15 @@ public class Endereco implements Serializable {
     @Override
     public String toString() {
         return "com.wrm.draftstore.common.entidades.Endereco[ idEndereco=" + idEndereco + " ]";
+    }
+
+    @XmlTransient
+    public Collection<CarrinhoVenda> getCarrinhoVendaCollection() {
+        return carrinhoVendaCollection;
+    }
+
+    public void setCarrinhoVendaCollection(Collection<CarrinhoVenda> carrinhoVendaCollection) {
+        this.carrinhoVendaCollection = carrinhoVendaCollection;
     }
 
 }

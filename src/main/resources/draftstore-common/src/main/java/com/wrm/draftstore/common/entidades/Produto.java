@@ -58,6 +58,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Produto.findByDataEventoFim", query = "SELECT p FROM Produto p WHERE p.dataEventoFim = :dataEventoFim")})
     
 public class Produto implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkProduto")
+    private Collection<Carrinho> carrinhoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -358,6 +360,15 @@ public class Produto implements Serializable {
     @Override
     public String toString() {
         return "com.wrm.draftstore.common.entidades.Produto[ idProduto=" + idProduto + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Carrinho> getCarrinhoCollection() {
+        return carrinhoCollection;
+    }
+
+    public void setCarrinhoCollection(Collection<Carrinho> carrinhoCollection) {
+        this.carrinhoCollection = carrinhoCollection;
     }
 
 }

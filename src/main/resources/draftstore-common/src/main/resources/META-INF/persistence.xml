@@ -15,6 +15,14 @@
     <class>com.wrm.draftstore.common.entidades.Categoria</class>
     <class>com.wrm.draftstore.common.entidades.Produto</class>
     <class>com.wrm.draftstore.common.entidades.Log</class>
+    <class>com.wrm.draftstore.common.entidades.TbCarrinhoVenda</class>
+    <class>com.wrm.draftstore.common.entidades.TbTipoPagamento</class>
+    <class>com.wrm.draftstore.common.entidades.TbCartao</class>
+    <class>com.wrm.draftstore.common.entidades.TbCarrinho</class>
+    <class>com.wrm.draftstore.common.entidades.CarrinhoVenda</class>
+    <class>com.wrm.draftstore.common.entidades.Cartao</class>
+    <class>com.wrm.draftstore.common.entidades.Carrinho</class>
+    <class>com.wrm.draftstore.common.entidades.TipoPagamento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/draftCliente"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

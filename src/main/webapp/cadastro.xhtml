@@ -11,22 +11,15 @@
       <div class="ui segment">
         <h2 class="ui dividing header">Cadastro</h2>
         <br/>
-        
-        <h:form id="formLogout">
-          <p:commandButton action="#{usuarioBean.cadastrarUsuario()}"
-                                 value="together" 
-                                 styleClass="ui right floated icon button inverted red"
-                                 icon="fa fa-fw fa-shopping-cart"/>
-              </h:form>
         <div class="ui grid"> 
           <div class="ui basic container segment">
-            #{usuarioBean.inicializarUsuario()}
             
             <h:form class="ui form" id="formCadastro">
+              #{usuarioBean.inicializarUsuario()}
               <label>Nome</label>                     
               <div class="field">
                 <!--<input type="text" name="nome" placeholder="Nome"/>-->
-                <h:inputText value="#{usuarioBean.novoUsuario.nome}" pt:placeholder="Informe seu nome"/>
+                <h:inputText id="nome" value="#{usuarioBean.novoUsuario.nome}" pt:placeholder="Informe seu nome"/>
               </div>
               <label>Sexo</label>
               <div class="field">
@@ -35,7 +28,8 @@
                                                     <option value="feminino" label="Feminino"/>                            
                                                     <option value="masculino" label="Masculino"/>                            
                                                 </select>-->
-                <h:selectOneMenu value="#{usuarioBean.novoUsuario.sexo}" styleClass="ui search dropdown" id="sSexo">
+                <h:selectOneMenu  value="#{usuarioBean.novoUsuario.sexo}" 
+                                  styleClass="ui search dropdown" id="sSexo">
                   <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled="true"/>
                   <f:selectItem itemValue="M" itemLabel="Masculino"/>
                   <f:selectItem itemValue="F" itemLabel="Feminino"/>
@@ -46,7 +40,7 @@
                 <p:inputText id="dtNascimento" type="date" label="Data de Nascimento"
                              value="#{usuarioBean.novoUsuario.dtNascimento}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
-                    </p:inputText>
+                </p:inputText>
               </div>
               <label>CPF</label>
               <div class="field">
@@ -65,15 +59,18 @@
               <label>Senha</label>
               <div class="field" id="campoSenha">
                 <!--<input type="password" name="senha"/>-->
-                <h:inputSecret value="#{usuarioBean.novoUsuario.senha}" pt:placeholder="Informe a sua senha"/>
+                <h:inputSecret id="senha" value="#{usuarioBean.novoUsuario.senha}" pt:placeholder="Informe a sua senha"/>
               </div>
-              <div class="field wide eight" id="campoCsenha">
+              <h:commandButton action="#{usuarioBean.cadastrarUsuario()}" 
+                               styleClass="ui primary button"
+                               value="Cadastrar">
+                <f:ajax execute="@this" render="@none" />
+              </h:commandButton>
+<!--              <div class="field wide eight" id="campoCsenha">
                                     <label>CONFIRME SUA SENHA</label>
                                     <input type="password" name="cSenha" id="cSenha"/>
-                                </div>
-              <p:commandButton action="#{usuarioBean.cadastrarUsuario()}" 
-                               styleClass="ui primary button"
-                               value="Cadastrar" ajax="false"/>
+                                </div>-->
+
 <!--              <p:commandButton 
                                styleClass="ui button"
                                value="Limpar campos" type="reset"/>-->

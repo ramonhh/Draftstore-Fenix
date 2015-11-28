@@ -6,6 +6,7 @@
 package com.wrm.draftstore.common.service.jpaimpl;
 
 import com.wrm.draftstore.common.entidades.Usuario;
+import com.wrm.draftstore.common.entidades.exceptions.IllegalOrphanException;
 import com.wrm.draftstore.common.jpaControllers.UsuarioJpaController;
 import com.wrm.draftstore.common.jpaControllers.exceptions.NonexistentEntityException;
 import com.wrm.draftstore.common.service.UsuarioService;
@@ -54,10 +55,12 @@ public class UsuarioServiceJPAImpl implements UsuarioService {
   @Override
   public void remover(Long idUsuario) {
     try {
-      usuarioController.destroy(idUsuario.intValue());
-    } catch (NonexistentEntityException ex) {
-      Logger.getLogger(UsuarioServiceJPAImpl.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        usuarioController.destroy(idUsuario.intValue());
+    } catch (IllegalOrphanException ex) {
+          Logger.getLogger(UsuarioServiceJPAImpl.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (com.wrm.draftstore.common.entidades.exceptions.NonexistentEntityException ex) {
+          Logger.getLogger(UsuarioServiceJPAImpl.class.getName()).log(Level.SEVERE, null, ex);
+      }
   }
 
   @Override

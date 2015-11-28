@@ -13,7 +13,13 @@ import com.wrm.draftstore.fenix.entity.UsuarioSistema;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -25,9 +31,7 @@ public class UsuarioBean implements Serializable {
 
     // Construtor padrao
 
-    public UsuarioBean() {
-        novoUsuario = new Usuario();
-    }
+    public UsuarioBean() {}
 
   // Usuarios Fake
 //  private UsuarioService usuarioService = new UsuarioServiceFakeImpl();
@@ -74,21 +78,56 @@ public class UsuarioBean implements Serializable {
     }
     
     public void inicializarUsuario(){
+        System.out.println("Inicializando usuario...");
         novoUsuario = new Usuario();
 //        novoUsuario.setDtNascimento(new Date());
     }
     
     public String cadastrarUsuario() {
         System.out.println("Cadastrando...");
+        
+        this.carregarParametrosRequestUsuario();
+        
         if (novoUsuario != null) {
             novoUsuario.setDataCriacao(new Date());
             usuarioService.incluir(novoUsuario);
-            System.out.println("Usuário cadastrado.");
+            System.out.println("Usuário cadastrado.\nLogando...");
+            this.email = novoUsuario.getEmail();
+            this.senha = novoUsuario.getSenha();
+            return this.efetuarLogin();
         } else {
             System.out.println("Usuário não cadastrado.");
             return "cadastro.xhtml?faces-redirect=true";
         }
-        return "perfil.xhtml?faces-redirect=true";
+    }
+    
+    public void carregarParametrosRequestUsuario(){
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String nomeRequest = request.getParameter("formCadastro:nome");
+        String sexo = request.getParameter("formCadastro:sSexo");
+        String dtNascimento = request.getParameter("formCadastro:dtNascimento");
+        String cpf = request.getParameter("formCadastro:cpf");
+        String telefone = request.getParameter("formCadastro:telefone");
+        String emailRequest = request.getParameter("formCadastro:email");
+        String senhaRequest = request.getParameter("formCadastro:senha");
+        
+        novoUsuario.setNome(nomeRequest);
+        novoUsuario.setSexo(sexo.toCharArray()[0]);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedCurrentDate = new Date();
+        try {
+            convertedCurrentDate = sdf.parse(dtNascimento);
+        } catch (ParseException ex) {
+            Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        novoUsuario.setDtNascimento(convertedCurrentDate);
+        
+        novoUsuario.setCpf(cpf);
+        novoUsuario.setTelefone(telefone);
+        novoUsuario.setCelular(telefone);
+        novoUsuario.setEmail(emailRequest);
+        novoUsuario.setSenha(senhaRequest);
     }
 
   //</editor-fold>

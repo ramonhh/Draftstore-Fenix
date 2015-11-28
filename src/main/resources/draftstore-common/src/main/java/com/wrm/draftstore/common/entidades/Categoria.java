@@ -6,7 +6,9 @@
 package com.wrm.draftstore.common.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,6 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Categoria.findByNomeCategoria", query = "SELECT c FROM Categoria c WHERE c.nomeCategoria = :nomeCategoria"),
     @NamedQuery(name = "Categoria.findByIcon", query = "SELECT c FROM Categoria c WHERE c.icon = :icon")})
 public class Categoria implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkCategoria")
+    private Collection<Produto> produtoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkCategoria")
+    private Collection<Subcategoria> subcategoriaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -109,6 +117,24 @@ public class Categoria implements Serializable {
     @Override
     public String toString() {
         return "com.wrm.draftstore.common.entidades.Categoria[ idCategoria=" + idCategoria + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Produto> getProdutoCollection() {
+        return produtoCollection;
+    }
+
+    public void setProdutoCollection(Collection<Produto> produtoCollection) {
+        this.produtoCollection = produtoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Subcategoria> getSubcategoriaCollection() {
+        return subcategoriaCollection;
+    }
+
+    public void setSubcategoriaCollection(Collection<Subcategoria> subcategoriaCollection) {
+        this.subcategoriaCollection = subcategoriaCollection;
     }
     
 }

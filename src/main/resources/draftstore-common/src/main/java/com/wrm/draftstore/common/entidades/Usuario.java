@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,6 +48,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.realizarLogin", query = "SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha")})
 
 public class Usuario implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuario")
+    private Collection<Carrinho> carrinhoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkUsuario")
+    private Collection<Cartao> cartaoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -221,6 +226,24 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "com.wrm.draftstore.common.entidades.Usuario[ idUsuario=" + idUsuario + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Carrinho> getCarrinhoCollection() {
+        return carrinhoCollection;
+    }
+
+    public void setCarrinhoCollection(Collection<Carrinho> carrinhoCollection) {
+        this.carrinhoCollection = carrinhoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Cartao> getCartaoCollection() {
+        return cartaoCollection;
+    }
+
+    public void setCartaoCollection(Collection<Cartao> cartaoCollection) {
+        this.cartaoCollection = cartaoCollection;
     }
 
 }
