@@ -94,8 +94,7 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "fkUsuario")
     private Collection<Endereco> enderecoCollection;
 
-    public Usuario() {
-    }
+    public Usuario() {}
 
     public Usuario(Integer idUsuario) {
         this.idUsuario = idUsuario;

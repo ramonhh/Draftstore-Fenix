@@ -26,6 +26,7 @@ public class UsuarioBean implements Serializable {
     // Construtor padrao
 
     public UsuarioBean() {
+        novoUsuario = new Usuario();
     }
 
   // Usuarios Fake
@@ -74,6 +75,7 @@ public class UsuarioBean implements Serializable {
     
     public void inicializarUsuario(){
         novoUsuario = new Usuario();
+//        novoUsuario.setDtNascimento(new Date());
     }
     
     public String cadastrarUsuario() {

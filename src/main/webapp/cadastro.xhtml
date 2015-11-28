@@ -11,6 +11,7 @@
       <div class="ui segment">
         <h2 class="ui dividing header">Cadastro</h2>
         <br/>
+        
         <h:form id="formLogout">
           <p:commandButton action="#{usuarioBean.cadastrarUsuario()}"
                                  value="together" 
@@ -42,28 +43,29 @@
               </div>
               <label>Data de Nascimento</label>
               <div class="field">
-                <!--<input type="date" name="dtNascimento" placeholder="dd/MM/yyyy"/>-->
-                <p:calendar value="#{usuarioBean.novoUsuario.dtNascimento}" pattern="dd/MM/yyyy" id="dataNascimento" pt:placeholder="Formato dia/mês/ano (dd/MM/yyyy)"/>
+                <p:inputText id="dtNascimento" type="date" label="Data de Nascimento"
+                             value="#{usuarioBean.novoUsuario.dtNascimento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </p:inputText>
               </div>
               <label>CPF</label>
               <div class="field">
-                <!--<input type="text" name="cpf" maxlength="15"/>-->
-                <h:inputText value="#{usuarioBean.novoUsuario.cpf}" id="cpf" pt:placeholder="Insira apenas números"/>
+                <p:inputText value="#{usuarioBean.novoUsuario.cpf}" 
+                             id="cpf" styleClass="cpf" >
+                </p:inputText>
               </div>
-              <label>Telefone</label>
+              <label>Contato</label>
               <div class="field">
-                <!--<input type="text" name="rg" maxlength="12"/>-->
-                <h:inputText value="#{usuarioBean.novoUsuario.telefone}" id="telefone" pt:placeholder="Insira apenas números"/>
+                <h:inputText value="#{usuarioBean.novoUsuario.telefone}" id="telefone" styleClass="telefone" pt:placeholder="Insira apenas números"/>
               </div>
               <label>Email</label>
               <div class="field">
-                <!--<input type="text" name="email"/>-->
                 <h:inputText id="email" value="#{usuarioBean.novoUsuario.email}" pt:placeholder="Informe o seu email"/>
               </div>
               <label>Senha</label>
               <div class="field" id="campoSenha">
                 <!--<input type="password" name="senha"/>-->
-                <h:inputSecret  value="#{usuarioBean.novoUsuario.senha}" pt:placeholder="Informe a sua senha"/>
+                <h:inputSecret value="#{usuarioBean.novoUsuario.senha}" pt:placeholder="Informe a sua senha"/>
               </div>
               <div class="field wide eight" id="campoCsenha">
                                     <label>CONFIRME SUA SENHA</label>
@@ -71,7 +73,7 @@
                                 </div>
               <p:commandButton action="#{usuarioBean.cadastrarUsuario()}" 
                                styleClass="ui primary button"
-                               value="Cadastrar"/>
+                               value="Cadastrar" ajax="false"/>
 <!--              <p:commandButton 
                                styleClass="ui button"
                                value="Limpar campos" type="reset"/>-->
@@ -93,8 +95,8 @@
             <script src="src/js/jquery.mask.js" type="text/javascript"></script>
             <script type="text/javascript">
                 $(document).ready(function () {
-                    $('#cpf').mask('999.999.999-99');
-                    $('#rg').mask('99.999.999-A');
+                    $('.cpf').mask('999.999.999-99');
+                    $('.telefone').mask("(99) 9999-9999?9");
                 });
             </script>
         </ui:define>        
