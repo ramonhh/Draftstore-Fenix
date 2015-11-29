@@ -13,24 +13,25 @@
                     <div class="column">
                         <div class="ui form">
                             <h:form class="ui form">                   
-                            <div class="field">
-                                <label>Email</label>
-                                <div class="ui left icon input">
-                                    <h:inputText value="#{usuarioBean.email}"></h:inputText>                
+                                <div class="field">
+                                    <label>Email</label>
+                                    <div class="ui left icon input">
+                                        <h:inputText value="#{usuarioBean.email}"></h:inputText>                
                                         <i class="user icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <label>Password</label>
-                                <div class="ui left icon input">
-                                    <h:inputSecret value="#{usuarioBean.senha}"/>
+                                <div class="field">
+                                    <label>Password</label>
+                                    <div class="ui left icon input">
+                                        <h:inputSecret value="#{usuarioBean.senha}"/>
                                         <i class="lock icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="ui basic center aligned segment">
-                                <h:commandButton action="#{usuarioBean.efetuarLogin()}" styleClass="ui big green button" value="Entrar"/>
-                            </div>
-                                </h:form>
+                                <div class="ui basic center aligned segment">
+                                    <h:commandButton action="#{usuarioBean.efetuarLogin(carrinhoBean.itensMapValues.size())}" styleClass="ui big green button addUser" value="Entrar">
+                                    </h:commandButton>
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                     <div class="ui vertical divider">
@@ -46,10 +47,10 @@
                         </div>
                         <br/>
                         <a href="cadastro.xhtml"> 
-                        <div class="ui big green labeled icon button">
-                            <i class="signup icon"></i>
-                            Cadastre-se
-                        </div>
+                            <div class="ui big green labeled icon button">
+                                <i class="signup icon"></i>
+                                Cadastre-se
+                            </div>
                         </a>
                     </div>
                 </div> 

@@ -6,12 +6,12 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    
+
     <head>
-    <h:outputStylesheet library="css" name="estiloDraftstore/style.css"/>
-    <link href="${facesContext.externalContext.requestContextPath}/css/estiloDraftstore.css" rel="stylesheet" type="text/css" media="screen" />  
+        <h:outputStylesheet library="css" name="estiloDraftstore/style.css"/>
+        <link href="${facesContext.externalContext.requestContextPath}/css/estiloDraftstore.css" rel="stylesheet" type="text/css" media="screen" />  
     </head>
-    
+
     <h:body>
         <ui:composition template="template/modelo.xhtml">
             <ui:define name="content">
@@ -38,56 +38,57 @@
                             </tr>
                         </thead>
                         <ui:repeat value="#{carrinhoBean.itensMapKeys}" var="item" varStatus="status">
-                        <tbody>
-                            <tr class="item center aligned">
-                                
-                                <td>
-                                    <img class="ui small left floated avatar image" 
-                                         src="#{item.caminhoImagem}"/>
-                                </td>
-                                
-                                <td>
-                                    <h:outputText value="#{item.modelo}"/>
-                                </td>
-                                
-                                <td>
-                                    <p:spinner id="ajaxSpinner" 
+                            <tbody>
+                                <tr class="item center aligned">
+
+                                    <td>
+                                        <img class="ui small left floated avatar image" 
+                                             src="#{item.caminhoImagem}"/>
+                                    </td>
+
+                                    <td>
+                                        <h:outputText value="#{item.modelo}"/>
+                                    </td>
+
+                                    <td>
+                                        <p:spinner id="ajaxSpinner" 
                                                    value="#{carrinhoBean.itensMap[item].quantidade}"
                                                    valueChangeListener="#{carrinhoBean.handleChange}"
                                                    min="1"
-                                                   max="100"
-                                                   styleClass="qtdSpinner">
+                                                   max="#{item.quantidade}"
+                                                   styleClass="qtdSpinner"
+                                                   onfocus="this.blur();">
                                             <p:ajax 
                                                 update="valorTotal labelCarrinho"
                                                 process="@this" />
                                         </p:spinner>
-                                </td>
-                                
-                                <td>
-                                    R$ <h:outputText value="#{item.precoVenda}"/>
-                                </td>
-                                
-                                <td class="ui floated right">
-                                    <p:button styleClass="ui button inverted blue"
-                                              value="Detalhes" 
-                                              outcome="detalhe.xhtml"
-                                              icon="fa fa-fw fa-list-alt">
-                                        <f:param name="id" value="#{item.idProduto}"/>
-                                    </p:button>
+                                    </td>
 
-                                    <!--Remover produto do carrinho-->
-                                    <p:commandButton styleClass="ui button inverted red"
-                                                     value="Remover" 
-                                                     action="#{carrinhoBean.removerProduto(item)}"
-                                                     update="valorTotal"
-                                                     icon="fa fa-fw fa-shopping-cart" ajax="false">
-                                    </p:commandButton>
-                                </td>
-                            </tr>
-                        </tbody>
-                            </ui:repeat>
+                                    <td>
+                                        R$ <h:outputText value="#{item.precoVenda}"/>
+                                    </td>
+
+                                    <td class="ui floated right">
+                                        <p:button styleClass="ui button inverted blue"
+                                                  value="Detalhes" 
+                                                  outcome="detalhe.xhtml"
+                                                  icon="fa fa-fw fa-list-alt">
+                                            <f:param name="id" value="#{item.idProduto}"/>
+                                        </p:button>
+
+                                        <!--Remover produto do carrinho-->
+                                        <p:commandButton styleClass="ui button inverted red"
+                                                         value="Remover" 
+                                                         action="#{carrinhoBean.removerProduto(item)}"
+                                                         update="valorTotal"
+                                                         icon="fa fa-fw fa-shopping-cart" ajax="false">
+                                        </p:commandButton>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </ui:repeat>
                     </table>
-                    
+
                     <c:choose>
                         <c:when test="#{carrinhoBean.quantidadeItensMap > 0}">
                             <div class="ui right aligned grid">

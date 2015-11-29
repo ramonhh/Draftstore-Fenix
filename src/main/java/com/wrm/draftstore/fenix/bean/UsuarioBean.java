@@ -30,10 +30,10 @@ import javax.servlet.http.HttpServletRequest;
 public class UsuarioBean implements Serializable {
 
     // Construtor padrao
+    public UsuarioBean() {
+    }
 
-    public UsuarioBean() {}
-
-  // Usuarios Fake
+    // Usuarios Fake
 //  private UsuarioService usuarioService = new UsuarioServiceFakeImpl();
     // Usuarios DB
     private UsuarioService usuarioService = new UsuarioServiceJPAImpl();
@@ -45,19 +45,20 @@ public class UsuarioBean implements Serializable {
 
     private Usuario usuarioLogado;
     private UsuarioSistema usuarioSistema;
-    
+
     // Novo usuario
     private Usuario novoUsuario;
 
-  //</editor-fold>
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Metodos">
-    public String efetuarLogin() {
+    public String efetuarLogin(int qttProdutoCarrinho) {
         UsuarioSistema usuarioSis = autenticar(email, senha);
         if (usuarioSis != null) {
             this.usuarioSistema = usuarioSis;
             System.out.println("[WRMLOG] Login efetuado com sucesso"
                     + "\n> " + usuarioLogado.getNome() + " logado.");
-            return "/perfil.xhtml?faces-redirect=true";
+
+            return qttProdutoCarrinho > 0 ? "/carrinho.xhtml?faces-redirect=true" : "/perfil.xhtml?faces-redirect=true";
         }
         return "/home.xhtml?faces-redirect=true";
     }
@@ -76,33 +77,33 @@ public class UsuarioBean implements Serializable {
         }
         return null;
     }
-    
-    public void inicializarUsuario(){
+
+    public void inicializarUsuario() {
         System.out.println("Inicializando usuario...");
         novoUsuario = new Usuario();
 //        novoUsuario.setDtNascimento(new Date());
     }
-    
+
     public String cadastrarUsuario() {
         System.out.println("Cadastrando...");
-        
+
         this.carregarParametrosRequestUsuario();
-        
+
         if (novoUsuario != null) {
             novoUsuario.setDataCriacao(new Date());
             usuarioService.incluir(novoUsuario);
             System.out.println("Usuário cadastrado.\nLogando...");
             this.email = novoUsuario.getEmail();
             this.senha = novoUsuario.getSenha();
-            return this.efetuarLogin();
+            return this.efetuarLogin(0);
         } else {
             System.out.println("Usuário não cadastrado.");
             return "cadastro.xhtml?faces-redirect=true";
         }
     }
-    
-    public void carregarParametrosRequestUsuario(){
-        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+    public void carregarParametrosRequestUsuario() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String nomeRequest = request.getParameter("formCadastro:nome");
         String sexo = request.getParameter("formCadastro:sSexo");
         String dtNascimento = request.getParameter("formCadastro:dtNascimento");
@@ -110,10 +111,10 @@ public class UsuarioBean implements Serializable {
         String telefone = request.getParameter("formCadastro:telefone");
         String emailRequest = request.getParameter("formCadastro:email");
         String senhaRequest = request.getParameter("formCadastro:senha");
-        
+
         novoUsuario.setNome(nomeRequest);
         novoUsuario.setSexo(sexo.toCharArray()[0]);
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date convertedCurrentDate = new Date();
         try {
@@ -122,7 +123,7 @@ public class UsuarioBean implements Serializable {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         novoUsuario.setDtNascimento(convertedCurrentDate);
-        
+
         novoUsuario.setCpf(cpf);
         novoUsuario.setTelefone(telefone);
         novoUsuario.setCelular(telefone);
@@ -130,7 +131,7 @@ public class UsuarioBean implements Serializable {
         novoUsuario.setSenha(senhaRequest);
     }
 
-  //</editor-fold>
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Getters e setters">
     public String getNome() {
         return nome;

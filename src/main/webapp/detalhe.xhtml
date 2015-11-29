@@ -5,103 +5,114 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-  <h:body>
+    <h:body>
 
-    <ui:composition template="template/modelo.xhtml">
+        <ui:composition template="template/modelo.xhtml">
 
-      <ui:define name="content"> 
-        <link href="src/css/ppSlider.css" rel="stylesheet"/>
-        <!--Corpo do detalhe-->
-        <!--Colunas para a divisão da imagem e detalhes do produto-->
+            <ui:define name="content"> 
+                <link href="src/css/ppSlider.css" rel="stylesheet"/>
+                <!--Corpo do detalhe-->
+                <!--Colunas para a divisão da imagem e detalhes do produto-->
 
 
-        <div class="ui three column grid center aligned">
-          
-            <div class="row">
+                <div class="ui three column grid center aligned">
 
-            <div class="sixteen wide mobile six wide computer column">
-              <div class="ui basic segment">
-                <div class="ui centered aligned image medium">
-                  <div class="ui slider-wrapper theme-default slids">
-                    <div id="slider" class="nivoSlider">
-                      <img src="#{produtoBean.produtoDetalhe.caminhoImagem}" alt="#{produtoBean.produtoDetalhe.descricaoImagem}"/>
-                    </div>    
-                  </div>
+                    <div class="row">
+
+                        <div class="sixteen wide mobile six wide computer column">
+                            <div class="ui basic segment">
+                                <div class="ui centered aligned image medium">
+                                    <div class="ui slider-wrapper theme-default slids">
+                                        <div id="slider" class="nivoSlider">
+                                            <img src="#{produtoBean.produtoDetalhe.caminhoImagem}" alt="#{produtoBean.produtoDetalhe.descricaoImagem}"/>
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sixteen wide tablet five wide computer column middle aligned">
+                            <div class="center floated aligned">
+                                <div class="ui basic center aligned segment">
+                                    <!--<h3 class="header"> Processador Intel Core i7 3770 (BX80637I73770) 3° Geração</h3>-->
+                                    <h3 class="header">
+                                        <h:outputText value="#{produtoBean.produtoDetalhe.modelo}"/>
+                                    </h3>
+                                    <!--{produtoBean.produto.modelo}-->
+                                </div>
+
+                                <div class="text center aligned">
+                                    <div class="ui tiny horizontal statistic">
+                                        <h:panelGrid rendered="#{produtoBean.produtoDetalhe.dataValida}">
+                                            De <h:outputText value="#{produtoBean.produtoDetalhe.precoVenda}">
+                                                <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
+                                            </h:outputText>
+                                            por
+                                            <div class="label">
+                                                R$
+                                            </div>
+                                            <div class="value">
+                                                <h:outputText value="#{produtoBean.produtoDetalhe.precoPromo}">
+                                                    <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
+                                                </h:outputText>
+                                            </div>
+                                        </h:panelGrid>
+                                        <h:panelGrid rendered="#{not produtoBean.produtoDetalhe.dataValida}">
+                                            por
+                                            <div class="label">
+                                                R$
+                                            </div>
+                                            <div class="value">
+                                                <h:outputText value="#{produtoBean.produtoDetalhe.precoVenda}">
+                                                </h:outputText>
+                                            </div>
+                                        </h:panelGrid>
+                                    </div>
+                                </div>
+
+                                <br/>
+                            </div>
+                            <div> 
+                                <!--                <div class="ui bottom teal button addCarrinho">
+                                                  <i class="cart icon"></i>
+                                                  Adicionar ao carrinho-->
+
+                                <h:form>
+                                    <p:commandButton id="adicionarAoCarrinhoButton" styleClass="ui bottom blue button addCarrinho"
+                                                     value="Adicionar ao carrinho" 
+                                                     action="#{carrinhoBean.adicionar(produtoBean.produtoDetalhe)}"
+                                                     icon="fa fa-fw fa-shopping-cart">
+                                    </p:commandButton>
+                                </h:form>
+
+
+                                <br/>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-            </div>
-            <div class="sixteen wide tablet five wide computer column middle aligned">
-              <div class="center floated aligned">
-                <div class="ui basic center aligned segment">
-                  <!--<h3 class="header"> Processador Intel Core i7 3770 (BX80637I73770) 3° Geração</h3>-->
-                  <h3 class="header">
-                    <h:outputText value="#{produtoBean.produtoDetalhe.modelo}"/>
-                  </h3>
-                  <!--{produtoBean.produto.modelo}-->
+
+                <div class="ui tabular menu">
+                    <div class="item active" data-tab="tab-name">Especificações</div>
+                    <!--<div class="item" data-tab="tab-name2">Opiniões</div>-->
                 </div>
 
-                <div class="ui tiny statistic">
-                  <i> De  
-                    <strike> 
-                      <h:outputText value="#{produtoBean.produtoDetalhe.precoVenda}">
-                        <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
-                      </h:outputText> 
-                    </strike> 
-                    por
-                  </i> 
-                  <div class="value">
-                    <strong> <h:outputText value="#{produtoBean.produtoDetalhe.precoPromo}">
-                        <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
-                      </h:outputText> </strong>
-                  </div> 
-                  <div class="text center aligned">
-                    <strong>8x</strong> de <strong>137,37 </strong> sem juros no paypal
-                  </div>
+                <div class="ui tab active" data-tab="tab-name">
+                    <div class="ui basic segment center aligned">
+                        <h:outputText value="#{produtoBean.produtoDetalhe.descricao}" escape="false"/>
+                    </div>
                 </div>
-                <br/>
-              </div>
-              <div> 
-<!--                <div class="ui bottom teal button addCarrinho">
-                  <i class="cart icon"></i>
-                  Adicionar ao carrinho-->
- 
-                <h:form>
-                  <p:commandButton id="adicionarAoCarrinhoButton" styleClass="ui bottom blue button addCarrinho"
-                                     value="Adicionar ao carrinho" 
-                                     action="#{carrinhoBean.adicionar(produtoBean.produtoDetalhe)}"
-                                     icon="fa fa-fw fa-shopping-cart">
-                  </p:commandButton>
-                </h:form>
-                
-                
-                <br/>
-                <br/>
-              </div>
-            </div>
-          </div>
+                <div class="ui tab" data-tab="tab-name2">
+                    <div class="ui basic segment center aligned">
+                        <i class="ui configure icon"/>
+                        Em breve! 
+                    </div>
+                </div>
 
-        </div>
+            </ui:define>
 
-        <div class="ui tabular menu">
-          <div class="item active" data-tab="tab-name">Especificações</div>
-          <!--<div class="item" data-tab="tab-name2">Opiniões</div>-->
-        </div>
-
-        <div class="ui tab active" data-tab="tab-name">
-          <div class="ui basic segment center aligned">
-            <h:outputText value="#{produtoBean.produtoDetalhe.descricao}" escape="false"/>
-          </div>
-        </div>
-        <div class="ui tab" data-tab="tab-name2">
-          <div class="ui basic segment center aligned">
-            <i class="ui configure icon"/>
-            Em breve! 
-          </div>
-        </div>
-
-      </ui:define>
-
-    </ui:composition>
-  </h:body>
+        </ui:composition>
+    </h:body>
 
 </html>

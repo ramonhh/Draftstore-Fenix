@@ -71,7 +71,7 @@ public class Usuario implements Serializable {
 //    @Size(min = 1, max = 500)
     @Column(name = "EMAIL")
     private String email;
-    @Size(max = 8)
+    //@Size(max = 20)
     @Column(name = "TELEFONE")
     private String telefone;
     @Size(max = 250)
@@ -94,7 +94,7 @@ public class Usuario implements Serializable {
     private Date dtNascimento;
     @Column(name = "SEXO")
     private Character sexo;
-//    @Size(max = 9)
+    //@Size(max = 20)
     @Column(name = "CELULAR")
     private String celular;
     @OneToMany(mappedBy = "fkUsuario")
