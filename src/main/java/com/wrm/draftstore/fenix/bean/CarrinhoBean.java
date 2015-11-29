@@ -5,8 +5,12 @@
  */
 package com.wrm.draftstore.fenix.bean;
 
+import com.wrm.draftstore.common.entidades.Carrinho;
+import com.wrm.draftstore.common.entidades.CarrinhoVenda;
 import com.wrm.draftstore.common.entidades.Produto;
 import com.wrm.draftstore.common.entidades.Usuario;
+import com.wrm.draftstore.common.service.CarrinhoService;
+import com.wrm.draftstore.common.service.jpaimpl.CarrinhoServiceJPAImpl;
 import com.wrm.draftstore.fenix.entity.ProdutoCarrinho;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -37,6 +41,7 @@ public class CarrinhoBean implements Serializable {
     private ArrayList<ProdutoCarrinho> itens = new ArrayList<>();
     private HashMap<Produto, ProdutoCarrinho> itensMap = new HashMap<>();
     private int quantidadeItensMap = 0;
+    private final CarrinhoService cs = new CarrinhoServiceJPAImpl();
 
     public float getPrecoTotal() {
         float preco = calcularPrecoCarrinho();
@@ -117,7 +122,20 @@ public class CarrinhoBean implements Serializable {
         System.out.println("--------------------");
     }
 
-    public String finalizarCompra() {
+    public String finalizarCompra(Usuario usuLogado, CarrinhoVenda cv) {
+        for (ProdutoCarrinho itensMapValue : this.getItensMapValues()) {
+            Carrinho car = new Carrinho();
+            Produto p = itensMapValue.getProduto();
+            car.setDataAlteracao(itensMapValue.getDataInclusao());
+            car.setFkCarrinhoVenda(cv);
+            car.setFkProduto(p);
+            car.setFkUsuario(usuLogado);
+            car.setPreco(p.isDataValida() ? p.getPrecoPromo() : p.getPrecoVenda());
+            car.setQuantidade(itensMapValue.getQuantidade());
+
+            cs.incluir(car);
+        }
+
         limparCarrinho();
         return "/compra_sucesso.xhtml";
     }
@@ -183,7 +201,7 @@ public class CarrinhoBean implements Serializable {
 
         if (u == null) {
             System.out.println("Não está logado");
-            
+
             return "login.xhtml";
         }
 

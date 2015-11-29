@@ -49,12 +49,12 @@
                             <div class="content">
                                 Para o endereço
                                 <div class="sub header">
-                                    #{enderecoBean.enderecoSelecionado.rua}, 
-                                    #{enderecoBean.enderecoSelecionado.numero},
-                                    #{enderecoBean.enderecoSelecionado.bairro},
-                                    CEP #{enderecoBean.enderecoSelecionado.cep},
-                                    #{enderecoBean.enderecoSelecionado.cidade}, 
-                                    #{enderecoBean.enderecoSelecionado.estado} - 
+                                    #{vendaBean.enderecoSelecionado.rua}, 
+                                    #{vendaBean.enderecoSelecionado.numero},
+                                    #{vendaBean.enderecoSelecionado.bairro},
+                                    CEP #{vendaBean.enderecoSelecionado.cep},
+                                    #{vendaBean.enderecoSelecionado.cidade}, 
+                                    #{vendaBean.enderecoSelecionado.estado} - 
                                     <a href="compra_endereco.xhtml">Alterar endereço</a></div>
                             </div>
                         </h2>
@@ -68,61 +68,28 @@
                         <div class="eight wide column">
                             <h3 class="ui header">Produto</h3>
                             <div class="ui cards">
-                                <div class="card">
-                                    <div class="content">
-                                        <img class="left floated tiny ui image" src="imagens/produtos/controlexbox.jpg"/>
-                                        <h4 class="ui header">
-                                            Console Playstation 4 500GB - Sony
-                                        </h4>
-                                        <div class="ui meta">
-                                            Quantidade: 1
-                                        </div>                                       
+                                <ui:repeat value="#{carrinhoBean.itensMapValues}" var="item" varStatus="status">
+                                    <div class="card">
+                                        <div class="content">
+                                            <img class="left floated tiny ui image" src="#{item.produto.caminhoImagem}"/>
+                                            <h4 class="ui header">
+                                                #{item.produto.modelo}
+                                            </h4>
+                                            <div class="ui meta">
+                                                Quantidade: #{item.quantidade}
+                                            </div>                                       
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card">
-                                    <div class="content">
-                                        <img class="left floated tiny ui image" src="imagens/produtos/controlexbox.jpg"/>
-                                        <h4 class="ui header">
-                                            Console Playstation 4 500GB - Sony
-                                        </h4>
-                                        <div class="ui meta">
-                                            Quantidade: 1
-                                        </div>                                       
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="content">
-                                        <img class="left floated tiny ui image" src="imagens/produtos/controlexbox.jpg"/>
-                                        <h4 class="ui header">
-                                            Console Playstation 4 500GB - Sony
-                                        </h4>
-                                        <div class="ui meta">
-                                            Quantidade: 1
-                                        </div>                                       
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="content">
-                                        <img class="left floated tiny ui image" src="imagens/produtos/controlexbox.jpg"/>
-                                        <h4 class="ui header">
-                                            Console Playstation 4 500GB - Sony
-                                        </h4>
-                                        <div class="ui meta">
-                                            Quantidade: 1
-                                        </div>                                       
-                                    </div>
-                                </div>
+                                </ui:repeat>
                             </div>
-
                         </div>
                         <div class="ui basic divider vertical"> </div>
                         <div class="eight wide column">
                             <div class="ui basic segment">
                                 <h3>Tipo de entrega</h3>
-                                <h:selectOneRadio value="#{enderecoBean.tipoEntrega}" layout="pageDirection" 
+                                <h:selectOneRadio value="#{vendaBean.cv.prazoEntrega}" layout="pageDirection" 
                                                   styleClass="ui celled table">
                                     <f:selectItem itemValue="10" itemLabel="Entrega em até 10 dias úteis"/>
-                                    <f:selectItem itemValue="15" itemLabel="Entrega em até 15 dias úteis"/>
                                 </h:selectOneRadio>
                             </div>
                         </div>

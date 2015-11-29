@@ -42,44 +42,35 @@
                         <div class="eight wide column">
                             <h3 class="ui header">Produto(s)</h3>
                             <div class="ui cards">
-                                <div class="card">
-                                    <div class="content">
-                                        <img class="left floated tiny ui image" src="imagens/produtos/controlexbox.jpg"/>
-                                        <h4 class="ui header">
-                                            Console Playstation 4 500GB - Sony
-                                        </h4>
-                                        <div class="ui meta">
-                                            Quantidade: 1
-                                        </div>                                       
+                                <ui:repeat value="#{carrinhoBean.itensMapValues}" var="item" varStatus="status">
+                                    <div class="card">
+                                        <div class="content">
+                                            <img class="left floated tiny ui image" src="#{item.produto.caminhoImagem}"/>
+                                            <h4 class="ui header">
+                                                #{item.produto.modelo}
+                                            </h4>
+                                            <div class="ui meta">
+                                                Quantidade: #{item.quantidade}
+                                            </div>                                       
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="basic card">
-                                    <div class="basic content">
-                                        <img class="left floated tiny ui image" src="imagens/produtos/controlexbox.jpg"/>
-                                        <h4 class="ui header">
-                                            Console Playstation 4 500GB - Sony
-                                        </h4>
-                                        <div class="ui meta">
-                                            Quantidade: 1
-                                        </div>                                       
-                                    </div>
-                                </div>
+                                </ui:repeat>
                             </div>
                         </div>
                         <div class="ui basic divider vertical"> </div>
                         <div class="eight wide column">
                             <h3 class="ui header">Valores da Compra</h3>                           
-                                <div class="ui basic segment right aligned">
-                                    <br/>
-                                    <br/>
-                                    <h4>Subtotal:	R$ 1.882,24</h4>
-                                    <h4>  Valor do frete:	R$ 10,05</h4>
-                                    <br/>
-                                    <br/>
-                                    <h3 class="ui header">  Valor total: R$ 649,00</h3>
-                                </div>
+                            <div class="ui basic segment right aligned">
+                                <br/>
+                                <br/>
+                                <h4>Subtotal:	R$ #{carrinhoBean.precoTotal}</h4>
+                                <h4>  Valor do frete:	R$ #{vendaBean.cv.frete}</h4>
+                                <br/>
+                                <br/>
+                                <h3 class="ui header">  Valor total: R$ #{carrinhoBean.precoTotal + vendaBean.cv.frete}</h3>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
 
@@ -128,7 +119,7 @@
                                 </a>-->
                 <div class="ui basic segment right aligned">
                     <h:form>
-                        <h:commandButton action="#{carrinhoBean.finalizarCompra()}"
+                        <h:commandButton action="#{carrinhoBean.finalizarCompra(usuarioBean.usuarioLogado, vendaBean.realizarVenda())}"
                                          value="Finalizar compra"
                                          styleClass="ui bottom button blue">
                         </h:commandButton>
