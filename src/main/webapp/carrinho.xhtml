@@ -27,6 +27,8 @@
                 -->
                 <br/>
                 <h:form prependId="false">
+                  <c:choose>
+                        <c:when test="#{carrinhoBean.quantidadeItensMap > 0}">
                     <table class="ui tablet stackable table">
                         <thead>
                             <tr class="center aligned">
@@ -89,8 +91,7 @@
                         </ui:repeat>
                     </table>
 
-                    <c:choose>
-                        <c:when test="#{carrinhoBean.quantidadeItensMap > 0}">
+                    
                             <div class="ui right aligned grid">
                                 <div class="center aligned two column row">
                                     <div class="column">
