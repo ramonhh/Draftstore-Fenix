@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
   <ui:composition template="template/modelo.xhtml"> 
     <ui:define name="content">
-      
+
       <!--Header Minha Conta-->
       <div class="ui clearing segment">
         <h2 class="ui header left floated">
@@ -16,7 +16,7 @@
             Minha conta
           </div>
         </h2>
-        
+
         <!--Botao Logout-->
         <h:form id="formLogout">
           <p:commandButton action="#{usuarioBean.efetuarLogout()}"
@@ -24,13 +24,13 @@
                            styleClass="ui right floated icon button inverted red"
                            icon="fa fa-fw fa-shopping-cart"/>
         </h:form>
-        
+
       </div>
-      
+
       <!--Conteudo da pagina-->
       <div class="ui segment">
         <div class="ui grid">
-          
+
           <!--Tabs-->
           <div class="four wide column">
             <div class="ui vertical fluid tabular menu">
@@ -39,11 +39,11 @@
               <div class="item" data-tab="tab-name3">Endereços</div>
             </div>
           </div>
-          
+
           <!--Conteudo-->
           <div class="twelve wide stretched column">
             <div class="ui segment">
-              
+
               <!--Tab Dados Pessoais-->
               <div class="ui tab active" data-tab="tab-name">
                 <div class="ui basic segment">
@@ -90,7 +90,7 @@
                   </button>
                 </h:form>
               </div>
-              
+
               <!--Tab Pedidos-->
               <div class="ui tab" data-tab="tab-name2">
                 <div class="ui basic segment">
@@ -155,25 +155,28 @@
                                                 </a>-->
 
                               <div class="ui icon buttons">
-                                <p:commandButton id="editarEndereco" action="#{enderecoBean.editarEndereco(endereco)}" 
-                                           value="Editar" 
-                                           styleClass="ui yellow button"
-                                           icon="fa fa-fw fa-edit"/>
-                                <p:commandButton id="removerEndereco" action="#{enderecoBean.removerEndereco(endereco)}" 
-                                           value="Remover" 
-                                           styleClass="ui red button"
-                                           icon="fa fa-fw fa-trash"/>
-                                
-                                
-                                
-<!--                                <div class="ui yellow button">
+                                <p:commandLink id="editarEndereco" 
+                                                 action="#{enderecoBean.editarEndereco(endereco)}" 
+                                                 value="Editar" 
+                                                 styleClass="ui yellow button">
                                   <i class="edit icon"></i>
-                                  Editar
-                                </div>
-                                <div class="ui red button">
-                                  <i class="trash icon"></i>
-                                  Remover
-                                </div>-->
+                                  <!--<f:ajax execute="@this" render="@none" />-->
+                                </p:commandLink>
+                                <p:commandButton id="removerEndereco" action="#{enderecoBean.removerEndereco(endereco)}" 
+                                                 value="Remover" 
+                                                 styleClass="ui red button"
+                                                 icon="fa fa-fw fa-trash"/>
+
+
+
+                                <!--                                <div class="ui yellow button">
+                                                                  <i class="edit icon"></i>
+                                                                  Editar
+                                                                </div>
+                                                                <div class="ui red button">
+                                                                  <i class="trash icon"></i>
+                                                                  Remover
+                                                                </div>-->
                               </div>
                             </div>
                           </div>
@@ -189,12 +192,12 @@
                 <div class="ui  modal endereco">
                   <div class="header">Cadastrar Endereço</div>
                   <div class="ui basic segment">
-                    <h:form class="ui form">
+                    <h:form class="ui form" id="formEndereco">
                       <div class="ui field">
                         <label>Logradouro (Avenida, Rua...)</label>
                         <div class="ui input">
                           <!--<input type="text" />-->
-                          <h:inputText value="#{enderecoBean.novoEndereco.rua}"/>
+                          <h:inputText id="rua" value="#{enderecoBean.novoEndereco.rua}"/>
                         </div>
                       </div>
                       <div class="ui two fields">
@@ -202,14 +205,14 @@
                           <label>Número</label>
                           <div class="uiinput">
                             <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.numero}"/>
+                            <h:inputText id="numero" value="#{enderecoBean.novoEndereco.numero}"/>
                           </div>
                         </div>
                         <div class="iu field">
                           <label>CEP</label>
                           <div class="ui input">
                             <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.cep}"/>
+                            <h:inputText id="cep" value="#{enderecoBean.novoEndereco.cep}"/>
                           </div>
                         </div>
                       </div>
@@ -218,14 +221,14 @@
                           <label>Bairro</label>
                           <div class="ui input">
                             <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.bairro}"/>
+                            <h:inputText id="bairro" value="#{enderecoBean.novoEndereco.bairro}"/>
                           </div>
                         </div>
                         <div class="ui field">
                           <label>Complemento</label>
                           <div class="ui input">
                             <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.complemento}"/>
+                            <h:inputText id="complemento" value="#{enderecoBean.novoEndereco.complemento}"/>
                           </div>
                         </div>
                       </div>
@@ -234,13 +237,14 @@
                           <label>Cidade</label>
                           <div class="ui input">
                             <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.cidade}"/>
+                            <h:inputText id="cidade" value="#{enderecoBean.novoEndereco.cidade}"/>
                           </div>
                         </div>
                         <div class="ui field">
                           <label>Estado</label>
 
-                          <h:selectOneMenu value="#{enderecoBean.novoEndereco.estado}" styleClass="ui search dropdown">
+                          <h:selectOneMenu id="estado" value="#{enderecoBean.novoEndereco.estado}" 
+                                           styleClass="ui search dropdown">
                             <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled="true" />
                             <f:selectItem itemValue="AC" itemLabel="Acre"/>
                             <f:selectItem itemValue="AL" itemLabel="Alagoas"/>
@@ -276,9 +280,15 @@
                       <div class="ui basic segment center middle aligned">
                         <div class="ui buttons">
 
-                          <p:commandButton action="#{enderecoBean.salvarEndereco()}" 
-                                           value="Salvar" styleClass="ui button blue">
-                          </p:commandButton>
+                          <h:commandButton action="#{enderecoBean.salvarEndereco()}" 
+                                           styleClass="ui button blue"
+                                           value="Salvar">
+                            <f:ajax execute="@this" render="@none" />
+                          </h:commandButton>
+
+                          <!--                          <p:commandButton action="{enderecoBean.salvarEndereco()}" 
+                                                                     value="Salvar" styleClass="ui button blue">
+                                                    </p:commandButton>-->
                           <div class="or" data-text="ou"></div>
                           <div class="ui button cancelaSalvarEndereco">Cancelar</div>
 
@@ -288,7 +298,7 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>

@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -62,8 +64,7 @@ public class EnderecoBean implements Serializable {
     }
     
     public String salvarEndereco() {
-//        System.out.println("Logradouro:"+novoEndereco.getRua());
-//        System.out.println("IDUSUARIO:"+novoEndereco.getFkUsuario());
+        carregarParametrosRequestEndereco();
         if (novoEndereco != null) {
             enderecoService.incluir(novoEndereco);
         } else {
@@ -71,6 +72,26 @@ public class EnderecoBean implements Serializable {
         }
         return "perfil.xhtml?faces-redirect=true";
     }
+    
+    public void carregarParametrosRequestEndereco(){
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String complemento = request.getParameter("formEndereco:complemento");
+        String numero = request.getParameter("formEndereco:numero");
+        String cep = request.getParameter("formEndereco:cep");
+        String estado = request.getParameter("formEndereco:estado");
+        String bairro = request.getParameter("formEndereco:bairro");
+        String rua = request.getParameter("formEndereco:rua");
+        String cidade = request.getParameter("formEndereco:cidade");
+        
+        novoEndereco.setComplemento(complemento);
+        novoEndereco.setNumero(numero);
+        novoEndereco.setCep(cep);
+        novoEndereco.setEstado(estado);
+        novoEndereco.setBairro(bairro);
+        novoEndereco.setRua(rua);
+        novoEndereco.setCidade(cidade);
+    }
+
 
     public Endereco getEnderecoSelecionado() {
         return enderecoSelecionado;
@@ -98,6 +119,7 @@ public class EnderecoBean implements Serializable {
     }
     
     public String editarEndereco(Endereco e){
+        System.out.println("Editando...");
         enderecoService.alterar(e);
         return "perfil.xhtml?faces-redirect=true";
     }
