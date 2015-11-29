@@ -8,8 +8,8 @@
   <ui:composition template="template/modelo.xhtml"> 
 
     <ui:define name="content">
-      
-      
+
+
       <!--Steps-->
       <div class="ui basic segment center aligned">
         <div class="ui three steps">
@@ -36,32 +36,32 @@
           </div>
         </div>
       </div>
-      
-      
+
+
       <div class="ui container center aligned">
         <div class="ui basic segment">
           <h2 class="ui header"> Escolha um endereço para entrega</h2>
         </div>
       </div>
       <h:form>
-      <div class="ui basic segment center aligned">
-        <div class="ui grid stackable center aligned">
-          <div class="ui cards centered stackable">
+        <div class="ui basic segment center aligned">
+          <div class="ui grid stackable center aligned">
+            <div class="ui cards centered stackable">
 
-            <div class="ui card">
-              <div class="ui content center aligned">
-                <h4 class="center aligned">Adicionar Endereço</h4>
-                <a class="center aligned" id="addEndereco">
-                  <h1><i class="add circle icon blue"></i></h1>
-                </a>
+              <div class="ui card">
+                <div class="ui content center aligned">
+                  <h4 class="center aligned">Adicionar Endereço</h4>
+                  <a class="center aligned" id="addEndereco">
+                    <h1><i class="add circle icon blue"></i></h1>
+                  </a>
+                </div>
               </div>
-            </div>
-            <!--{enderecoBean.carregarEnderecos(usuarioBean.usuarioLogado)}-->
-            #{enderecoBean.inicializarEndereco(usuarioBean.usuarioLogado)}
+              <!--{enderecoBean.carregarEnderecos(usuarioBean.usuarioLogado)}-->
+              #{enderecoBean.inicializarEndereco(usuarioBean.usuarioLogado)}
 
-            
+
               <ui:repeat value="#{enderecoBean.enderecos}" var="endereco" varStatus="status">
-                
+
                 <div class="ui card">
                   <div class="content">
                     <div class="header">#{endereco.rua}</div>
@@ -79,35 +79,36 @@
                                       </a>-->
 
                     <!--<div class="ui bottom attached button">-->
-                      <p:commandButton action="#{enderecoBean.selecionarEndereco(endereco)}"
-                                       icon="fa fa-fw fa-check-square"
-                                       styleClass="ui bottom button"
-                                       value="Entregar neste endereço" ajax="false"/>
+                    <p:commandButton action="#{enderecoBean.selecionarEndereco(endereco)}"
+                                     icon="fa fa-fw fa-check-square"
+                                     styleClass="ui bottom button"
+                                     value="Entregar neste endereço" ajax="false"/>
                     <!--</div>-->
 
 
                   </div>
                 </div>
-                  
-              </ui:repeat>
-            
 
+              </ui:repeat>
+
+
+
+            </div>
 
           </div>
-
         </div>
-      </div>
-</h:form>
+      </h:form>
 
+      <!--MODAL: Cadastrar endereco--> 
       <div class="ui  modal endereco">
         <div class="header">Cadastrar Endereço</div>
         <div class="ui basic segment">
-          <h:form class="ui form">
+          <h:form class="ui form" id="formEndereco">
             <div class="ui field">
               <label>Logradouro (Avenida, Rua...)</label>
               <div class="ui input">
                 <!--<input type="text" />-->
-                <h:inputText value="#{enderecoBean.novoEndereco.rua}"/>
+                <h:inputText id="rua" value="#{enderecoBean.novoEndereco.rua}"/>
               </div>
             </div>
             <div class="ui two fields">
@@ -115,14 +116,14 @@
                 <label>Número</label>
                 <div class="uiinput">
                   <!--<input type="text" />-->
-                  <h:inputText value="#{enderecoBean.novoEndereco.numero}"/>
+                  <h:inputText id="numero" value="#{enderecoBean.novoEndereco.numero}"/>
                 </div>
               </div>
               <div class="iu field">
                 <label>CEP</label>
                 <div class="ui input">
                   <!--<input type="text" />-->
-                  <h:inputText value="#{enderecoBean.novoEndereco.cep}"/>
+                  <h:inputText id="cep" value="#{enderecoBean.novoEndereco.cep}"/>
                 </div>
               </div>
             </div>
@@ -131,14 +132,14 @@
                 <label>Bairro</label>
                 <div class="ui input">
                   <!--<input type="text" />-->
-                  <h:inputText value="#{enderecoBean.novoEndereco.bairro}"/>
+                  <h:inputText id="bairro" value="#{enderecoBean.novoEndereco.bairro}"/>
                 </div>
               </div>
               <div class="ui field">
                 <label>Complemento</label>
                 <div class="ui input">
                   <!--<input type="text" />-->
-                  <h:inputText value="#{enderecoBean.novoEndereco.complemento}"/>
+                  <h:inputText id="complemento" value="#{enderecoBean.novoEndereco.complemento}"/>
                 </div>
               </div>
             </div>
@@ -147,13 +148,14 @@
                 <label>Cidade</label>
                 <div class="ui input">
                   <!--<input type="text" />-->
-                  <h:inputText value="#{enderecoBean.novoEndereco.cidade}"/>
+                  <h:inputText id="cidade" value="#{enderecoBean.novoEndereco.cidade}"/>
                 </div>
               </div>
               <div class="ui field">
                 <label>Estado</label>
 
-                <h:selectOneMenu value="#{enderecoBean.novoEndereco.estado}" styleClass="ui search dropdown">
+                <h:selectOneMenu id="estado" value="#{enderecoBean.novoEndereco.estado}" 
+                                 styleClass="ui search dropdown">
                   <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled="true" />
                   <f:selectItem itemValue="AC" itemLabel="Acre"/>
                   <f:selectItem itemValue="AL" itemLabel="Alagoas"/>
@@ -186,20 +188,17 @@
 
               </div>
             </div>
-            <div class="ui basic segment center aligned">
-              <div class="ui buttons">
-                <!--                <button class="ui button blue">Salvar</button>                         
-                                <div class="or" data-text="ou"></div>
-                                <button class="ui button">Cancelar</button>-->
 
-                <h:commandButton action="#{enderecoBean.salvarEndereco()}" 
-                                 value="Salvar" styleClass="ui button blue"/>
-                <div class="or" data-text="ou"></div>
-                <a href="compra_endereco.xhtml"> 
-                  <div class="ui button" id="cancelaSalvarEndereco">Cancelar</div> 
-                </a>
-
+            <div class="ui basic segment">
+              <div class="ui left floated label">
+                <i class="cancel icon"></i> Clique fora da janela para cancelar
               </div>
+              <h:commandButton action="#{enderecoBean.salvarEndereco('compra_endereco')}" 
+                               styleClass="ui button blue right floated"
+                               value="Salvar">
+                <f:ajax execute="@this" render="@none" />
+              </h:commandButton>
+
             </div>
           </h:form>
         </div>

@@ -63,25 +63,25 @@ public class EnderecoBean implements Serializable {
         this.tipoEntrega = tipoEntrega;
     }
     
-    public String salvarEndereco() {
-        carregarParametrosRequestEndereco();
+    public String salvarEndereco(String nomePagina) {
+        carregarParametrosRequestEndereco("formEndereco");
         if (novoEndereco != null) {
             enderecoService.incluir(novoEndereco);
         } else {
             System.out.println("Endereço não salvo.");
         }
-        return "perfil.xhtml?faces-redirect=true";
+        return nomePagina+".xhtml?faces-redirect=true";
     }
     
-    public void carregarParametrosRequestEndereco(){
+    public void carregarParametrosRequestEndereco(String idForm){
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String complemento = request.getParameter("formEndereco:complemento");
-        String numero = request.getParameter("formEndereco:numero");
-        String cep = request.getParameter("formEndereco:cep");
-        String estado = request.getParameter("formEndereco:estado");
-        String bairro = request.getParameter("formEndereco:bairro");
-        String rua = request.getParameter("formEndereco:rua");
-        String cidade = request.getParameter("formEndereco:cidade");
+        String complemento = request.getParameter(idForm+":complemento");
+        String numero = request.getParameter(idForm+":numero");
+        String cep = request.getParameter(idForm+":cep");
+        String estado = request.getParameter(idForm+":estado");
+        String bairro = request.getParameter(idForm+":bairro");
+        String rua = request.getParameter(idForm+":rua");
+        String cidade = request.getParameter(idForm+":cidade");
         
         novoEndereco.setComplemento(complemento);
         novoEndereco.setNumero(numero);
@@ -118,9 +118,23 @@ public class EnderecoBean implements Serializable {
         return "perfil.xhtml?faces-redirect=true";
     }
     
-    public String editarEndereco(Endereco e){
-        System.out.println("Editando...");
-        enderecoService.alterar(e);
+    public void selecionarOnlyEndereco(Endereco e){
+        
+        enderecoSelecionado = e;
+    }
+    
+    public String editarEndereco(){
+        carregarParametrosRequestEndereco("formAlterarEndereco");
+        
+        enderecoSelecionado.setComplemento(novoEndereco.getComplemento());
+        enderecoSelecionado.setNumero(novoEndereco.getNumero());
+        enderecoSelecionado.setCep(novoEndereco.getCep());
+        enderecoSelecionado.setEstado(novoEndereco.getEstado());
+        enderecoSelecionado.setBairro(novoEndereco.getBairro());
+        enderecoSelecionado.setRua(novoEndereco.getRua());
+        enderecoSelecionado.setCidade(novoEndereco.getCidade());
+        
+        enderecoService.alterar(enderecoSelecionado);
         return "perfil.xhtml?faces-redirect=true";
     }
 }

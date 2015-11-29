@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+cancelarAlteracao = false;
 
 // Permite a execucao inicial das funcionalidades javascript
 $(function () { // Abreviação para $(document).ready(function() { ... });
@@ -53,13 +54,25 @@ $(function () { // Abreviação para $(document).ready(function() { ... });
             .modal('show')
             ;
   });
+  $('.alterarEndereco').click(function () {
+      $('.modal.alterarEndereco')
+            .modal('show')
+            ;
+  });
   $('.cancelaSalvarEndereco').click(function () {
     $('.modal.endereco')
-            .modal('hide')
-            ;
+            .modal('hide');
+    $('.modal.alterarEndereco')
+            .modal('hide');
+  });
+  $('.cancelaSalvarEndereco2').click(function () {
+    $('.modal.alterarEndereco')
+            .modal('hide');
   });
 
 });
+
+
 
 function animacaoAdicionouItens(quantidade) {
 //    Testando uma animacao na contagem xD
