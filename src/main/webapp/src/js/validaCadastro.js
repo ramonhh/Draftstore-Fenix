@@ -14,7 +14,7 @@ var campoCsenha = document.getElementById("campoCsenha");
 
 
 function validaNome() {
-    var valorNome = document.getElementById("nome").value;
+    var valorNome = document.getElementById("formCadastro:nome").value;
     if (valorNome === "") {
         campoNome.classList.add("error");
         return false;
@@ -26,7 +26,7 @@ function validaNome() {
 
 }
 function validaSexo() {
-    var valorSexo = document.getElementById("sSexo");
+    var valorSexo = document.getElementById("fromCadsatro:sSexo");
     if (valorSexo.options[valorSexo.selectedIndex].value === "") {
         campoSexo.classList.add("error");
         return false;
@@ -37,7 +37,7 @@ function validaSexo() {
     }
 }
 function validaDataNascimento() {
-    var valorData = new Date(document.getElementById("dataNascimento").value);
+    var valorData = new Date(document.getElementById("formCadastro:dataNascimento").value);
     if (!valorData.isValid()) {
         campoDataNascimento.classList.add("error");
         return false;
@@ -51,7 +51,7 @@ function validaDataNascimento() {
 
 function validaCPF() {
     var reg = /^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}/;
-    var valorDoCampo = $("#cpf").val();
+    var valorDoCampo = $("#formCadastro\\:cpf").val();
     if (!reg.test(valorDoCampo) || !validarCPF(valorDoCampo)) {
         campoCpf.classList.add("error");
         return false;
@@ -63,7 +63,7 @@ function validaCPF() {
 }
 function validaRg() {
     var reg = /^[0-9]{2}.?[0-9]{3}.?[0-9]{3}-{1}/;
-    var valorDoCampo = $("#rg").val();
+    var valorDoCampo = $("#formCadastro\\:rg").val();
     if (!reg.test(valorDoCampo)) {
         campoRg.classList.add("error");
         return false;
@@ -76,7 +76,7 @@ function validaRg() {
 }
 function validaEmail() {
     var regex = /^.+@.+\..{2,3}$/;
-    var valorDoCampo = $("#email").val();
+    var valorDoCampo = $("#formCadastro\\:email").val();
     if (!regex.test(valorDoCampo)) {
         campoEmail.classList.add("error");
         return false;
@@ -99,8 +99,8 @@ function validaSenha() {
     }
 }
 function validaCsenha() {
-    var cSenha = document.getElementById("cSenha").value;
-    var senha = document.getElementById("senha").value;
+    var cSenha = document.getElementById("formCadastro:cSenha").value;
+    var senha = document.getElementById("formCadastro:senha").value;
 
     if (senha !== cSenha) {
         campoCsenha.classList.add("error");
@@ -150,14 +150,14 @@ function validaCadastro(form) {
         alert('Operação realizada com sucesso!');
     }
 }
-$("#nome").blur(validaNome);
-$("#sSexo").blur(validaSexo);
-$("#dataNascimento").blur(validaDataNascimento);
-$("#cpf").blur(validaCPF);
-$("#rg").blur(validaRg);
-$("#email").blur(validaEmail);
-$("#senha").blur(validaSenha);
-$("#cSenha").blur(validaCsenha);
+$("#formCadastro\\:nome").blur(validaNome);
+$("#formCadastro\\:sSexo").blur(validaSexo);
+$("#formCadastro\\:dataNascimento").blur(validaDataNascimento);
+$("#formCadastro\\:cpf").blur(validaCPF);
+$("#fomCadastro\\:rg").blur(validaRg);
+$("#formCadastro\\:email").blur(validaEmail);
+$("#formCadastro\\:senha").blur(validaSenha);
+$("#formCadastro\\:cSenha").blur(validaCsenha);
 
 Date.prototype.isValid = function () {
     // An invalid date object returns NaN for getTime() and NaN is the only

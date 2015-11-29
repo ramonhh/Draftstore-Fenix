@@ -66,6 +66,9 @@ public class EnderecoBean implements Serializable {
     public String salvarEndereco(String nomePagina) {
         carregarParametrosRequestEndereco("formEndereco");
         if (novoEndereco != null) {
+            if(novoEndereco.getComplemento().equals("")){
+                novoEndereco.setComplemento("nao ha");
+            }
             enderecoService.incluir(novoEndereco);
         } else {
             System.out.println("Endereço não salvo.");
