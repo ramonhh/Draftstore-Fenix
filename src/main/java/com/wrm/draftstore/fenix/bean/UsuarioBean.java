@@ -7,7 +7,6 @@ package com.wrm.draftstore.fenix.bean;
 
 import com.wrm.draftstore.common.entidades.Usuario;
 import com.wrm.draftstore.common.service.UsuarioService;
-import com.wrm.draftstore.common.service.fakeimpl.UsuarioServiceFakeImpl;
 import com.wrm.draftstore.common.service.jpaimpl.UsuarioServiceJPAImpl;
 import com.wrm.draftstore.fenix.entity.UsuarioSistema;
 import javax.inject.Named;
@@ -104,6 +103,7 @@ public class UsuarioBean implements Serializable {
 
     public void carregarParametrosRequestUsuario() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        
         String nomeRequest = request.getParameter("formCadastro:nome");
         String sexo = request.getParameter("formCadastro:sSexo");
         String dtNascimento = request.getParameter("formCadastro:dtNascimento");
@@ -123,7 +123,6 @@ public class UsuarioBean implements Serializable {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         novoUsuario.setDtNascimento(convertedCurrentDate);
-
         novoUsuario.setCpf(cpf);
         novoUsuario.setTelefone(telefone);
         novoUsuario.setCelular(telefone);
@@ -181,4 +180,6 @@ public class UsuarioBean implements Serializable {
         this.novoUsuario = novoUsuario;
     }
       //</editor-fold>
+
+//validação
 }

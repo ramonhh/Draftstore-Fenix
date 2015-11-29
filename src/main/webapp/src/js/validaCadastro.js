@@ -4,14 +4,19 @@
  * and open the template in the editor.
  */
 var campoNome = document.getElementById("campoNome");
-var campoSexo = document.getElementById("campoSexo");
-var campoDataNascimento = document.getElementById("campoDataNascimento");
+var campoDataNascimento = document.getElementById("campoDtNascimento");
 var campoCpf = document.getElementById("campoCpf");
-var campoRg = document.getElementById("campoRg");
+var campoContato = document.getElementById("campoContato");
 var campoEmail = document.getElementById("campoEmail");
 var campoSenha = document.getElementById("campoSenha");
 var campoCsenha = document.getElementById("campoCsenha");
 
+var nameNome = document.getElementsByClassName("formCastro:nome");
+var nameCpf = document.getElementsByClassName("formCastro:cpf");
+var nameContato = document.getElementsByClassName("formCastro:telefone");
+var nameEmail = document.getElementsByClassName("formCastro:email");
+var nameSenha = document.getElementsByClassName("formCastro:senha");
+var nameCsenha = document.getElementsByClassName("formCastro:cSenha");
 
 function validaNome() {
     var valorNome = document.getElementById("formCadastro:nome").value;
@@ -25,19 +30,10 @@ function validaNome() {
     }
 
 }
-function validaSexo() {
-    var valorSexo = document.getElementById("fromCadsatro:sSexo");
-    if (valorSexo.options[valorSexo.selectedIndex].value === "") {
-        campoSexo.classList.add("error");
-        return false;
-    } else {
-        campoSexo.classList.remove("error");
-        campoSexo.classList.add("success");
-        return true;
-    }
-}
+
+
 function validaDataNascimento() {
-    var valorData = new Date(document.getElementById("formCadastro:dataNascimento").value);
+    var valorData = new Date (document.getElementById("formCadastro:dtNascimento").value);
     if (!valorData.isValid()) {
         campoDataNascimento.classList.add("error");
         return false;
@@ -61,15 +57,14 @@ function validaCPF() {
         return true;
     }
 }
-function validaRg() {
-    var reg = /^[0-9]{2}.?[0-9]{3}.?[0-9]{3}-{1}/;
-    var valorDoCampo = $("#formCadastro\\:rg").val();
-    if (!reg.test(valorDoCampo)) {
-        campoRg.classList.add("error");
+function validaContato() {
+    var valorDoCampo = $("#formCadastro\\:telefone").val();
+    if (valorDoCampo.length < 14) {
+        campoContato.classList.add("error");
         return false;
     } else {
-        campoRg.classList.remove("error");
-        campoRg.classList.add("success");
+        campoContato.classList.remove("error");
+        campoContato.classList.add("success");
         return true;
     }
 
@@ -87,7 +82,7 @@ function validaEmail() {
     }
 }
 function validaSenha() {
-    var senha = document.getElementById("senha").value;
+    var senha = document.getElementById("formCadastro:senha").value;
 
     if (senha.length < 6) {
         campoSenha.classList.add("error");
@@ -111,50 +106,37 @@ function validaCsenha() {
         return true;
     }
 }
-function validaCadastro(form) {
+function validaCadastro() {
     if (!validaNome()) {
-        form.nome.focus();
-        return false;
-    }
-    if (!validaSexo()) {
-        form.sexo.focus();
-        return false;
-    }
-    if (!validaDataNascimento()) {
-        form.dataNascimento.focus();
+        document.getElementsByClassName("formCastro:nome").focus();
         return false;
     }
     if (!validaCPF()) {
-        form.cpf.focus();
+        document.getElementsByClassName("formCastro:cpf").focus();
         return false;
     }
-    if (!validaRg()) {
-        form.rg.focus();
+    if (!validaContato()) {
+        document.getElementsByClassName("formCastro:telefone").focus();
         return false;
     }
     if (!validaEmail()) {
-        form.email.focus();
+        document.getElementsByClassName("formCastro:email").focus();
         return false;
     }
     if (!validaSenha()) {
-        form.senha.focus();
+        document.getElementsByClassName("formCastro:senha").focus();
         return false;
     }
     if (!validaCsenha()) {
-        form.cSenha.focus();
+        document.getElementsByClassName("formCastro:cSenha").focus();
         return false;
     }
-    if (!confirm('Tem certeza que deseja efetuar o registro com essas informações?')) {
-        return false;
-    } else {
-        alert('Operação realizada com sucesso!');
-    }
+   
 }
 $("#formCadastro\\:nome").blur(validaNome);
-$("#formCadastro\\:sSexo").blur(validaSexo);
 $("#formCadastro\\:dataNascimento").blur(validaDataNascimento);
 $("#formCadastro\\:cpf").blur(validaCPF);
-$("#fomCadastro\\:rg").blur(validaRg);
+$("#formCadastro\\:telefone").blur(validaContato);
 $("#formCadastro\\:email").blur(validaEmail);
 $("#formCadastro\\:senha").blur(validaSenha);
 $("#formCadastro\\:cSenha").blur(validaCsenha);
