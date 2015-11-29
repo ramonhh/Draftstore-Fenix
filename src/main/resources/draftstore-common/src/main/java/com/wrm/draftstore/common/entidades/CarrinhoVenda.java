@@ -6,6 +6,7 @@
 package com.wrm.draftstore.common.entidades;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -41,6 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "CarrinhoVenda.findByPrazoEntrega", query = "SELECT c FROM CarrinhoVenda c WHERE c.prazoEntrega = :prazoEntrega"),
     @NamedQuery(name = "CarrinhoVenda.findByDataVenda", query = "SELECT c FROM CarrinhoVenda c WHERE c.dataVenda = :dataVenda")})
 public class CarrinhoVenda implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,6 +116,17 @@ public class CarrinhoVenda implements Serializable {
         return dataVenda;
     }
 
+    public Date getDataEntrega() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(this.dataVenda);
+        c.add(Calendar.DATE, this.prazoEntrega);
+        return c.getTime();
+    }
+
+    public boolean isVendaEntregue() {
+        return this.getDataEntrega().compareTo(Calendar.getInstance().getTime()) <= 0;
+    }
+
     public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
     }
@@ -175,5 +188,5 @@ public class CarrinhoVenda implements Serializable {
     public String toString() {
         return "com.wrm.draftstore.common.entidades.CarrinhoVenda[ idVenda=" + idVenda + " ]";
     }
-    
+
 }
