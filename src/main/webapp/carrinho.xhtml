@@ -71,12 +71,12 @@
                                     </td>
 
                                     <td class="ui floated right">
-                                        <p:button styleClass="ui button inverted blue"
+                                        <p:commandButton styleClass="ui button inverted blue"
                                                   value="Detalhes" 
-                                                  outcome="detalhe.xhtml"
-                                                  icon="fa fa-fw fa-list-alt">
+                                                  action="#{produtoBean.carregarDetalhes()}"
+                                                  icon="fa fa-fw fa-list-alt" ajax="false">
                                             <f:param name="id" value="#{item.idProduto}"/>
-                                        </p:button>
+                                        </p:commandButton>
 
                                         <!--Remover produto do carrinho-->
                                         <p:commandButton styleClass="ui button inverted red"
