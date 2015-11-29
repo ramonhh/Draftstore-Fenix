@@ -24,7 +24,8 @@
                                 <div class="ui centered aligned image medium">
                                     <div class="ui slider-wrapper theme-default slids">
                                         <div id="slider" class="nivoSlider">
-                                            <img src="#{produtoBean.produtoDetalhe.caminhoImagem}" alt="#{produtoBean.produtoDetalhe.descricaoImagem}"/>
+                                            <img src="#{produtoBean.produtoDetalhe.caminhoImagem}" alt="#
+                                                 {produtoBean.produtoDetalhe.descricaoImagem}"/>
                                         </div>    
                                     </div>
                                 </div>
@@ -33,7 +34,8 @@
                         <div class="sixteen wide tablet five wide computer column middle aligned">
                             <div class="center floated aligned">
                                 <div class="ui basic center aligned segment">
-                                    <!--<h3 class="header"> Processador Intel Core i7 3770 (BX80637I73770) 3° Geração</h3>-->
+                                    <!--<h3 class="header"> Processador Intel Core i7 3770 (BX80637I73770) 3° 
+Geração</h3>-->
                                     <h3 class="header">
                                         <h:outputText value="#{produtoBean.produtoDetalhe.modelo}"/>
                                     </h3>
@@ -46,7 +48,7 @@
                                             De <h:outputText value="#{produtoBean.produtoDetalhe.precoVenda}">
                                                 <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
                                             </h:outputText>
-                                            por
+                                            Por
                                             <div class="label">
                                                 R$
                                             </div>
@@ -57,7 +59,7 @@
                                             </div>
                                         </h:panelGrid>
                                         <h:panelGrid rendered="#{not produtoBean.produtoDetalhe.dataValida}">
-                                            por
+                                            Por
                                             <div class="label">
                                                 R$
                                             </div>
@@ -77,7 +79,8 @@
                                                   Adicionar ao carrinho-->
 
                                 <h:form>
-                                    <p:commandButton id="adicionarAoCarrinhoButton" styleClass="ui bottom blue button addCarrinho"
+                                    <p:commandButton id="adicionarAoCarrinhoButton" styleClass="ui bottom blue button 
+                                                     addCarrinho"
                                                      value="Adicionar ao carrinho" 
                                                      actionListener="#{carrinhoBean.adicionar(produtoBean.produtoDetalhe)}"
                                                      update="labelCarrinho"
@@ -101,7 +104,35 @@
 
                 <div class="ui tab active" data-tab="tab-name">
                     <div class="ui basic segment center aligned">
-                        <h:outputText value="#{produtoBean.produtoDetalhe.descricao}" escape="false"/>
+                        <table class="ui unstackable table">
+                            <thead>
+                                <tr>
+                                    <th>Informações:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Modelo: </td>
+                                    <td>#{produtoBean.produtoDetalhe.modelo}</td>
+                                </tr>
+                                <tr>
+                                    <td>Marca: </td>
+                                    <td>#{produtoBean.produtoDetalhe.marca}</td>
+                                </tr>
+                                <tr>
+                                    <td>Categoria: </td>
+                                    <td>#{produtoBean.produtoDetalhe.fkCategoria.nomeCategoria}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sub-Categoria: </td>
+                                    <td>#{produtoBean.produtoDetalhe.fkSubcategoria.nomeSubcategoria}</td>
+                                </tr>
+                                <tr>
+                                    <td class="header">Descrição: </td>
+                                    <td>#{produtoBean.produtoDetalhe.descricao}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="ui tab" data-tab="tab-name2">

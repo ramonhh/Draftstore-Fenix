@@ -30,7 +30,7 @@
                                 <!--Logo da imagem-->
                                 <div class="ui logo shape">
                                     <h:outputLink value="home.xhtml">
-                                        <img class="ui tiny image" src="imagens/logo/image.png"/>
+                                        <img class="ui tiny image" src="imagens/logo/draftstore_logo2.png"/>
                                     </h:outputLink>
 
                                 </div>
@@ -67,7 +67,8 @@
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <!--Utilizar o item abaixo para quando o usuario NÃO ESTIVER LOGADO-->                            
+                                        <!--Utilizar o item abaixo para quando o usuario NÃO ESTIVER LOGADO-->              
+
                                         <a class="ui item" href="login.xhtml">
                                             <div class="column">
                                                 <i class="sign in icon"></i>
@@ -91,8 +92,9 @@
                                         <!--Label da quantidade de itens adicionados ao carrinho-->
                                         <h:panelGroup layout="block" 
                                                       id="labelCarrinho" 
-                                                      styleClass="ui label #{carrinhoBean.quantidadeItensMap == 0 ? 'hidden' : ''} ">
-                                            #{carrinhoBean.quantidadeItensMap}
+                                                      styleClass="ui label #{carrinhoBean.quantidadeItensMap == 0 ? 
+                                                                             'hidden' : ''} ">
+                                                      #{carrinhoBean.quantidadeItensMap}
                                         </h:panelGroup>
                                     </div>
                                 </h:outputLink>
@@ -103,30 +105,30 @@
                     </div>
                     <!--Fim container menu principal-->
                     <h:form>
-                    <!--Menu das categorias-->
-                    <div class="container">
-                        <nav class="ui labeled small icon borderless menu centered grid inverted grey secondary">
-                            
-                                
-                                
+                        <!--Menu das categorias-->
+                        <div class="container">
+                            <nav class="ui labeled small icon borderless menu centered grid inverted grey secondary">
+
+
+
                                 <ui:repeat value="#{categoriaBean.categorias}" var="categoria" varStatus="status">
                                     <h:commandLink styleClass="item" 
-                                                     action="#{categoriaBean.irParaListagem(categoria)}">
+                                                   action="#{categoriaBean.irParaListagem(categoria)}">
                                         <i class="#{categoria.icon}"></i>
                                         #{categoria.nomeCategoria}
                                     </h:commandLink>
-                                    
+
                                 </ui:repeat>
-                            
-                                
-                        </nav>
-                    </div>
+
+
+                            </nav>
+                        </div>
                     </h:form>
                 </div>
             </div>
             <div class="ui mobile tablet only row">
                 <!--Menu principal-->
-                <div class="ui teal menu borderless inverted secondary">
+                <div class="ui blue menu borderless inverted secondary">
                     <div class="item">
                         <button class="ui icon button" id="btslide">
                             <i class="bars icon big"></i>
@@ -136,28 +138,48 @@
                     <div class="item" id="nomeMenu">
                         <h1 class="title">
                             <h:outputLink value="home.xhtml" style="color: white">
-                                eDraftstore
+                                Draftstore
                             </h:outputLink>
                         </h1>
                     </div>
-                    <a class="ui item" id="btnLogin2">                       
-                        <i class="sign in icon" style="color: white"></i>
-                    </a>
+                    <div class="menu right">
+                        <c:choose>
+                            <c:when test="#{usuarioBean.usuarioLogado != null}">
+                                <!--Utilizar o item abaixo para quando o usuario ESTIVER LOGADO-->
+                                <a class="ui item" href="perfil.xhtml"> 
+                                    <div class="column">
+                                        <i class="user icon"></i>
+                                    </div>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <!--Utilizar o item abaixo para quando o usuario NÃO ESTIVER LOGADO-->              
 
-                    <h:outputLink value="carrinho.xhtml" id="linkCarrinho2" class="ui item">
-                        <i class="cart icon" style="color: white"></i>
-                        <!--Icone do carrinho-->
+                                <a class="ui item" href="login.xhtml">
+                                    <div class="column">
+                                        <i class="sign in icon"></i>
+                                    </div>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
 
-                        <!--Texto do carrinho-->
-                        <!--Label da quantidade de itens adicionados ao carrinho-->
-                        <h:panelGroup layout="block" 
-                                      id="labelCarrinho2" 
-                                      styleClass="ui label #{carrinhoBean.itens.size() == 0 ? 'hidden' : ''} ">
-                            #{carrinhoBean.itens.size()}
-                        </h:panelGroup>
-                    </h:outputLink>
-                    <div class="ui item" id="pesquisaMenu">
-                        <i class="search icon"></i>
+                        <div class="item" id="pesquisaMenu">
+                            <i class="search icon"></i>
+                        </div>
+
+                        <h:outputLink value="carrinho.xhtml" id="linkCarrinho2" class="ui item">
+                            <i class="cart icon" style="color: white"></i>
+                            <!--Icone do carrinho-->
+
+                            <!--Texto do carrinho-->
+                            <!--Label da quantidade de itens adicionados ao carrinho-->
+                            <h:panelGroup layout="block" 
+                                          id="labelCarrinho2" 
+                                          styleClass="ui label #{carrinhoBean.itens.size() == 0 ? 'hidden' : ''} ">
+                                #{carrinhoBean.itens.size()}
+                            </h:panelGroup>
+                        </h:outputLink>
+
                     </div>
                 </div>
                 <div class="ui top demo vertical inverted sidebar labeled icon pesquisa">
@@ -173,21 +195,13 @@
                 </div>
                 <div class="ui left demo vertical inverted sidebar labeled icon menu">
                     <nav class="ui labeled small icon borderless menu centered grid inverted grey secondary">
-                        <a class="item">
-                            <i class="desktop icon"></i>Computadores montados
-                        </a>
-                        <a class="item">
-                            <i class="laptop icon"></i>Notebooks
-                        </a>
-                        <a class="item">
-                            <i class="disk outline icon"></i>Componentes de hardware
-                        </a>
-                        <a class="item">
-                            <i class="game icon"></i>Acessórios para games
-                        </a>
-                        <a class="item">
-                            <i class="plug icon"></i>Periféricos
-                        </a>
+                        <ui:repeat value="#{categoriaBean.categorias}" var="categoria" varStatus="status">
+                            <h:commandLink styleClass="item" 
+                                           action="#{categoriaBean.irParaListagem(categoria)}">
+                                <i class="#{categoria.icon}"></i>
+                                #{categoria.nomeCategoria}
+                            </h:commandLink>
+                        </ui:repeat>
                     </nav>
                 </div>
             </div> 

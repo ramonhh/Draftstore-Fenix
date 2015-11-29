@@ -34,7 +34,8 @@
                                         <div class="ui inverted dimmer">
                                             <div class="content">
                                                 <div class="center">
-                                                    <!--                                <a href="detalhe.html"> <div class="ui primary button">Ver mais detalhes</div>
+                                                    <!--                                <a href="detalhe.html"> <div 
+class="ui primary button">Ver mais detalhes</div>
                                                                                     </a>-->
 
                                                     <p:commandButton action="#{produtoBean.carregarDetalhes()}" 
@@ -76,18 +77,19 @@
                                                     De <h:outputText value="#{item.precoVenda}">
                                                         <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
                                                     </h:outputText>
-                                                    por
+                                                    Por
                                                     <div class="label">
                                                         R$
                                                     </div>
                                                     <div class="value">
                                                         <h:outputText value="#{item.precoPromo}">
-                                                            <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
+                                                            <f:convertNumber type="currency" locale="pt_BR" 
+                                                                             currencySymbol=""/>
                                                         </h:outputText>
                                                     </div>
                                                 </h:panelGrid>
                                                 <h:panelGrid rendered="#{not item.dataValida}">
-                                                    por
+                                                    Por
                                                     <div class="label">
                                                         R$
                                                     </div>
@@ -108,14 +110,14 @@
 
                                 </div>
                             </div>
-                            
-                            
 
-                                
+
+
+
                             <!-- Fim do card -->
 
                         </ui:repeat>
-                    <!--Fim do grid-->
+                        <!--Fim do grid-->
                     </div>
                 </h:form>
             </ui:define>
