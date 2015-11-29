@@ -183,7 +183,7 @@ public class CarrinhoBean implements Serializable {
 
         if (u == null) {
             System.out.println("Não está logado");
-            return "home.xhtml";
+            return "login.xhtml";
         }
 
         return "compra_endereco.xhtml";
