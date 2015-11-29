@@ -99,23 +99,40 @@
                                         Pedidos
                                     </h1>
                                 </div>
+                                #{carrinhoBean.carregarCompras(usuarioBean.usuarioLogado)}
                                 <div class="ui horizontal segments">
-                                    <div class="ui segment">
-                                        <h4>  Nº do pedido:
-                                            17708589 </h4>
-                                        <p>Realizado em: 28/11/2014</p>
-                                        <h4>
-                                            <i class="check green circle icon header"></i>
-                                            Ótimo! A entrega chegou! :)
-                                        </h4>
-                                        <p>  Entregue em: 11/12/2014</p>
-
-                                    </div>
-                                    <div class="ui segment center aligned">
-                                        <div class="ui basic segment image small" >
-                                            <a href="detalhe.xhtml?id=0"><img src="imagens/produtos/processadori7.jpg"/></a>
+                                    <ui:repeat value="#{carrinhoBean.compras}" var="compra" varStatus="stat">
+                                        <div class="ui segment">
+                                            <h4>  Nº do pedido:
+                                                #000#{compra.fkCarrinhoVenda.idVenda} </h4>
+                                            <p>Realizado em: <h:outputText value="#{compra.fkCarrinhoVenda.dataVenda}">
+                                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                                </h:outputText></p>
+                                            <h:panelGrid rendered="#{compra.fkCarrinhoVenda.vendaEntregue}">
+                                                <h4>
+                                                    <i class="check green circle icon header"></i>
+                                                    Ótimo! A entrega chegou!
+                                                </h4>
+                                                <p>  Entregue em: <h:outputText value="#{compra.fkCarrinhoVenda.dataEntrega}">
+                                                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                                    </h:outputText></p>
+                                            </h:panelGrid>
+                                            <h:panelGrid rendered="#{!compra.fkCarrinhoVenda.vendaEntregue}">
+                                                <h4>
+                                                    <i class="remove red circle icon header"></i>
+                                                    Tenha paciência! Seu produto está a caminho...
+                                                </h4>
+                                                <p>  Data extimada para entrega: <h:outputText value="#{compra.fkCarrinhoVenda.dataEntrega}">
+                                                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                                    </h:outputText></p>
+                                            </h:panelGrid>
                                         </div>
-                                    </div>
+                                        <div class="ui segment center aligned">
+                                            <div class="ui basic segment image small" >
+                                                <a href="detalhe.xhtml?id=0"><img src="#{compra.fkProduto.caminhoImagem}"/></a>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
                                 </div>
                             </div>
 
@@ -169,7 +186,7 @@
                                                                                  :formAlterarEndereco:cidade
                                                                                  :formAlterarEndereco:estado">
                                                                 </p:commandButton>
-                                                                 <div class="or" data-text="ou"></div>
+                                                                <div class="or" data-text="ou"></div>
                                                                 <p:commandButton id="removerEndereco" action="#{enderecoBean.removerEndereco(endereco)}" 
                                                                                  value="Remover" 
                                                                                  styleClass="ui button right aligned"

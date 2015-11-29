@@ -36,8 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Carrinho.findByIdCarrinho", query = "SELECT c FROM Carrinho c WHERE c.idCarrinho = :idCarrinho"),
     @NamedQuery(name = "Carrinho.findByDataAlteracao", query = "SELECT c FROM Carrinho c WHERE c.dataAlteracao = :dataAlteracao"),
     @NamedQuery(name = "Carrinho.findByQuantidade", query = "SELECT c FROM Carrinho c WHERE c.quantidade = :quantidade"),
+    @NamedQuery(name = "Carrinho.findByUser", query = "SELECT c FROM Usuario u JOIN u.carrinhoCollection c WHERE u.idUsuario = :idUsuario"),
     @NamedQuery(name = "Carrinho.findByPreco", query = "SELECT c FROM Carrinho c WHERE c.preco = :preco")})
 public class Carrinho implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -162,5 +164,5 @@ public class Carrinho implements Serializable {
     public String toString() {
         return "com.wrm.draftstore.common.entidades.Carrinho[ idCarrinho=" + idCarrinho + " ]";
     }
-    
+
 }

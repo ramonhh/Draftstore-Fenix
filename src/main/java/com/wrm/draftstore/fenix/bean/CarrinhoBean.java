@@ -36,12 +36,26 @@ public class CarrinhoBean implements Serializable {
      * Creates a new instance of CarrinhoBean
      */
     public CarrinhoBean() {
+        this.compras = new ArrayList<>();
     }
 
     private ArrayList<ProdutoCarrinho> itens = new ArrayList<>();
     private HashMap<Produto, ProdutoCarrinho> itensMap = new HashMap<>();
     private int quantidadeItensMap = 0;
     private final CarrinhoService cs = new CarrinhoServiceJPAImpl();
+    private List<Carrinho> compras;
+
+    public List<Carrinho> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Carrinho> compras) {
+        this.compras = compras;
+    }
+
+    public void carregarCompras(Usuario u) {
+        this.compras = cs.listarDoUsuario(u);
+    }
 
     public float getPrecoTotal() {
         float preco = calcularPrecoCarrinho();
