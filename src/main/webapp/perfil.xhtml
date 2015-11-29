@@ -67,8 +67,7 @@
                                     <label>Data de Nascimento</label>
                                     <div class="field">
                                         <!--<input type="date" name="dtNascimento" placeholder="dd/MM/yyyy"/>-->
-                                        <p:calendar pattern="dd/MM/yyyy" value="#
-                                                    {usuarioBean.usuarioLogado.dtNascimento}"/>
+                                        <p:calendar pattern="dd/MM/yyyy" value="#{usuarioBean.usuarioLogado.dtNascimento}"/>
                                     </div>
                                     <label>CPF</label>
                                     <div class="field">
@@ -110,17 +109,15 @@
                                                 <div class="ui column segment">
                                                     <h4>  Nº do pedido:
                                                         #000#{compra.fkCarrinhoVenda.idVenda} </h4>
-                                                    <p>Realizado em: <h:outputText value="#
-                                                                                   {compra.fkCarrinhoVenda.dataVenda}">
-                                                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                                    <p>Realizado em: <h:outputText value="#{compra.fkCarrinhoVenda.dataVenda}" >
+                                                            <f:convertDateTime  type="date" pattern="dd/MM/yyyy"/>
                                                         </h:outputText></p>
                                                     <h:panelGrid rendered="#{compra.fkCarrinhoVenda.vendaEntregue}">
                                                         <h4>
                                                             <i class="check green circle icon header"></i>
                                                             Ótimo! A entrega chegou!
                                                         </h4>
-                                                        <p>  Entregue em: <h:outputText value="#
-                                                                                        {compra.fkCarrinhoVenda.dataEntrega}">
+                                                        <p>  Entregue em: <h:outputText value="#{compra.fkCarrinhoVenda.dataEntrega}" >
                                                                 <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                                                             </h:outputText></p>
                                                     </h:panelGrid>
@@ -129,16 +126,14 @@
                                                             <i class="remove red circle icon header"></i>
                                                             Tenha paciência! Seu produto está a caminho...
                                                         </h4>
-                                                        <p>  Data extimada para entrega: <h:outputText value="#
-                                                                                                       {compra.fkCarrinhoVenda.dataEntrega}">
+                                                        <p>  Data extimada para entrega: <h:outputText value="#{compra.fkCarrinhoVenda.dataEntrega}">
                                                                 <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
                                                             </h:outputText></p>
                                                     </h:panelGrid>
 
                                                     <div class="ui segment center aligned">
                                                         <div class="ui basic segment image small" >
-                                                            <a href="detalhe.xhtml?id=0"><img src="#
-                                                                                              {compra.fkProduto.caminhoImagem}"/></a>
+                                                            <a href="detalhe.xhtml?id=0"><img src="#{compra.fkProduto.caminhoImagem}"/></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -190,8 +185,7 @@
                                                                                  value="Editar" 
                                                                                  styleClass="ui primary button 
                                                                                  alterarEndereco left aligned"
-                                                                                 action="#
-                                                                                 {enderecoBean.selecionarOnlyEndereco(endereco)}"
+                                                                                 action="#{enderecoBean.selecionarOnlyEndereco(endereco)}"
                                                                                  icon="fa fa-fw fa-edit" 
                                                                                  update=":formAlterarEndereco:rua 
                                                                                  :formAlterarEndereco:numero 
@@ -202,8 +196,7 @@
                                                                                  :formAlterarEndereco:estado">
                                                                 </p:commandButton>
                                                                 <div class="or" data-text="ou"></div>
-                                                                <p:commandButton id="removerEndereco" action="#
-                                                                                 {enderecoBean.removerEndereco(endereco)}" 
+                                                                <p:commandButton id="removerEndereco" action="#{enderecoBean.removerEndereco(endereco)}" 
                                                                                  value="Remover" 
                                                                                  styleClass="ui button right aligned"
                                                                                  icon="fa fa-fw fa-trash"/>
@@ -244,8 +237,7 @@
                                                     <label>Número</label>
                                                     <div class="uiinput">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="numero" value="#
-                                                                     {enderecoBean.novoEndereco.numero}"/>
+                                                        <h:inputText id="numero" value="#{enderecoBean.novoEndereco.numero}"/>
                                                     </div>
                                                 </div>
 
@@ -255,16 +247,14 @@
                                                     <label>Bairro</label>
                                                     <div class="ui input">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="bairro" value="#
-                                                                     {enderecoBean.novoEndereco.bairro}" />
+                                                        <h:inputText id="bairro" value="#{enderecoBean.novoEndereco.bairro}" />
                                                     </div>
                                                 </div>
                                                 <div class="ui field">
                                                     <label>Complemento</label>
                                                     <div class="ui input">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="complemento" value="#
-                                                                     {enderecoBean.novoEndereco.complemento}"/>
+                                                        <h:inputText id="complemento" value="#{enderecoBean.novoEndereco.complemento}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,8 +263,7 @@
                                                     <label>Cidade</label>
                                                     <div class="ui input">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="cidade" value="#
-                                                                     {enderecoBean.novoEndereco.cidade}" />
+                                                        <h:inputText id="cidade" value="#{enderecoBean.novoEndereco.cidade}" />
                                                     </div>
                                                 </div>
                                                 <div class="ui field">
@@ -318,16 +307,14 @@
                                                     <label>Logradouro (Avenida, Rua...)</label>
                                                     <div class="ui input">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="rua" value="#
-                                                                     {enderecoBean.enderecoSelecionado.rua}"/>
+                                                        <h:inputText id="rua" value="#{enderecoBean.enderecoSelecionado.rua}"/>
                                                     </div>
                                                 </div>
                                                 <div class="ui field">
                                                     <label>Número</label>
                                                     <div class="uiinput">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="numero" value="#
-                                                                     {enderecoBean.enderecoSelecionado.numero}"/>
+                                                        <h:inputText id="numero" value="#{enderecoBean.enderecoSelecionado.numero}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -336,16 +323,14 @@
                                                     <label>Bairro</label>
                                                     <div class="ui input">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="bairro" value="#
-                                                                     {enderecoBean.enderecoSelecionado.bairro}" />
+                                                        <h:inputText id="bairro" value="#{enderecoBean.enderecoSelecionado.bairro}" />
                                                     </div>
                                                 </div>
                                                 <div class="ui field">
                                                     <label>Complemento</label>
                                                     <div class="ui input">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="complemento" value="#
-                                                                     {enderecoBean.enderecoSelecionado.complemento}"/>
+                                                        <h:inputText id="complemento" value="#{enderecoBean.enderecoSelecionado.complemento}" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -354,14 +339,13 @@
                                                     <label>Cidade</label>
                                                     <div class="ui input">
                                                         <!--<input type="text" />-->
-                                                        <h:inputText id="cidade" value="#
-                                                                     {enderecoBean.enderecoSelecionado.cidade}" />
+                                                        <h:inputText id="cidade" value="#{enderecoBean.enderecoSelecionado.cidade}"/>
+                                                                      
                                                     </div>
                                                 </div>
                                                 <div class="ui field">
                                                     <label>Estado</label>
-                                                    <h:inputText id="estado" value="#
-                                                                 {enderecoBean.enderecoSelecionado.estado}" />
+                                                    <h:inputText id="estado" value="#{enderecoBean.enderecoSelecionado.estado}" />
                                                 </div>
                                             </div>
                                             <div class="ui basic segment">
