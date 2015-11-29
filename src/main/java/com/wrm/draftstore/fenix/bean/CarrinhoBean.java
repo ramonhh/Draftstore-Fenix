@@ -15,14 +15,26 @@ import com.wrm.draftstore.fenix.entity.ProdutoCarrinho;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -137,7 +149,10 @@ public class CarrinhoBean implements Serializable {
         }
 
         limparCarrinho();
-        return "/compra_sucesso.xhtml";
+        
+        enviarEmail(usuLogado.getEmail(), cv.getIdVenda());
+        
+        return "/compra_sucesso.xhtml?faces-redirect=true";
     }
 
     public float calcularPrecoCarrinho() {
@@ -208,4 +223,55 @@ public class CarrinhoBean implements Serializable {
         return "compra_endereco.xhtml";
     }
 
+    public void enviarEmail(String destinatario, Integer idVenda) {
+        Properties props = new Properties();
+        /**
+         * Parâmetros de conexão com servidor Gmail
+         */
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        Session session = Session.getDefaultInstance(props,
+            new javax.mail.Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("wrm.draftstore@gmail.com", "DR@FT123");
+                }
+            });
+
+        /**
+         * Ativa Debug para sessão
+         */
+        session.setDebug(true);
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("wrm.draftstore@gmail.com", "DraftStore e-Commerce")); //Remetente
+
+            Address[] toUser = InternetAddress //Destinatário(s)
+                    .parse(destinatario);
+
+            message.setRecipients(Message.RecipientType.TO, toUser);
+            message.setSubject("Compra realizada com sucesso! #000"+idVenda);//Assunto
+            message.setText(
+                    "Olá, gostaríamos de lhe informar que sua compra #000"+idVenda+" foi efetuada com sucesso. \n"
+                    + "Aguardamos agora o pagamento do boleto bancário.");
+            /**
+             * Método para enviar a mensagem criada
+             */
+            Transport.send(message);
+
+            System.out.println("Email para "+destinatario+" foi enviado com sucesso. #000"+idVenda);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(VendaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

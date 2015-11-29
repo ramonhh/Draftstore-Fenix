@@ -4,134 +4,140 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <ui:composition template="template/modelo.xhtml"> 
+  <ui:composition template="template/modelo.xhtml"> 
 
-        <ui:define name="content">
+    <ui:define name="content">
 
-            <!--Steps-->
-            <div class="ui basic segment center aligned">
-                <div class="ui three steps">
-                    <div class="completed step">
-                        <i class="map marker icon"></i>
-                        <div class="content">
-                            <div class="title">Endereço</div>
-                            <div class="description">Informe onde será entregue a compra</div>
-                        </div>
+      <!--Steps-->
+      <div class="ui basic segment center aligned">
+        <div class="ui three steps">
+          <div class="completed step">
+            <i class="map marker icon"></i>
+            <div class="content">
+              <div class="title">Endereço</div>
+              <div class="description">Informe onde será entregue a compra</div>
+            </div>
+          </div>
+          <div class="completed step">
+            <i class="truck icon"></i>
+            <div class="content">
+              <div class="title">Entrega</div>    
+              <div class="description">Indique as opções para a entrega</div>
+            </div>
+          </div>
+          <div class="active step">
+            <i class="credit card icon"></i>
+            <div class="content">
+              <div class="title">Pagamento</div>
+              <div class="description">Escolha a forma de pagamento</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui container">
+        <h3 class="ui header">Resumo da compra</h3>
+        <div class="ui segment stackable">
+          <div class="ui grid stackable"> 
+            <div class="eight wide column">
+              <h3 class="ui header">Produto(s)</h3>
+              <div class="ui cards">
+                <ui:repeat value="#{carrinhoBean.itensMapValues}" var="item" varStatus="status">
+                  <div class="card">
+                    <div class="content">
+                      <img class="left floated tiny ui image" src="#{item.produto.caminhoImagem}"/>
+                      <h4 class="ui header">
+                        #{item.produto.modelo}
+                      </h4>
+                      <div class="ui meta">
+                        Quantidade: #{item.quantidade}
+                      </div>                                       
                     </div>
-                    <div class="completed step">
-                        <i class="truck icon"></i>
-                        <div class="content">
-                            <div class="title">Entrega</div>    
-                            <div class="description">Indique as opções para a entrega</div>
-                        </div>
-                    </div>
-                    <div class="active step">
-                        <i class="credit card icon"></i>
-                        <div class="content">
-                            <div class="title">Pagamento</div>
-                            <div class="description">Escolha a forma de pagamento</div>
-                        </div>
-                    </div>
+                  </div>
+                </ui:repeat>
+              </div>
+            </div>
+            <div class="ui basic divider vertical"> </div>
+            <div class="eight wide column">
+              <h3 class="ui header">Valores da Compra</h3>                           
+              <div class="ui basic segment right aligned">
+                <br/>
+                <br/>
+                <h4>Subtotal:	R$ #{carrinhoBean.precoTotal}</h4>
+                <h4>  Valor do frete:	R$ #{vendaBean.cv.frete}</h4>
+                <br/>
+                <br/>
+                <h3 class="ui header">  Valor total: R$ #{carrinhoBean.precoTotal + vendaBean.cv.frete}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br/>
+
+      <div class="ui container">
+        <h3 class="ui header">Escolha a forma de pagamento</h3>     
+        <div class="ui top attached tabular menu">
+          <a class="item active" data-tab="boleto">Boleto Bancário</a>
+          <a class="item" data-tab="cartao">Cartão de Crédito</a>
+        </div>
+        <div class="ui bottom attached tab segment active" data-tab="boleto">
+          <div class="ui grid">
+            <div class="four wide column center aligned">
+              <h3 class="ui icon header">
+                <i class="barcode icon"></i>
+                <div class="content">
+                  Boleto Bancário
                 </div>
+              </h3>
+            </div>
+            <div class="ten wide column">
+              <h4 class="ui">Pagamento à vista R$ #{carrinhoBean.precoTotal}<div class="content"> </div></h4>
+              <div class="ui bulleted list">
+                <div class="item">Importante: Verifique a data de vencimento informada no boleto. 
+                  O prazo para pagamento do boleto é 1 dia útil. Em caso de não pagamento 
+                  do boleto até a data de vencimento, o pedido será automaticamente cancelado.</div>
+                <div class="item">O prazo de entrega informado durante a compra é contado a partir da confirmação do pagamento
+                  pelo banco, o que pode levar até 2 dias úteis.</div>
+                <div class="item">O pagamento do boleto pode ser efetuado pela internet, utilizando o código de barras, ou 
+                  diretamente em bancos, lotéricas e correios, apresentando o boleto impresso.
+                </div>
+              </div>
             </div>
 
-            <div class="ui container">
-                <h3 class="ui header">Resumo da compra</h3>
-                <div class="ui segment stackable">
-                    <div class="ui grid stackable"> 
-                        <div class="eight wide column">
-                            <h3 class="ui header">Produto(s)</h3>
-                            <div class="ui cards">
-                                <ui:repeat value="#{carrinhoBean.itensMapValues}" var="item" varStatus="status">
-                                    <div class="card">
-                                        <div class="content">
-                                            <img class="left floated tiny ui image" src="#{item.produto.caminhoImagem}"/>
-                                            <h4 class="ui header">
-                                                #{item.produto.modelo}
-                                            </h4>
-                                            <div class="ui meta">
-                                                Quantidade: #{item.quantidade}
-                                            </div>                                       
-                                        </div>
-                                    </div>
-                                </ui:repeat>
-                            </div>
-                        </div>
-                        <div class="ui basic divider vertical"> </div>
-                        <div class="eight wide column">
-                            <h3 class="ui header">Valores da Compra</h3>                           
-                            <div class="ui basic segment right aligned">
-                                <br/>
-                                <br/>
-                                <h4>Subtotal:	R$ #{carrinhoBean.precoTotal}</h4>
-                                <h4>  Valor do frete:	R$ #{vendaBean.cv.frete}</h4>
-                                <br/>
-                                <br/>
-                                <h3 class="ui header">  Valor total: R$ #{carrinhoBean.precoTotal + vendaBean.cv.frete}</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
+        </div>
+        <!--<div class="ui bottom attached tab segment" data-tab="cartao">
+          Em breve :)
+        </div>-->
 
-            <br/>
+        <!--                <a href="compra_sucesso.xhtml">
+                          
+                            <div class="ui bottom button blue">Finalizar compra</div>
+                          </div>
+                        </a>-->
+        <div class="ui basic segment right aligned">
+          <h:form>
+            <h:commandButton action="#{carrinhoBean.finalizarCompra(usuarioBean.usuarioLogado, vendaBean.realizarVenda())}"
+                             value="Finalizar compra"
+                             styleClass="ui bottom button blue finalizarCompra">
+            </h:commandButton>
+          </h:form>
+        </div>
+      </div>
 
-            <div class="ui container">
-                <h3 class="ui header">Escolha a forma de pagamento</h3>     
-                <div class="ui top attached tabular menu">
-                    <a class="item active" data-tab="boleto">Boleto Bancário</a>
-                    <a class="item" data-tab="cartao">Cartão de Crédito</a>
-                </div>
-                <div class="ui bottom attached tab segment active" data-tab="boleto">
-                    <div class="ui grid">
-                        <div class="four wide column center aligned">
-                            <h3 class="ui icon header">
-                                <i class="barcode icon"></i>
-                                <div class="content">
-                                    Boleto Bancário
-                                </div>
-                            </h3>
-                        </div>
-                        <div class="ten wide column">
-                            <h4 class="ui">Pagamento à vista R$ #{carrinhoBean.precoTotal}<div class="content"> </div></h4>
-                            <div class="ui bulleted list">
-                                <div class="item">Importante: Verifique a data de vencimento informada no boleto. 
-                                    O prazo para pagamento do boleto é 1 dia útil. Em caso de não pagamento 
-                                    do boleto até a data de vencimento, o pedido será automaticamente cancelado.</div>
-                                <div class="item">O prazo de entrega informado durante a compra é contado a partir da confirmação do pagamento
-                                    pelo banco, o que pode levar até 2 dias úteis.</div>
-                                <div class="item">O pagamento do boleto pode ser efetuado pela internet, utilizando o código de barras, ou 
-                                    diretamente em bancos, lotéricas e correios, apresentando o boleto impresso.
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <!--<div class="ui bottom attached tab segment" data-tab="cartao">
-                  Em breve :)
-                </div>-->
-
-                <!--                <a href="compra_sucesso.xhtml">
-                                  
-                                    <div class="ui bottom button blue">Finalizar compra</div>
-                                  </div>
-                                </a>-->
-                <div class="ui basic segment right aligned">
-                    <h:form>
-                        <h:commandButton action="#{carrinhoBean.finalizarCompra(usuarioBean.usuarioLogado, vendaBean.realizarVenda())}"
-                                         value="Finalizar compra"
-                                         styleClass="ui bottom button blue">
-                        </h:commandButton>
-                    </h:form>
-                </div>
-            </div>                  
-
-            <script>
-                $('.menu .item')
-                        .tab()
-                        ;
-            </script>
-        </ui:define>
-    </ui:composition>
+      <div class="ui basic modal finalizarCompraModal">
+          <div class="ui large text loader indeterminate">Processando a compra</div>
+        <p></p>
+        <p></p>
+        <p></p>
+      </div>
+      <script type="text/javascript">
+        $('.menu .item')
+                .tab()
+                ;
+      </script>
+    </ui:define>
+  </ui:composition>
 </html>
