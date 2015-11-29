@@ -5,296 +5,295 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-  <ui:composition template="template/modelo.xhtml"> 
-    <ui:define name="content">
-      
-      <!--Header Minha Conta-->
-      <div class="ui clearing segment">
-        <h2 class="ui header left floated">
-          <i class="settings icon"></i>
-          <div class="content">
-            Minha conta
-          </div>
-        </h2>
-        
-        <!--Botao Logout-->
-        <h:form id="formLogout">
-          <p:commandButton action="#{usuarioBean.efetuarLogout()}"
-                           value="Sair" 
-                           styleClass="ui right floated icon button inverted red"
-                           icon="fa fa-fw fa-shopping-cart"/>
-        </h:form>
-        
-      </div>
-      
-      <!--Conteudo da pagina-->
-      <div class="ui segment">
-        <div class="ui grid">
-          
-          <!--Tabs-->
-          <div class="four wide column">
-            <div class="ui vertical fluid tabular menu">
-              <div class="item active" data-tab="tab-name">Dados Pessoais</div>
-              <div class="item" data-tab="tab-name2">Pedidos</div> 
-              <div class="item" data-tab="tab-name3">Endereços</div>
+    <ui:composition template="template/modelo.xhtml"> 
+        <ui:define name="content">
+
+            <!--Header Minha Conta-->
+            <div class="ui clearing segment">
+                <h2 class="ui header left floated">
+                    <i class="settings icon"></i>
+                    <div class="content">
+                        Minha conta
+                    </div>
+                </h2>
+
+                <!--Botao Logout-->
+                <h:form id="formLogout">
+                    <p:commandButton action="#{usuarioBean.efetuarLogout()}"
+                                     value="Sair" 
+                                     styleClass="ui right floated icon button inverted red"
+                                     icon="fa fa-fw fa-shopping-cart"/>
+                </h:form>
+
             </div>
-          </div>
-          
-          <!--Conteudo-->
-          <div class="twelve wide stretched column">
+
+            <!--Conteudo da pagina-->
             <div class="ui segment">
-              
-              <!--Tab Dados Pessoais-->
-              <div class="ui tab active" data-tab="tab-name">
-                <div class="ui basic segment">
-                  <h1 class="ui header">
-                    Dados Pessoais
-                  </h1>
-                </div>
-                <h:form id="perfil"  class="ui form">
-                  <label>Nome</label>                     
-                  <div class="field">
-                    <h:inputText label="name" value="#{usuarioBean.usuarioLogado.nome}"/>
-                  </div>
-                  <label>Sexo</label>
-                  <div class="field">
-                    <h:selectOneMenu id="items" value="#{usuarioBean.usuarioLogado.sexo}">
-                      <f:selectItem itemLabel="Feminino" itemValue="F"/>
-                      <f:selectItem itemLabel="Masculino" itemValue="M"/>
-                    </h:selectOneMenu>
-                  </div>
-                  <label>Data de Nascimento</label>
-                  <div class="field">
-                    <!--<input type="date" name="dtNascimento" placeholder="dd/MM/yyyy"/>-->
-                    <p:calendar pattern="dd/MM/yyyy" value="#{usuarioBean.usuarioLogado.dtNascimento}"/>
-                  </div>
-                  <label>CPF</label>
-                  <div class="field">
-                    <!--<input type="text" name="cpf" maxlength="15"/>-->
-                    <h:inputText label="CPF" value="#{usuarioBean.usuarioLogado.cpf}"/>
-                  </div>  
-                  <label>Email</label>
-                  <div class="field">
-                    <!--<input type="text" name="email"/>-->
-                    <h:inputText label="Email" value="#{usuarioBean.usuarioLogado.email}"/>
-                  </div>
-                  <!--                                    <label>Senha</label>
-                                                      <div class="field">
-                                                          <input type="password" name="senha"/>
-                                                      </div>-->
-                  <button class="ui primary button">
-                    Salvar
-                  </button>
-                  <button class="ui button" type="reset">
-                    Cancelar
-                  </button>
-                </h:form>
-              </div>
-              
-              <!--Tab Pedidos-->
-              <div class="ui tab" data-tab="tab-name2">
-                <div class="ui basic segment">
-                  <h1 class="ui header">
-                    Pedidos
-                  </h1>
-                </div>
-                <div class="ui horizontal segments">
-                  <div class="ui segment">
-                    <h4>  Nº do pedido:
-                      17708589 </h4>
-                    <p>Realizado em: 28/11/2014</p>
-                    <h4>
-                      <i class="check green circle icon header"></i>
-                      Ótimo! A entrega chegou! :)
-                    </h4>
-                    <p>  Entregue em: 11/12/2014</p>
+                <div class="ui grid">
 
-                  </div>
-                  <div class="ui segment center aligned">
-                    <div class="ui basic segment image small" >
-                      <a href="detalhe.xhtml?id=0"><img src="imagens/produtos/processadori7.jpg"/></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!--Tab Enderecos-->
-              <div class="ui tab" data-tab="tab-name3">
-                <h:form id="adicionarEndereco">
-                  <div class="ui basic segment center aligned">
-                    <div class="ui grid stackable center aligned">
-                      <div class="ui cards centered stackable">
-
-                        <div class="ui card">
-                          <div class="ui content center aligned">
-                            <h4 class="center aligned">Adicionar Endereço</h4>
-                            <a class="center aligned cadastrarEndereco">
-                              <h1><i class="add circle icon blue"></i></h1>
-                            </a>
-                          </div>
+                    <!--Tabs-->
+                    <div class="four wide column">
+                        <div class="ui vertical fluid tabular menu">
+                            <div class="item active" data-tab="tab-name">Dados Pessoais</div>
+                            <div class="item" data-tab="tab-name2">Pedidos</div> 
+                            <div class="item" data-tab="tab-name3">Endereços</div>
                         </div>
-                        <!--{enderecoBean.carregarEnderecos(usuarioBean.usuarioLogado)}-->
-                        #{enderecoBean.inicializarEndereco(usuarioBean.usuarioLogado)}
+                    </div>
 
-                        <ui:repeat value="#{enderecoBean.enderecos}" var="endereco" varStatus="status">
+                    <!--Conteudo-->
+                    <div class="twelve wide stretched column">
+                        <div class="ui segment">
 
-                          <div class="ui card">
-                            <div class="content">
-                              <div class="header">#{endereco.rua}</div>
-                              <div class="description">
-                                <p>#{endereco.bairro}</p>
-                                <p>CEP #{endereco.cep}</p>
-                                <p>#{endereco.cidade}</p>
-                              </div>
-                              <br/>
-                              <!--                  <a href="compra_confirmarEndereco.xhtml"> 
-                                                  <div class="ui bottom attached button">
-                                                    <i class="check square icon"></i>
-                                                    Entregar nesse endereço
-                                                  </div>
-                                                </a>-->
-
-                              <div class="ui icon buttons">
-                                <p:commandButton id="editarEndereco" action="#{enderecoBean.editarEndereco(endereco)}" 
-                                           value="Editar" 
-                                           styleClass="ui yellow button"
-                                           icon="fa fa-fw fa-edit"/>
-                                <p:commandButton id="removerEndereco" action="#{enderecoBean.removerEndereco(endereco)}" 
-                                           value="Remover" 
-                                           styleClass="ui red button"
-                                           icon="fa fa-fw fa-trash"/>
-                                
-                                
-                                
-<!--                                <div class="ui yellow button">
-                                  <i class="edit icon"></i>
-                                  Editar
+                            <!--Tab Dados Pessoais-->
+                            <div class="ui tab active" data-tab="tab-name">
+                                <div class="ui basic segment">
+                                    <h1 class="ui header">
+                                        Dados Pessoais
+                                    </h1>
                                 </div>
-                                <div class="ui red button">
-                                  <i class="trash icon"></i>
-                                  Remover
-                                </div>-->
-                              </div>
+                                <h:form id="perfil"  class="ui form">
+                                    <label>Nome</label>                     
+                                    <div class="field">
+                                        <h:inputText label="name" value="#{usuarioBean.usuarioLogado.nome}"/>
+                                    </div>
+                                    <label>Sexo</label>
+                                    <div class="field">
+                                        <h:selectOneMenu id="items" value="#{usuarioBean.usuarioLogado.sexo}">
+                                            <f:selectItem itemLabel="Feminino" itemValue="F"/>
+                                            <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <label>Data de Nascimento</label>
+                                    <div class="field">
+                                        <!--<input type="date" name="dtNascimento" placeholder="dd/MM/yyyy"/>-->
+                                        <p:calendar pattern="dd/MM/yyyy" value="#{usuarioBean.usuarioLogado.dtNascimento}"/>
+                                    </div>
+                                    <label>CPF</label>
+                                    <div class="field">
+                                        <!--<input type="text" name="cpf" maxlength="15"/>-->
+                                        <h:inputText label="CPF" value="#{usuarioBean.usuarioLogado.cpf}"/>
+                                    </div>  
+                                    <label>Email</label>
+                                    <div class="field">
+                                        <!--<input type="text" name="email"/>-->
+                                        <h:inputText label="Email" value="#{usuarioBean.usuarioLogado.email}"/>
+                                    </div>
+                                    <!--                                    <label>Senha</label>
+                                                                        <div class="field">
+                                                                            <input type="password" name="senha"/>
+                                                                        </div>-->
+                                    <button class="ui primary button">
+                                        Salvar
+                                    </button>
+                                    <button class="ui button" type="reset">
+                                        Cancelar
+                                    </button>
+                                </h:form>
                             </div>
-                          </div>
 
-                        </ui:repeat>
+                            <!--Tab Pedidos-->
+                            <div class="ui tab" data-tab="tab-name2">
+                                <div class="ui basic segment">
+                                    <h1 class="ui header">
+                                        Pedidos
+                                    </h1>
+                                </div>
+                                <div class="ui horizontal segments">
+                                    <div class="ui segment">
+                                        <h4>  Nº do pedido:
+                                            17708589 </h4>
+                                        <p>Realizado em: 28/11/2014</p>
+                                        <h4>
+                                            <i class="check green circle icon header"></i>
+                                            Ótimo! A entrega chegou! :)
+                                        </h4>
+                                        <p>  Entregue em: 11/12/2014</p>
 
-                      </div>
+                                    </div>
+                                    <div class="ui segment center aligned">
+                                        <div class="ui basic segment image small" >
+                                            <a href="detalhe.xhtml?id=0"><img src="imagens/produtos/processadori7.jpg"/></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!--Tab Enderecos-->
+                            <div class="ui tab" data-tab="tab-name3">
+                                <h:form id="adicionarEndereco">
+                                    <div class="ui basic segment center aligned">
+                                        <div class="ui grid stackable center aligned">
+                                            <div class="ui cards centered stackable">
+
+                                                <div class="ui card">
+                                                    <div class="ui content center aligned">
+                                                        <h4 class="center aligned">Adicionar Endereço</h4>
+                                                        <a class="center aligned cadastrarEndereco">
+                                                            <h1><i class="add circle icon blue"></i></h1>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--{enderecoBean.carregarEnderecos(usuarioBean.usuarioLogado)}-->
+                                                #{enderecoBean.inicializarEndereco(usuarioBean.usuarioLogado)}
+
+                                                <ui:repeat value="#{enderecoBean.enderecos}" var="endereco" varStatus="status">
+
+                                                    <div class="ui card">
+                                                        <div class="content">
+                                                            <div class="header">#{endereco.rua}</div>
+                                                            <div class="description">
+                                                                <p>#{endereco.bairro}</p>
+                                                                <p>CEP #{endereco.cep}</p>
+                                                                <p>#{endereco.cidade}</p>
+                                                            </div>
+                                                            <br/>
+                                                            <!--                  <a href="compra_confirmarEndereco.xhtml"> 
+                                                                                <div class="ui bottom attached button">
+                                                                                  <i class="check square icon"></i>
+                                                                                  Entregar nesse endereço
+                                                                                </div>
+                                                                              </a>-->
+
+                                                            <div class="ui icon buttons">
+                                                                <p:commandButton id="editarEndereco" action="#{enderecoBean.editarEndereco(endereco)}" 
+                                                                                 value="Editar" 
+                                                                                 styleClass="ui yellow button"
+                                                                                 icon="fa fa-fw fa-edit"/>
+                                                                <p:commandButton id="removerEndereco" action="#{enderecoBean.removerEndereco(endereco)}" 
+                                                                                 value="Remover" 
+                                                                                 styleClass="ui red button"
+                                                                                 icon="fa fa-fw fa-trash"/>
+
+
+
+                                                                <!--                                <div class="ui yellow button">
+                                                                                                  <i class="edit icon"></i>
+                                                                                                  Editar
+                                                                                                </div>
+                                                                                                <div class="ui red button">
+                                                                                                  <i class="trash icon"></i>
+                                                                                                  Remover
+                                                                                                </div>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </ui:repeat>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </h:form>
+
+                                <div class="ui  modal endereco">
+                                    <div class="header">Cadastrar Endereço</div>
+                                    <div class="ui basic segment">
+                                        <h:form class="ui form">
+                                            <div class="ui field">
+                                                <label>Logradouro (Avenida, Rua...)</label>
+                                                <div class="ui input">
+                                                    <!--<input type="text" />-->
+                                                    <h:inputText value="#{enderecoBean.novoEndereco.rua}"/>
+                                                </div>
+                                            </div>
+                                            <div class="ui two fields">
+                                                <div class="ui field">
+                                                    <label>Número</label>
+                                                    <div class="uiinput">
+                                                        <!--<input type="text" />-->
+                                                        <h:inputText value="#{enderecoBean.novoEndereco.numero}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="iu field">
+                                                    <label>CEP</label>
+                                                    <div class="ui input">
+                                                        <!--<input type="text" />-->
+                                                        <h:inputText value="#{enderecoBean.novoEndereco.cep}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ui two fields">
+                                                <div class="iu field">
+                                                    <label>Bairro</label>
+                                                    <div class="ui input">
+                                                        <!--<input type="text" />-->
+                                                        <h:inputText value="#{enderecoBean.novoEndereco.bairro}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="ui field">
+                                                    <label>Complemento</label>
+                                                    <div class="ui input">
+                                                        <!--<input type="text" />-->
+                                                        <h:inputText value="#{enderecoBean.novoEndereco.complemento}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ui two fields">
+                                                <div class="ui field">
+                                                    <label>Cidade</label>
+                                                    <div class="ui input">
+                                                        <!--<input type="text" />-->
+                                                        <h:inputText value="#{enderecoBean.novoEndereco.cidade}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="ui field">
+                                                    <label>Estado</label>
+
+                                                    <h:selectOneMenu value="#{enderecoBean.novoEndereco.estado}" styleClass="ui search dropdown">
+                                                        <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled="true" />
+                                                        <f:selectItem itemValue="AC" itemLabel="Acre"/>
+                                                        <f:selectItem itemValue="AL" itemLabel="Alagoas"/>
+                                                        <f:selectItem itemValue="AP" itemLabel="Amapá"/>
+                                                        <f:selectItem itemValue="AM" itemLabel="Amazonas"/>
+                                                        <f:selectItem itemValue="BA" itemLabel="Bahia"/>
+                                                        <f:selectItem itemValue="CE" itemLabel="Ceará"/>
+                                                        <f:selectItem itemValue="DF" itemLabel="Distrito Federal"/>
+                                                        <f:selectItem itemValue="ES" itemLabel="Espirito Santo"/>
+                                                        <f:selectItem itemValue="GO" itemLabel="Goiás"/>
+                                                        <f:selectItem itemValue="MA" itemLabel="Maranhão"/>
+                                                        <f:selectItem itemValue="MS" itemLabel="Mato Grosso do Sul"/>
+                                                        <f:selectItem itemValue="MT" itemLabel="Mato Grosso"/>
+                                                        <f:selectItem itemValue="MG" itemLabel="Minas Gerais"/>
+                                                        <f:selectItem itemValue="PA" itemLabel="Pará"/>
+                                                        <f:selectItem itemValue="PB" itemLabel="Paraíba"/>
+                                                        <f:selectItem itemValue="PR" itemLabel="Paraná"/>
+                                                        <f:selectItem itemValue="PE" itemLabel="Pernambuco"/>
+                                                        <f:selectItem itemValue="PI" itemLabel="Piauí"/>
+                                                        <f:selectItem itemValue="RJ" itemLabel="Rio de Janeiro"/>
+                                                        <f:selectItem itemValue="RN" itemLabel="Rio Grande do Norte"/>
+                                                        <f:selectItem itemValue="RS" itemLabel="Rio Grande do Sul"/>
+                                                        <f:selectItem itemValue="RO" itemLabel="Rondônia"/>
+                                                        <f:selectItem itemValue="RR" itemLabel="Roraima"/>
+                                                        <f:selectItem itemValue="SC" itemLabel="Santa Catarina"/>
+                                                        <f:selectItem itemValue="SP" itemLabel="São Paulo"/>
+                                                        <f:selectItem itemValue="SE" itemLabel="Sergipe"/>
+                                                        <f:selectItem itemValue="TO" itemLabel="Tocantins"/>
+                                                    </h:selectOneMenu>	
+
+                                                </div>
+                                            </div>
+                                            <div class="ui basic segment center middle aligned">
+                                                <div class="ui buttons">
+
+                                                    <p:commandButton action="#{enderecoBean.salvarEndereco()}" 
+                                                                     value="Salvar" styleClass="ui button blue"/>
+                                                    <div class="or" data-text="ou"></div>
+                                                    <div class="ui button cancelaSalvarEndereco">Cancelar</div>
+
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                  </div>
-                </h:form>
-
-                <div class="ui  modal endereco">
-                  <div class="header">Cadastrar Endereço</div>
-                  <div class="ui basic segment">
-                    <h:form class="ui form">
-                      <div class="ui field">
-                        <label>Logradouro (Avenida, Rua...)</label>
-                        <div class="ui input">
-                          <!--<input type="text" />-->
-                          <h:inputText value="#{enderecoBean.novoEndereco.rua}"/>
-                        </div>
-                      </div>
-                      <div class="ui two fields">
-                        <div class="ui field">
-                          <label>Número</label>
-                          <div class="uiinput">
-                            <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.numero}"/>
-                          </div>
-                        </div>
-                        <div class="iu field">
-                          <label>CEP</label>
-                          <div class="ui input">
-                            <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.cep}"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ui two fields">
-                        <div class="iu field">
-                          <label>Bairro</label>
-                          <div class="ui input">
-                            <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.bairro}"/>
-                          </div>
-                        </div>
-                        <div class="ui field">
-                          <label>Complemento</label>
-                          <div class="ui input">
-                            <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.complemento}"/>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ui two fields">
-                        <div class="ui field">
-                          <label>Cidade</label>
-                          <div class="ui input">
-                            <!--<input type="text" />-->
-                            <h:inputText value="#{enderecoBean.novoEndereco.cidade}"/>
-                          </div>
-                        </div>
-                        <div class="ui field">
-                          <label>Estado</label>
-
-                          <h:selectOneMenu value="#{enderecoBean.novoEndereco.estado}" styleClass="ui search dropdown">
-                            <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled="true" />
-                            <f:selectItem itemValue="AC" itemLabel="Acre"/>
-                            <f:selectItem itemValue="AL" itemLabel="Alagoas"/>
-                            <f:selectItem itemValue="AP" itemLabel="Amapá"/>
-                            <f:selectItem itemValue="AM" itemLabel="Amazonas"/>
-                            <f:selectItem itemValue="BA" itemLabel="Bahia"/>
-                            <f:selectItem itemValue="CE" itemLabel="Ceará"/>
-                            <f:selectItem itemValue="DF" itemLabel="Distrito Federal"/>
-                            <f:selectItem itemValue="ES" itemLabel="Espirito Santo"/>
-                            <f:selectItem itemValue="GO" itemLabel="Goiás"/>
-                            <f:selectItem itemValue="MA" itemLabel="Maranhão"/>
-                            <f:selectItem itemValue="MS" itemLabel="Mato Grosso do Sul"/>
-                            <f:selectItem itemValue="MT" itemLabel="Mato Grosso"/>
-                            <f:selectItem itemValue="MG" itemLabel="Minas Gerais"/>
-                            <f:selectItem itemValue="PA" itemLabel="Pará"/>
-                            <f:selectItem itemValue="PB" itemLabel="Paraíba"/>
-                            <f:selectItem itemValue="PR" itemLabel="Paraná"/>
-                            <f:selectItem itemValue="PE" itemLabel="Pernambuco"/>
-                            <f:selectItem itemValue="PI" itemLabel="Piauí"/>
-                            <f:selectItem itemValue="RJ" itemLabel="Rio de Janeiro"/>
-                            <f:selectItem itemValue="RN" itemLabel="Rio Grande do Norte"/>
-                            <f:selectItem itemValue="RS" itemLabel="Rio Grande do Sul"/>
-                            <f:selectItem itemValue="RO" itemLabel="Rondônia"/>
-                            <f:selectItem itemValue="RR" itemLabel="Roraima"/>
-                            <f:selectItem itemValue="SC" itemLabel="Santa Catarina"/>
-                            <f:selectItem itemValue="SP" itemLabel="São Paulo"/>
-                            <f:selectItem itemValue="SE" itemLabel="Sergipe"/>
-                            <f:selectItem itemValue="TO" itemLabel="Tocantins"/>
-                          </h:selectOneMenu>	
-
-                        </div>
-                      </div>
-                      <div class="ui basic segment center middle aligned">
-                        <div class="ui buttons">
-
-                          <p:commandButton action="#{enderecoBean.salvarEndereco()}" 
-                                           value="Salvar" styleClass="ui button blue">
-                          </p:commandButton>
-                          <div class="or" data-text="ou"></div>
-                          <div class="ui button cancelaSalvarEndereco">Cancelar</div>
-
-                        </div>
-                      </div>
-                    </h:form>
-                  </div>
                 </div>
-              </div>
-              
             </div>
-          </div>
-        </div>
-      </div>
 
-    </ui:define>
-  </ui:composition>
+        </ui:define>
+    </ui:composition>
 </html>
 

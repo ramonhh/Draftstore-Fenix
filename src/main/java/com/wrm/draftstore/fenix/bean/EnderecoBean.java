@@ -27,7 +27,7 @@ public class EnderecoBean implements Serializable {
     public List<Endereco> enderecos;
     public Endereco novoEndereco;
     public Endereco enderecoSelecionado;
-    
+
     public String tipoEntrega;
 
     public EnderecoBean() {
@@ -60,8 +60,8 @@ public class EnderecoBean implements Serializable {
     public void setTipoEntrega(String tipoEntrega) {
         this.tipoEntrega = tipoEntrega;
     }
-    
-    public String salvarEndereco() {
+
+    public String salvarEndereco(String urlRetorno) {
 //        System.out.println("Logradouro:"+novoEndereco.getRua());
 //        System.out.println("IDUSUARIO:"+novoEndereco.getFkUsuario());
         if (novoEndereco != null) {
@@ -69,7 +69,17 @@ public class EnderecoBean implements Serializable {
         } else {
             System.out.println("Endereço não salvo.");
         }
-        return "perfil.xhtml?faces-redirect=true";
+        return urlRetorno + "?faces-redirect=true";
+    }
+
+    public void salvarEndereco() {
+//        System.out.println("Logradouro:"+novoEndereco.getRua());
+//        System.out.println("IDUSUARIO:"+novoEndereco.getFkUsuario());
+        if (novoEndereco != null) {
+            enderecoService.incluir(novoEndereco);
+        } else {
+            System.out.println("Endereço não salvo.");
+        }
     }
 
     public Endereco getEnderecoSelecionado() {
@@ -79,25 +89,25 @@ public class EnderecoBean implements Serializable {
     public void setEnderecoSelecionado(Endereco enderecoSelecionado) {
         this.enderecoSelecionado = enderecoSelecionado;
     }
-    
-    public void inicializarEndereco(Usuario u){
+
+    public void inicializarEndereco(Usuario u) {
         novoEndereco = new Endereco();
         novoEndereco.setFkUsuario(u);
         this.carregarEnderecos(u);
         enderecoSelecionado = new Endereco();
     }
 
-    public String selecionarEndereco(Endereco e){
+    public String selecionarEndereco(Endereco e) {
         enderecoSelecionado = e;
         return "compra_confirmarEndereco.xhtml?faces-redirect=true";
     }
-    
+
     public String removerEndereco(Endereco e) {
         enderecoService.remover(e.getIdEndereco().longValue());
         return "perfil.xhtml?faces-redirect=true";
     }
-    
-    public String editarEndereco(Endereco e){
+
+    public String editarEndereco(Endereco e) {
         enderecoService.alterar(e);
         return "perfil.xhtml?faces-redirect=true";
     }
