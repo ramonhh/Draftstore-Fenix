@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="src/css/ppSlider.css" type="text/css"/>
 
         <script src="Nivo-Slider-master/jquery.nivo.slider.pack.js"/>
-
         <div class="ui grid">
             <div class="computer only row">
                 <div class="column">
@@ -30,7 +29,7 @@
                                 <!--Logo da imagem-->
                                 <div class="ui logo shape">
                                     <h:outputLink value="home.xhtml">
-                                        <img class="ui tiny image" src="imagens/logo/draftstore_logo2.png"/>
+                                        <img class="ui tiny image" src="imagens/logo/image.png" alt=""/>
                                     </h:outputLink>
 
                                 </div>
@@ -108,9 +107,6 @@
                         <!--Menu das categorias-->
                         <div class="container">
                             <nav class="ui labeled small icon borderless menu centered grid inverted grey secondary">
-
-
-
                                 <ui:repeat value="#{categoriaBean.categorias}" var="categoria" varStatus="status">
                                     <h:commandLink styleClass="item" 
                                                    action="#{categoriaBean.irParaListagem(categoria)}">

@@ -45,27 +45,19 @@ Geração</h3>-->
                                 <div class="text center aligned">
                                     <div class="ui tiny horizontal statistic">
                                         <h:panelGrid rendered="#{produtoBean.produtoDetalhe.dataValida}">
-                                            De <h:outputText value="#{produtoBean.produtoDetalhe.precoVenda}">
+                                            <h3> De R$<h:outputText value="#{produtoBean.produtoDetalhe.precoVenda}">
                                                 <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
                                             </h:outputText>
-                                            Por
-                                            <div class="label">
+                                            </h3>
+                                            <h5>Por </h5>
                                                 R$
-                                            </div>
-                                            <div class="value">
                                                 <h:outputText value="#{produtoBean.produtoDetalhe.precoPromo}">
                                                     <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
                                                 </h:outputText>
-                                            </div>
                                         </h:panelGrid>
                                         <h:panelGrid rendered="#{not produtoBean.produtoDetalhe.dataValida}">
-                                            Por
-                                            <div class="label">
-                                                R$
-                                            </div>
                                             <div class="value">
-                                                <h:outputText value="#{produtoBean.produtoDetalhe.precoVenda}">
-                                                </h:outputText>
+                                                <h3> R$ #{produtoBean.produtoDetalhe.precoVenda} </h3>
                                             </div>
                                         </h:panelGrid>
                                     </div>
@@ -104,35 +96,7 @@ Geração</h3>-->
 
                 <div class="ui tab active" data-tab="tab-name">
                     <div class="ui basic segment center aligned">
-                        <table class="ui unstackable table">
-                            <thead>
-                                <tr>
-                                    <th>Informações:</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Modelo: </td>
-                                    <td>#{produtoBean.produtoDetalhe.modelo}</td>
-                                </tr>
-                                <tr>
-                                    <td>Marca: </td>
-                                    <td>#{produtoBean.produtoDetalhe.marca}</td>
-                                </tr>
-                                <tr>
-                                    <td>Categoria: </td>
-                                    <td>#{produtoBean.produtoDetalhe.fkCategoria.nomeCategoria}</td>
-                                </tr>
-                                <tr>
-                                    <td>Sub-Categoria: </td>
-                                    <td>#{produtoBean.produtoDetalhe.fkSubcategoria.nomeSubcategoria}</td>
-                                </tr>
-                                <tr>
-                                    <td class="header">Descrição: </td>
-                                    <td>#{produtoBean.produtoDetalhe.descricao}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                       <h:outputText value="#{produtoBean.produtoDetalhe.descricao}" escape="false"/>
                     </div>
                 </div>
                 <div class="ui tab" data-tab="tab-name2">
