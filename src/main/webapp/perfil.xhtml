@@ -27,23 +27,24 @@
                 </h:form>
 
             </div>
-
-            <!--Conteudo da pagina-->
-            <div class="ui segment">
-                <div class="ui grid">
-
-                    <!--Tabs-->
+<!--Tabs-->
+<div class="ui segment">
                     <div class="four wide column">
-                        <div class="ui vertical fluid tabular menu">
+                        <div class="ui top fluid tabular menu">
                             <div class="item active" data-tab="tab-name">Dados Pessoais</div>
                             <div class="item" data-tab="tab-name2">Pedidos</div> 
                             <div class="item" data-tab="tab-name3">Endereços</div>
                         </div>
                     </div>
+            <!--Conteudo da pagina-->
+            
+                <div class="ui grid">
+
+                    
 
                     <!--Conteudo-->
                     <div class="twelve wide stretched column">
-                        <div class="ui segment">
+                        <div class="ui basic segment">
 
                             <!--Tab Dados Pessoais-->
                             <div class="ui tab active" data-tab="tab-name">
@@ -100,13 +101,13 @@
                                     </h1>
                                 </div>
                                 #{carrinhoBean.carregarCompras(usuarioBean.usuarioLogado)}
-                                <div class="ui horizontal segments">
-                                    <div class="ui segment">
+                                <!--<div class="ui horizontal segments">-->
+                                    <!--<div class="ui segment">-->
                                         <div class="ui two column grid">
                                             <ui:repeat value="#{carrinhoBean.compras}" var="compra" varStatus="stat">
 
 
-                                                <div class="ui column segment">
+                                                <div class="ui column segment center aligned">
                                                     <h4>  Nº do pedido:
                                                         #000#{compra.fkCarrinhoVenda.idVenda} </h4>
                                                     <p>Realizado em: <h:outputText value="#{compra.fkCarrinhoVenda.dataVenda}" >
@@ -131,7 +132,7 @@
                                                             </h:outputText></p>
                                                     </h:panelGrid>
 
-                                                    <div class="ui segment center aligned">
+                                                    <div class="ui basic segment center aligned">
                                                         <div class="ui basic segment image small" >
                                                             <a href="detalhe.xhtml?id=0"><img src="#{compra.fkProduto.caminhoImagem}"/></a>
                                                         </div>
@@ -139,8 +140,8 @@
                                                 </div>
                                             </ui:repeat>
                                         </div>
-                                    </div>
-                                </div>
+                                    <!--</div>-->
+                                <!--</div>-->
                             </div>
 
                             <!--Tab Enderecos-->
