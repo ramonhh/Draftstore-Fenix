@@ -108,27 +108,27 @@ function validaCsenha() {
 }
 function validaCadastro() {
     if (!validaNome()) {
-        document.getElementsByClassName("formCastro:nome").focus();
+        document.getElementsByClassName("formCadastro:nome").focus();
         return false;
     }
     if (!validaCPF()) {
-        document.getElementsByClassName("formCastro:cpf").focus();
+        document.getElementsByClassName("formCadastro:cpf").focus();
         return false;
     }
     if (!validaContato()) {
-        document.getElementsByClassName("formCastro:telefone").focus();
+        document.getElementsByClassName("formCadastro:telefone").focus();
         return false;
     }
     if (!validaEmail()) {
-        document.getElementsByClassName("formCastro:email").focus();
+        document.getElementsByClassName("formCadastro:email").focus();
         return false;
     }
     if (!validaSenha()) {
-        document.getElementsByClassName("formCastro:senha").focus();
+        document.getElementsByClassName("formCadastro:senha").focus();
         return false;
     }
     if (!validaCsenha()) {
-        document.getElementsByClassName("formCastro:cSenha").focus();
+        document.getElementsByClassName("formCadastro:cSenha").focus();
         return false;
     }
    

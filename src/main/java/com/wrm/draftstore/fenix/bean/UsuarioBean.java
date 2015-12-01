@@ -86,9 +86,7 @@ public class UsuarioBean implements Serializable {
     public String cadastrarUsuario() {
         System.out.println("Cadastrando...");
 
-        this.carregarParametrosRequestUsuario();
-
-        if (novoUsuario != null) {
+        if (this.carregarParametrosRequestUsuario() && novoUsuario != null) {
             novoUsuario.setDataCriacao(new Date());
             usuarioService.incluir(novoUsuario);
             System.out.println("Usuário cadastrado.\nLogando...");
@@ -99,11 +97,12 @@ public class UsuarioBean implements Serializable {
             System.out.println("Usuário não cadastrado.");
             return "cadastro.xhtml?faces-redirect=true";
         }
+
     }
 
-    public void carregarParametrosRequestUsuario() {
+    public boolean carregarParametrosRequestUsuario() {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        
+
         String nomeRequest = request.getParameter("formCadastro:nome");
         String sexo = request.getParameter("formCadastro:sSexo");
         String dtNascimento = request.getParameter("formCadastro:dtNascimento");
@@ -111,6 +110,12 @@ public class UsuarioBean implements Serializable {
         String telefone = request.getParameter("formCadastro:telefone");
         String emailRequest = request.getParameter("formCadastro:email");
         String senhaRequest = request.getParameter("formCadastro:senha");
+
+        if (nomeRequest.equals("")
+                || sexo.equals("") || dtNascimento.equals("") || cpf.equals("") || telefone.equals("")
+                || emailRequest.equals("") || senhaRequest.equals("")) {
+            return false;
+        }
 
         novoUsuario.setNome(nomeRequest);
         novoUsuario.setSexo(sexo.toCharArray()[0]);
@@ -128,6 +133,12 @@ public class UsuarioBean implements Serializable {
         novoUsuario.setCelular(telefone);
         novoUsuario.setEmail(emailRequest);
         novoUsuario.setSenha(senhaRequest);
+        return true;
+    }
+
+    public String salvarAlteracoesUsuario() {
+        usuarioService.alterar(usuarioLogado);
+        return "/perfil.xhtml?faces-redirect=true";
     }
 
     //</editor-fold>

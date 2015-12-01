@@ -83,12 +83,12 @@
                                                                         <div class="field">
                                                                             <input type="password" name="senha"/>
                                                                         </div>-->
-                                    <button class="ui primary button">
+<!--                                    <button class="ui primary button">
                                         Salvar
-                                    </button>
-                                    <button class="ui button" type="reset">
-                                        Cancelar
-                                    </button>
+                                    </button>-->
+                                    <p:commandButton action="#{usuarioBean.salvarAlteracoesUsuario()}" 
+                                                     value="Salvar"
+                                                     styleClass="ui primary button"/>
                                 </h:form>
                             </div>
 
@@ -195,7 +195,7 @@
                                                                                  :formAlterarEndereco:cidade
                                                                                  :formAlterarEndereco:estado">
                                                                 </p:commandButton>
-                                                                <div class="or" data-text="ou"></div>
+                                                                <!--<div class="or" data-text="ou"></div>-->
                                                                 <p:commandButton id="removerEndereco" action="#{enderecoBean.removerEndereco(endereco)}" 
                                                                                  value="Remover" 
                                                                                  styleClass="ui button right aligned"
