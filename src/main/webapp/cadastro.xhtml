@@ -4,102 +4,107 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <ui:composition template="template/modelo.xhtml">
-        <ui:define name="content">
-            <div class="ui segment">
-                <h2 class="ui dividing header">Cadastro</h2>
-                <br/>
-                <div class="ui grid"> 
-                    <div class="ui basic container segment">
+    <h:head>
+        <h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
+    </h:head>
 
-                        <h:form class="ui form" id="formCadastro">
-                            #{usuarioBean.inicializarUsuario()}
+    <h:body>
+        <ui:composition template="template/novoModelo.xhtml">
+            <ui:define name="content">
+                <div class="ui segment">
+                    <h2 class="ui dividing header">Cadastro</h2>
+                    <br/>
+                    <div class="ui grid"> 
+                        <div class="ui basic container segment">
 
-                            <div class="field" id="campoNome">
-                                <label>Nome</label>                     
-                                <!--<input type="text" name="nome" placeholder="Nome"/>-->
-                                <h:inputText id="nome" value="#{usuarioBean.novoUsuario.nome}" pt:placeholder="Informe seu nome"/>
-                            </div>
-                            <div class="field" id="campoSexo">
-                                <label>Sexo</label>
-                                <!--                                <select>
-                                                                    <option value="" label="Selecione" disabled="true" selected="true"/>
-                                                                    <option value="feminino" label="Feminino"/>                            
-                                                                    <option value="masculino" label="Masculino"/>                            
-                                                                </select>-->
-                                <h:selectOneMenu  value="#{usuarioBean.novoUsuario.sexo}" 
-                                                  styleClass="ui search dropdown" id="sSexo">
-                                    <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled="true"/>
-                                    <f:selectItem itemValue="M" itemLabel="Masculino"/>
-                                    <f:selectItem itemValue="F" itemLabel="Feminino"/>
-                                </h:selectOneMenu>
-                            </div>
-                            <div class="field" id="campoDataNascimento">
-                                <label>Data de Nascimento</label>
-                                <p:inputText id="dtNascimento" type="date" label="Data de Nascimento"
-                                             value="#{usuarioBean.novoUsuario.dtNascimento}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </p:inputText>
-                            </div>
-                            <div class="field" id="campoCpf">
-                                <label>CPF</label>
-                                <p:inputText value="#{usuarioBean.novoUsuario.cpf}" 
-                                             id="cpf" styleClass="cpf" >
-                                </p:inputText>
-                            </div>
-                            <div class="field" id="campoContato">
-                                <label>Contato</label>
-                                <h:inputText value="#{usuarioBean.novoUsuario.telefone}" id="telefone" styleClass="telefone" pt:placeholder="Insira apenas números"/>
-                            </div>
-                            <div class="field" id="campoEmail">
-                                <label>Email</label>
-                                <h:inputText id="email" value="#{usuarioBean.novoUsuario.email}" pt:placeholder="Informe o seu email"/>
-                            </div>
-                            <div class="two fields">
-                                <div class="field" id="campoSenha">
-                                    <label>Senha</label>
-                                    <!--<input type="password" name="senha"/>-->
-                                    <h:inputSecret id="senha" value="#{usuarioBean.novoUsuario.senha}" pt:placeholder="Informe a sua senha"/>
+                            <h:form class="ui form" id="formCadastro">
+                                #{usuarioBean.inicializarUsuario()}
+
+                                <div class="field" id="campoNome">
+                                    <label>Nome</label>                     
+                                    <!--<input type="text" name="nome" placeholder="Nome"/>-->
+                                    <h:inputText id="nome" value="#{usuarioBean.novoUsuario.nome}" p:placeholder="Informe seu nome"/>
                                 </div>
-                            </div>
+                                <div class="field" id="campoSexo">
+                                    <label>Sexo</label>
+                                    <!--                                <select>
+                                                                        <option value="" label="Selecione" disabled="true" selected="true"/>
+                                                                        <option value="feminino" label="Feminino"/>                            
+                                                                        <option value="masculino" label="Masculino"/>                            
+                                                                    </select>-->
+                                    <h:selectOneMenu  value="#{usuarioBean.novoUsuario.sexo}" 
+                                                      styleClass="ui search dropdown" id="sSexo">
+                                        <f:selectItem itemValue="" itemLabel="Selecione" itemDisabled="true"/>
+                                        <f:selectItem itemValue="M" itemLabel="Masculino"/>
+                                        <f:selectItem itemValue="F" itemLabel="Feminino"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="field" id="campoDataNascimento">
+                                    <label>Data de Nascimento</label>
+                                    <p:inputText id="dtNascimento" type="date" label="Data de Nascimento"
+                                                 value="#{usuarioBean.novoUsuario.dtNascimento}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:inputText>
+                                </div>
+                                <div class="field" id="campoCpf">
+                                    <label>CPF</label>
+                                    <p:inputText value="#{usuarioBean.novoUsuario.cpf}" 
+                                                 id="cpf" styleClass="cpf" >
+                                    </p:inputText>
+                                </div>
+                                <div class="field" id="campoContato">
+                                    <label>Contato</label>
+                                    <h:inputText value="#{usuarioBean.novoUsuario.telefone}" id="telefone" styleClass="telefone" p:placeholder="Insira apenas números"/>
+                                </div>
+                                <div class="field" id="campoEmail">
+                                    <label>Email</label>
+                                    <h:inputText id="email" value="#{usuarioBean.novoUsuario.email}" p:placeholder="Informe o seu email"/>
+                                </div>
+                                <div class="two fields">
+                                    <div class="field" id="campoSenha">
+                                        <label>Senha</label>
+                                        <!--<input type="password" name="senha"/>-->
+                                        <h:inputSecret id="senha" value="#{usuarioBean.novoUsuario.senha}" p:placeholder="Informe a sua senha"/>
+                                    </div>
+                                </div>
 
-                            <h:commandButton action="#{usuarioBean.cadastrarUsuario()}" 
-                                             styleClass="ui primary button addUser"
-                                             value="Cadastrar">
-                                <f:ajax execute="@this" render="@none" />
-                            </h:commandButton>
-                            <!--              <div class="field wide eight" id="campoCsenha">
-                                                                <label>CONFIRME SUA SENHA</label>
-                                                                <input type="password" name="cSenha" id="cSenha"/>
-                                                            </div>-->
+                                <h:commandButton action="#{usuarioBean.cadastrarUsuario()}" 
+                                                 styleClass="ui primary button addUser"
+                                                 value="Cadastrar">
+                                    <f:ajax execute="@this" render="@none" />
+                                </h:commandButton>
+                                <!--              <div class="field wide eight" id="campoCsenha">
+                                                                    <label>CONFIRME SUA SENHA</label>
+                                                                    <input type="password" name="cSenha" id="cSenha"/>
+                                                                </div>-->
 
-                            <!--              <p:commandButton 
-                                                           styleClass="ui button"
-                                                           value="Limpar campos" type="reset"/>-->
-                            <!--              <button class="ui primary button">
-                                            Cadastrar
-                                          </button>-->
-                            <!--              <button class="ui button" type="reset">
-                                            Limpar campos
-                                          </button>-->
-                        </h:form>
+                                <!--              <p:commandButton 
+                                                               styleClass="ui button"
+                                                               value="Limpar campos" type="reset"/>-->
+                                <!--              <button class="ui primary button">
+                                                Cadastrar
+                                              </button>-->
+                                <!--              <button class="ui button" type="reset">
+                                                Limpar campos
+                                              </button>-->
+                            </h:form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br/>
-            <br/> 
-            <br/>
-            <br/>
-            <script type="text/javascript" src="src/js/validaCadastro.js"/>
-            <script src="src/js/jquery.mask.js" type="text/javascript"></script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $('.cpf').mask('999.999.999-99');
-                    $('.telefone').mask("(99) 9999-99999");
-                });
-            </script>
-        </ui:define>        
-    </ui:composition>
+                <br/>
+                <br/> 
+                <br/>
+                <br/>
+                <script type="text/javascript" src="src/js/validaCadastro.js"/>
+                <script src="src/js/jquery.mask.js" type="text/javascript"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('.cpf').mask('999.999.999-99');
+                        $('.telefone').mask("(99) 9999-99999");
+                    });
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>

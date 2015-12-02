@@ -3,111 +3,122 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <ui:composition template="template/modelo.xhtml"> 
+    <h:head>
+        <h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
+    </h:head>
 
-        <ui:define name="content">
-
-            <!--Steps-->
-            <div class="ui basic segment center aligned">
-                <div class="ui three steps">
-                    <div class="completed step">
-                        <i class="map marker icon"></i>
-                        <div class="content">
-                            <div class="title">Endereço</div>
-                            <div class="description">Informe onde será entregue a compra</div>
-                        </div>
-                    </div>
-                    <div class="active step">
-                        <i class="truck icon"></i>
-                        <div class="content">
-                            <div class="title">Entrega</div>    
-                            <div class="description">Indique as opções para a entrega</div>
-                        </div>
-                    </div>
-                    <div class="disabled step">
-                        <i class="credit card icon"></i>
-                        <div class="content">
-                            <div class="title">Pagamento</div>
-                            <div class="description">Escolha a forma de pagamento</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="ui basic segment">      
-                <div class="ui grid">
-                    <div class="ui container">
-
-                        <h1 class="ui center aligned header">
-                            Como você deseja que seja entregue?
-                        </h1>
-
-                        <h2 class="ui header">
-                            <i class="map marker icon"></i>
+    <h:body>
+        <ui:composition template="template/novoModelo.xhtml">
+            <ui:define name="content">
+                <!--Steps-->
+                <div class="ui basic segment center aligned">
+                    <div class="ui three steps">
+                        <div class="completed step">
                             <div class="content">
-                                Para o endereço
-                                <div class="sub header">
-                                    #{vendaBean.enderecoSelecionado.rua}, 
-                                    #{vendaBean.enderecoSelecionado.numero},
-                                    #{vendaBean.enderecoSelecionado.bairro},
-                                    CEP #{vendaBean.enderecoSelecionado.cep},
-                                    #{vendaBean.enderecoSelecionado.cidade}, 
-                                    #{vendaBean.enderecoSelecionado.estado} - 
-                                    <a href="compra_endereco.xhtml">Alterar endereço</a></div>
+                                <div class="title">
+                                    <i class="fa fa-check-square fa-2x"></i>&emsp;
+                                    Endereço
+                                </div>
+                                <div class="description">Informe onde será entregue a compra</div>
                             </div>
-                        </h2>
+                        </div>
+                        <div class="completed step">
+                            <div class="content">
+                                <div class="title">
+                                    <i class="fa fa-truck fa-2x"></i>&emsp;
+                                    Entrega
+                                </div>    
+                                <div class="description">Indique as opções para a entrega</div>
+                            </div>
+                        </div>
+                        <div class="disabled step">
+                            <div class="content">
+                                <div class="title">
+                                    <i class="fa fa-credit-card fa-2x"></i>&emsp;
+                                    Pagamento
+                                </div>
+                                <div class="description">Escolha a forma de pagamento</div>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-            </div>
-            <div class="ui container">
-                <div class="ui segment">
-                    <div class="ui grid stackable">
-                        <div class="eight wide column">
-                            <h3 class="ui header">Produto</h3>
-                            <div class="ui cards">
-                                <ui:repeat value="#{carrinhoBean.itensMapValues}" var="item" varStatus="status">
-                                    <div class="card">
-                                        <div class="content">
-                                            <img class="left floated tiny ui image" src="#{item.produto.caminhoImagem}"/>
-                                            <h4 class="ui header">
-                                                #{item.produto.modelo}
-                                            </h4>
-                                            <div class="ui meta">
-                                                Quantidade: #{item.quantidade}
-                                            </div>                                       
+
+
+                <div class="ui basic segment">      
+                    <div class="ui grid">
+                        <div class="ui container">
+
+                            <h1 class="ui center aligned header">
+                                Como você deseja que seja entregue?
+                            </h1>
+
+                            <h2 class="ui header">
+                                <i class="fa fa-map-marker fa-2x"></i>
+                                <div class="content">
+                                    Para o endereço
+                                    <div class="sub header">
+                                        #{vendaBean.enderecoSelecionado.rua}, 
+                                        #{vendaBean.enderecoSelecionado.numero},
+                                        #{vendaBean.enderecoSelecionado.bairro},
+                                        CEP #{vendaBean.enderecoSelecionado.cep},
+                                        #{vendaBean.enderecoSelecionado.cidade}, 
+                                        #{vendaBean.enderecoSelecionado.estado} - 
+                                        <a href="compra_endereco.xhtml">Alterar endereço</a></div>
+                                </div>
+                            </h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui container">
+                    <div class="ui segment">
+                        <div class="ui grid stackable">
+                            <div class="eight wide column">
+                                <h3 class="ui header">Produto</h3>
+                                <div class="ui cards">
+                                    <ui:repeat value="#{carrinhoBean.itensMapValues}" var="item" varStatus="status">
+                                        <div class="card">
+                                            <div class="content">
+                                                <img class="left floated tiny ui image" src="#{item.produto.caminhoImagem}"/>
+                                                <h4 class="ui header">
+                                                    #{item.produto.modelo}
+                                                </h4>
+                                                <div class="ui meta">
+                                                    Quantidade: #{item.quantidade}
+                                                </div>                                       
+                                            </div>
                                         </div>
-                                    </div>
-                                </ui:repeat>
+                                    </ui:repeat>
+                                </div>
                             </div>
-                        </div>
-                        <div class="ui basic divider vertical"> </div>
-                        <div class="eight wide column">
-                            <div class="ui basic segment">
-                                <h3>Tipo de entrega</h3>
-                                <h:selectOneRadio value="#{vendaBean.cv.prazoEntrega}" layout="pageDirection" 
-                                                  styleClass="ui celled table">
-                                    <f:selectItem itemValue="10" itemLabel="Entrega em até 10 dias úteis"/>
-                                </h:selectOneRadio>
+                            <div class="ui basic divider vertical"> </div>
+                            <div class="eight wide column">
+                                <div class="ui basic segment">
+                                    <h3>Tipo de entrega</h3>
+                                    <h:selectOneRadio value="#{vendaBean.cv.prazoEntrega}" layout="pageDirection" 
+                                                      styleClass="ui celled table">
+                                        <f:selectItem itemValue="10" itemLabel="Entrega em até 10 dias úteis"/>
+                                    </h:selectOneRadio>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="ui basic segment">
+                <div class="ui basic segment">
 
-                <div class="ui  container right aligned">
-                    <a href="compra_pagamento.xhtml"> 
-                        <button class="ui huge labeled icon bottom button blue">  
-                            <i class="right arrow icon"></i>
-                            Continuar
-                        </button>
-                    </a>
+                    <div class="ui  container right aligned">
+                        <a href="compra_pagamento.xhtml"> 
+                            <button class="ui big icon bottom button blue">  
+                                <i class="fa fa-arrow-right"></i> &emsp;
+                                Continuar
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </ui:define>
-    </ui:composition>
-</html>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>  

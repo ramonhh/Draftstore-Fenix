@@ -2,31 +2,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <ui:composition template="template/modelo.xhtml"> 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
+    </h:head>
 
-        <ui:define name="content">
-            <div class="ui basic segment center aligned">
-                <div class="ui container">
-                    <div class="ui image medium">
-                    <img src="imagens/outros/sucessoIcon.png" alt="Sucesso"/>
+    <h:body>
+        <ui:composition template="template/novoModelo.xhtml">
+            <ui:define name="content">
+                <div class="ui basic segment center aligned">
+                    <div class="ui container">
+                        <div class="ui image medium">
+                            <img src="imagens/outros/sucessoIcon.png" alt="Sucesso"/>
+                        </div>
+                        <h2 class="ui header">PARABÉNS  !</h2>
+                        <h3 class="ui header">Sua compra foi realizada com sucesso!
+                            <div class="sub header">Dentro de instantes chegará um email a você contendo mais informações a respeito.</div></h3>
+                        <hr width="50%"/>
+                        <h4 class="ui header">AGRADECEMOS PELA PREFERÊNCIA E CONFIANÇA
+                            <div class="sub header">#{usuarioBean.usuarioLogado.nome}</div>
+                        </h4>
+                        <h5> Número do seu pedido é: #000#{vendaBean.cv.idVenda}</h5>
+
+                        <a href="home.xhtml">
+                            <div class="ui button blue big">
+                                Continue comprando
+                            </div>
+                        </a>
                     </div>
-                    <h2 class="ui header">PARABÉNS  !</h2>
-                    <h3 class="ui header">Sua compra foi realizada com sucesso!
-                    <div class="sub header">Dentro de instantes chegará um email a você contendo mais informações a respeito.</div></h3>
-                    <hr width="50%"/>
-                    <h4 class="ui header">AGRADECEMOS PELA PREFERÊNCIA E CONFIANÇA
-                      <div class="sub header">#{usuarioBean.usuarioLogado.nome}</div>
-                    </h4>
-                    <h5> Número do seu pedido é: #000#{vendaBean.cv.idVenda}</h5>
-                    
-                    <a href="home.xhtml">
-                      <div class="ui button blue big">
-                        Continue comprando
-                      </div>
-                    </a>
                 </div>
-            </div>
-        </ui:define>
-    </ui:composition>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>

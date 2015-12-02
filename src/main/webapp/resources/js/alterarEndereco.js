@@ -1,5 +1,5 @@
 $(function(){
-   $("#formEndereco\\:cep").change(function(){
+   $("#formAlterarEndereco\\:cep").change(function(){
       var cep_code = $(this).val();
       if( cep_code.length <= 0 ) return;
       $.get("http://apps.widenet.com.br/busca-cep/api/cep.json", { code: cep_code },
@@ -8,10 +8,10 @@ $(function(){
                alert(result.message || "Houve um erro desconhecido");
                return;
             }
-            $("input#formEndereco\\:estado").val( result.state );
-            $("input#formEndereco\\:cidade").val( result.city );
-            $("input#formEndereco\\:bairro").val( result.district );
-            $("input#formEndereco\\:rua").val( result.address );
+            $("input#formAlterarEndereco\\:estado").val( result.state );
+            $("input#formAlterarEndereco\\:cidade").val( result.city );
+            $("input#formAlterarEndereco\\:bairro").val( result.district );
+            $("input#formAlterarEndereco\\:rua").val( result.address );
          });
    });
 });

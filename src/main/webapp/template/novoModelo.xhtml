@@ -5,33 +5,33 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-  <h:head>
-    <f:facet name="first">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
-      <h:outputStylesheet library="css" name="estiloDraftstore.css"/>
-      <title>DraftStore e-Commerce</title>
-    </f:facet>
-  </h:head>
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+            <h:outputStylesheet library="css" name="estiloDraftstore.css"/>
+            <title>DraftStore e-Commerce</title>
+        </f:facet>
+    </h:head>
 
-  <h:panelGroup layout="block" id="header">
-    <ui:insert name="header">
-      <ui:include src="novoMenu.xhtml"/>
-    </ui:insert>
-  </h:panelGroup>
+    <h:panelGroup layout="block" id="header">
+        <ui:insert name="header">
+            <ui:include src="novoMenu.xhtml"/>
+        </ui:insert>
+    </h:panelGroup>
 
-  <h:panelGroup layout="block" id="content">
-    <ui:insert name="content">
-      <ui:include src="corpo.xhtml"/>
-    </ui:insert>
-  </h:panelGroup>
-  
-  <h:panelGroup layout="block" id="footer">
-    <ui:insert name="footer">
-        <ui:include src="rodape.xhtml"/>
-    </ui:insert>
-  </h:panelGroup>
+    <h:panelGroup layout="block" id="content">
+        <ui:insert name="content">
+            <ui:include src="corpo.xhtml"/>
+        </ui:insert>
+    </h:panelGroup>
+
+    <h:panelGroup layout="block" id="footer">
+        <ui:insert name="footer">
+            <ui:include src="rodape.xhtml"/>
+        </ui:insert>
+    </h:panelGroup>
 
 </html>
