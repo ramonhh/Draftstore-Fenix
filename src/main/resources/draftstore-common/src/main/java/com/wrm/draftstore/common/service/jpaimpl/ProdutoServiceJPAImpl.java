@@ -6,8 +6,11 @@
 package com.wrm.draftstore.common.service.jpaimpl;
 
 import com.wrm.draftstore.common.entidades.Produto;
+import com.wrm.draftstore.common.entidades.ProdutoBusca;
 import com.wrm.draftstore.common.service.ProdutoService;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -98,6 +101,18 @@ public class ProdutoServiceJPAImpl implements ProdutoService {
         EntityManager em = emFactory.createEntityManager();
         Query query = em.createNamedQuery("Produto.findByCategoria")
                 .setParameter("idCategoria", idCategoria)
+                .setFirstResult(offset)
+                .setMaxResults(quantidade);
+        List<Produto> resultados = query.getResultList();
+        em.close();
+        return resultados;
+    }
+
+    @Override
+    public List<Produto> obterPorParteDoNome(String nome, int offset, int quantidade) {
+        EntityManager em = emFactory.createEntityManager();
+        Query query = em.createNamedQuery("Produto.findByParteDoNome")
+                .setParameter("nome", nome.toLowerCase()+"%")
                 .setFirstResult(offset)
                 .setMaxResults(quantidade);
         List<Produto> resultados = query.getResultList();

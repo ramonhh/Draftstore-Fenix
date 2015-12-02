@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19/11/2015, 15:59:39
+    Author     : maikon_silva
+*/
+
+#ajaxSpinner {
+    width: 70px;
+}
+
+.wrapper .search {
+    position: relative; 
+}
+
+input { font-family: 'FontAwesome'; } /* This is for the placeholder */
+
+.wrapper:before {
+    font-family: 'FontAwesome';
+    color:red;
+    position: relative;
+    left: -10px;
+    content: "\f007";
+}

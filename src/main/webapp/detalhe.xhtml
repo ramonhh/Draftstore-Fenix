@@ -10,6 +10,11 @@
         <ui:composition template="template/modelo.xhtml">
 
             <ui:define name="content"> 
+              <f:metadata>
+                <f:viewParam name="idProduto" value="#{authenticator.token}" />
+                <f:viewAction action="#{authenticator.check}" />
+            </f:metadata>
+              
                 <link href="src/css/ppSlider.css" rel="stylesheet"/>
                 <!--Corpo do detalhe-->
                 <!--Colunas para a divisão da imagem e detalhes do produto-->
