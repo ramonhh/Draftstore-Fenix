@@ -46,6 +46,7 @@ public class ProdutoBean implements Serializable {
     private Map<String, Produto> mapaProdutosBusca;
 
     private Produto produtoDetalhe;
+    private int idProdutoDetalhe;
 
     public String carregarDetalhes() {
         this.produtoDetalhe = this.getProduto();
@@ -62,6 +63,7 @@ public class ProdutoBean implements Serializable {
             Logger.getLogger(ProdutoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 
     public List<Produto> getOfertasSemana() {
         return ofertasSemana;
@@ -90,6 +92,14 @@ public class ProdutoBean implements Serializable {
         return this.produtoService.obterPorCategoria(categoria.getIdCategoria(), 0, 10);
     }
 
+    public int getIdProdutoDetalhe() {
+        return idProdutoDetalhe;
+    }
+
+    public void setIdProdutoDetalhe(int idProdutoDetalhe) {
+        this.idProdutoDetalhe = idProdutoDetalhe;
+    }
+
     public String getTextoDeBusca() {
         return textoDeBusca;
     }
@@ -114,9 +124,16 @@ public class ProdutoBean implements Serializable {
     }
     
     public void onItemSelect(SelectEvent event) {
-        String produtoSelecionado = event.getObject().toString();
-        System.out.println("Um produto foi selecionado: "+produtoSelecionado);
-        carregarDetalhesBusca(this.mapaProdutosBusca.get(produtoSelecionado));
+        String stringProdutoSelecionado = event.getObject().toString();
+        System.out.println("Um produto foi selecionado: "+stringProdutoSelecionado);
+        Produto produtoSelecionado = this.mapaProdutosBusca.get(stringProdutoSelecionado);
+        this.produtoDetalhe = produtoSelecionado;
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("detalhe.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ProdutoBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        carregarDetalhesBusca(this.mapaProdutosBusca.get(produtoSelecionado));
     }
 
 }
