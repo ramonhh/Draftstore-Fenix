@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
     </h:head>
@@ -17,8 +18,8 @@
                         <div class="completed step">
                             <div class="content">
                                 <div class="title">
-                                        <i class="fa fa-check-square fa-2x" style="color: green"></i>&emsp;
-                                        Endereço
+                                    <i class="fa fa-check-square fa-2x" style="color: green"></i>&emsp;
+                                    Endereço
                                 </div>
                                 <div class="description">Informe onde será entregue a compra</div>
                             </div>
@@ -71,11 +72,15 @@
                                 <div class="ui basic segment right aligned">
                                     <br/>
                                     <br/>
-                                    <h4>Subtotal:	R$ #{carrinhoBean.precoTotal}</h4>
+                                    <h4>Subtotal:	R$ <h:outputText value="#{carrinhoBean.precoTotal}">
+                                            <f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+                                        </h:outputText></h4>
                                     <h4>  Valor do frete:	R$ #{vendaBean.cv.frete}</h4>
                                     <br/>
                                     <br/>
-                                    <h3 class="ui header">  Valor total: R$ #{carrinhoBean.precoTotal + vendaBean.cv.frete}</h3>
+                                    <h3 class="ui header">  Valor total: R$ <h:outputText value="#{carrinhoBean.precoTotal + vendaBean.cv.frete}">
+                                            <f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+                                        </h:outputText></h3>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +106,9 @@
                                 </h3>
                             </div>
                             <div class="ten wide column">
-                                <h4 class="ui">Pagamento à vista R$ #{carrinhoBean.precoTotal}<div class="content"> </div></h4>
+                                <h4 class="ui">Pagamento à vista R$ R$ <h:outputText value="#{carrinhoBean.precoTotal + vendaBean.cv.frete}">
+                                        <f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+                                    </h:outputText><div class="content"> </div></h4>
                                 <div class="ui bulleted list">
                                     <div class="item">Importante: Verifique a data de vencimento informada no boleto. 
                                         O prazo para pagamento do boleto é 1 dia útil. Em caso de não pagamento 
