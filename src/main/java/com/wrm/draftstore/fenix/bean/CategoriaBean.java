@@ -5,7 +5,6 @@
  */
 package com.wrm.draftstore.fenix.bean;
 
-
 import com.wrm.draftstore.common.entidades.Categoria;
 import com.wrm.draftstore.common.service.jpaimpl.CategoriaServiceJPAImpl;
 import javax.inject.Named;
@@ -23,18 +22,18 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class CategoriaBean implements Serializable {
 
-  /**
-   * Creates a new instance of ProdutoBean
-   */
-  public CategoriaBean() {
-  }
-  
-  // Categorias JPA
+    /**
+     * Creates a new instance of ProdutoBean
+     */
+    public CategoriaBean() {
+    }
+
+    // Categorias JPA
     private List<Categoria> categorias = new CategoriaServiceJPAImpl().listar();
     private int auxCategoria, auxCategoria2, auxIcone, auxIcone2;
     private Categoria categoriaSelecionada;
 
-    public String getNomeCategoria(){
+    public String getNomeCategoria() {
         String nome = "";
         auxCategoria = auxCategoria2;
         for (int i = auxCategoria; i < categorias.size(); i++) {
@@ -44,8 +43,30 @@ public class CategoriaBean implements Serializable {
         auxCategoria2 = auxCategoria + 1;
         return nome;
     }
-    
-    public String getIconCategoria(){
+
+    public void remapIcons(List<Categoria> cat) {
+        for (Categoria c : cat) {
+            switch (c.getIcon()) {
+                case "desktop icon":
+                    c.setIcon("fa fa-2x fa-desktop");
+                    break;
+                case "laptop icon":
+                    c.setIcon("fa fa-2x fa-laptop");
+                    break;
+                case "disk outline icon":
+                    c.setIcon("fa fa-2x fa-hdd-o");
+                    break;
+                case "game icon":
+                    c.setIcon("fa fa-2x fa-gamepad");
+                    break;
+                case "plug icon":
+                    c.setIcon("fa fa-2x fa-plug");
+                    break;
+            }
+        }
+    }
+
+    public String getIconCategoria() {
         String nome = "";
         auxIcone = auxIcone2;
         for (int i = auxIcone; i < categorias.size(); i++) {
@@ -55,24 +76,25 @@ public class CategoriaBean implements Serializable {
         auxIcone2 = auxIcone + 1;
         return nome;
     }
-    
+
     public List<Categoria> getCategorias() {
+        this.remapIcons(categorias);
         return categorias;
     }
-    
+
     public Categoria getCategoria() {
-    FacesContext contexto = FacesContext.getCurrentInstance();
-    return categorias.get(getId(contexto)-1);
-  }
+        FacesContext contexto = FacesContext.getCurrentInstance();
+        return categorias.get(getId(contexto) - 1);
+    }
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
     }
-    
-  private int getId(FacesContext fc) {
-    Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-    return Integer.parseInt(params.get("id"));
-  }
+
+    private int getId(FacesContext fc) {
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        return Integer.parseInt(params.get("id"));
+    }
 
     public Categoria getCategoriaSelecionada() {
         return categoriaSelecionada;
@@ -81,15 +103,10 @@ public class CategoriaBean implements Serializable {
     public void setCategoriaSelecionada(Categoria categoriaSelecionada) {
         this.categoriaSelecionada = categoriaSelecionada;
     }
-  
-  public String irParaListagem(Categoria categoria){
-      this.categoriaSelecionada = categoria;
-      return "listaCategoria.xhtml?faces-redirect=true";
-  }
 
-  
+    public String irParaListagem(Categoria categoria) {
+        this.categoriaSelecionada = categoria;
+        return "listaCategoria.xhtml?faces-redirect=true";
+    }
+
 }
-
-
-
-
