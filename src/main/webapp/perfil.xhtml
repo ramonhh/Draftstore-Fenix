@@ -47,10 +47,10 @@
 
                         <!--Conteudo-->
                         <div class="twelve wide stretched column">
-                            <div class="ui basic segment">
-
+                            <div class="ui basic segment ">
                                 <!--Tab Dados Pessoais-->
                                 <div class="ui tab active" data-tab="tab-name">
+                                    <div class="ui content">
                                     <div class="ui basic segment">
                                         <h1 class="ui header">
                                             Dados Pessoais
@@ -94,6 +94,7 @@
                                                          value="Salvar"
                                                          styleClass="ui right floated primary button "/>
                                     </h:form>
+                                    </div>
                                 </div>
 
                                 <!--Tab Pedidos-->
@@ -104,47 +105,45 @@
                                         </h1>
                                     </div>
                                     #{carrinhoBean.carregarCompras(usuarioBean.usuarioLogado)}
-                                    <!--<div class="ui horizontal segments">-->
-                                    <!--<div class="ui segment">-->
-                                    <div class="ui two column grid">
-                                        <ui:repeat value="#{carrinhoBean.compras}" var="compra" varStatus="stat">
+                                    <div class="ui two column centered grid stackable">
+                                        <div class="four column centered row">
+                                            <ui:repeat value="#{carrinhoBean.compras}" var="compra" varStatus="stat">
+                                                <div class="ui column stackable">
+                                                    <div class="ui segment center aligned">
+                                                        <h4>  Nº do pedido:
+                                                            #000#{compra.fkCarrinhoVenda.idVenda} </h4>
+                                                        <p>Realizado em: <h:outputText value="#{compra.fkCarrinhoVenda.dataVenda}" >
+                                                                <f:convertDateTime  type="date" pattern="dd/MM/yyyy"/>
+                                                            </h:outputText></p>
+                                                        <h:panelGrid rendered="#{compra.fkCarrinhoVenda.vendaEntregue}">
+                                                            <h4>
+                                                                <i class="fa fa-check-circle" style="color: green"></i>
+                                                                Ótimo! A entrega chegou!
+                                                            </h4>
+                                                            <p>  Entregue em: <h:outputText value="#{compra.fkCarrinhoVenda.dataEntrega}" >
+                                                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                                                </h:outputText></p>
+                                                        </h:panelGrid>
+                                                        <h:panelGrid rendered="#{!compra.fkCarrinhoVenda.vendaEntregue}" >
+                                                            <h4>
+                                                                <i class="fa fa-remove header" style="color: red"></i>
+                                                                Tenha paciência! Seu produto está a caminho...
+                                                            </h4>
+                                                            <p>  Data extimada para entrega: <h:outputText value="#{compra.fkCarrinhoVenda.dataEntrega}">
+                                                                    <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                                                                </h:outputText></p>
+                                                        </h:panelGrid>
 
-
-                                            <div class="ui column segment center aligned">
-                                                <h4>  Nº do pedido:
-                                                    #000#{compra.fkCarrinhoVenda.idVenda} </h4>
-                                                <p>Realizado em: <h:outputText value="#{compra.fkCarrinhoVenda.dataVenda}" >
-                                                        <f:convertDateTime  type="date" pattern="dd/MM/yyyy"/>
-                                                    </h:outputText></p>
-                                                <h:panelGrid rendered="#{compra.fkCarrinhoVenda.vendaEntregue}">
-                                                    <h4>
-                                                        <i class="check green circle icon header"></i>
-                                                        Ótimo! A entrega chegou!
-                                                    </h4>
-                                                    <p>  Entregue em: <h:outputText value="#{compra.fkCarrinhoVenda.dataEntrega}" >
-                                                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                                                        </h:outputText></p>
-                                                </h:panelGrid>
-                                                <h:panelGrid rendered="#{!compra.fkCarrinhoVenda.vendaEntregue}">
-                                                    <h4>
-                                                        <i class="remove red circle icon header"></i>
-                                                        Tenha paciência! Seu produto está a caminho...
-                                                    </h4>
-                                                    <p>  Data extimada para entrega: <h:outputText value="#{compra.fkCarrinhoVenda.dataEntrega}">
-                                                            <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                                                        </h:outputText></p>
-                                                </h:panelGrid>
-
-                                                <div class="ui basic segment center aligned">
-                                                    <div class="ui basic segment image small" >
-                                                        <a href="detalhe.xhtml?id=0"><img src="#{compra.fkProduto.caminhoImagem}"/></a>
+                                                        <div class="ui basic segment center aligned">
+                                                            <div class="ui basic segment image small" >
+                                                                <a href="detalhe.xhtml?id=0"><img src="#{compra.fkProduto.caminhoImagem}"/></a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </ui:repeat>
+                                            </ui:repeat>
+                                        </div>
                                     </div>
-                                    <!--</div>-->
-                                    <!--</div>-->
                                 </div>
 
                                 <!--Tab Enderecos-->
@@ -275,8 +274,6 @@
                                                         <label>Estado</label>
 
                                                         <h:inputText id="estado" value="#{enderecoBean.novoEndereco.estado}" />
-
-
                                                     </div>
                                                 </div>
 
@@ -290,7 +287,6 @@
                                                                      value="Salvar">
                                                         <f:ajax execute="@this" render="@none"/>
                                                     </h:commandButton>
-
                                                 </div>
                                             </h:form>
                                         </div>
@@ -302,24 +298,19 @@
                                         <div class="ui basic segment">
                                             <h:form class="ui form" id="formAlterarEndereco">  
                                                 <div class="iu field">
-                                                    <label>CEP</label>
-                                                    <div class="ui input">
-                                                        <!--<input type="text" />-->
-                                                        <h:inputText id="cep" value="#{enderecoBean.enderecoSelecionado.cep}"/>
+                                                    <label>CEP</label>                                                    <div class="ui input">                                                        <h:inputText id="cep" value="#{enderecoBean.enderecoSelecionado.cep}"/>
                                                     </div>
                                                 </div>
                                                 <div class="ui two fields">      
                                                     <div class="ui field">
                                                         <label>Logradouro (Avenida, Rua...)</label>
-                                                        <div class="ui input">
-                                                            <!--<input type="text" />-->
+                                                        <div class="ui input">                                                           
                                                             <h:inputText id="rua" value="#{enderecoBean.enderecoSelecionado.rua}"/>
                                                         </div>
                                                     </div>
                                                     <div class="ui field">
                                                         <label>Número</label>
-                                                        <div class="uiinput">
-                                                            <!--<input type="text" />-->
+                                                        <div class="uiinput">                                                          
                                                             <h:inputText id="numero" value="#{enderecoBean.enderecoSelecionado.numero}"/>
                                                         </div>
                                                     </div>
@@ -327,15 +318,13 @@
                                                 <div class="ui two fields">
                                                     <div class="iu field">
                                                         <label>Bairro</label>
-                                                        <div class="ui input">
-                                                            <!--<input type="text" />-->
+                                                        <div class="ui input">                                                          
                                                             <h:inputText id="bairro" value="#{enderecoBean.enderecoSelecionado.bairro}" />
                                                         </div>
                                                     </div>
                                                     <div class="ui field">
                                                         <label>Complemento</label>
-                                                        <div class="ui input">
-                                                            <!--<input type="text" />-->
+                                                        <div class="ui input">                                                            
                                                             <h:inputText id="complemento" value="#{enderecoBean.enderecoSelecionado.complemento}" />
                                                         </div>
                                                     </div>
@@ -343,8 +332,7 @@
                                                 <div class="ui two fields">
                                                     <div class="ui field">
                                                         <label>Cidade</label>
-                                                        <div class="ui input">
-                                                            <!--<input type="text" />-->
+                                                        <div class="ui input">                                                           
                                                             <h:inputText id="cidade" value="#{enderecoBean.enderecoSelecionado.cidade}"/>
 
                                                         </div>

@@ -14,13 +14,13 @@
         <h:outputStylesheet library="semantic" name="dist/semantic.min.css" />
         <h:outputStylesheet library="font-awesome" name="css/font-awesome.css" />
         <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" type="text/css"/>-->
-        
+
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
         <h:outputScript library="js" name="funcoes-jquery.js" />
         <h:outputScript library="semantic" name="dist/semantic.js" />
         <h:outputScript library="Nivo-Slider-master" name="jquery.nivo.slider.pack.js"/>
-            
-        
+
+
         <div class="ui grid">
             <div class="computer only row">
                 <div class="column">
@@ -49,23 +49,23 @@
 
                                 <!--Barra de pesquisa-->
                                 <div class="ui item">
-<!--                                    <div class="ui icon input floated left">
-                                        <input type="text" placeholder="Buscar..."/>
-                                        <i class="fa fa-fw fa-search icon"></i>
-                                    </div>-->
-                                  
-<!--                                  <p:autoComplete placeholder="Buscar..." 
-                                                  styleClass="ui input floated left"/>
-                                  <i class="fa fa-fw fa-search"></i>-->
-                                  
-                                  <div class="ui action input">
-  <!--<input type="text" placeholder="Search..."/>-->
-              <p:autoComplete placeholder="Buscar..." 
-                              styleClass="ui input floated left" type="text" 
-                              value="#{produtoBean.textoDeBusca}"
-                              completeMethod="#{produtoBean.completeText}">
-                <p:ajax event="itemSelect" listener="#{produtoBean.onItemSelect}"/>
-              </p:autoComplete></div>
+                                    <!--                                    <div class="ui icon input floated left">
+                                                                            <input type="text" placeholder="Buscar..."/>
+                                                                            <i class="fa fa-fw fa-search icon"></i>
+                                                                        </div>-->
+
+                                    <!--                                  <p:autoComplete placeholder="Buscar..." 
+                                                                                      styleClass="ui input floated left"/>
+                                                                      <i class="fa fa-fw fa-search"></i>-->
+
+                                    <div class="ui action input">
+                                        <!--<input type="text" placeholder="Search..."/>-->
+                                        <p:autoComplete placeholder="Buscar..." 
+                                                        styleClass="ui input floated left" type="text" 
+                                                        value="#{produtoBean.textoDeBusca}"
+                                                        completeMethod="#{produtoBean.completeText}">
+                                            <p:ajax event="itemSelect" listener="#{produtoBean.onItemSelect}"/>
+                                        </p:autoComplete></div>
                                 </div>
 
                                 <c:choose>
@@ -142,7 +142,7 @@
                 <div class="ui blue menu borderless inverted secondary">
                     <div class="item">
                         <button class="ui icon button" id="btslide">
-                            <i class="bars icon big"></i>
+                            <i class="fa fa-bars fa-2x"></i>
                         </button>
                     </div>
 
@@ -159,7 +159,7 @@
                             <!--Utilizar o item abaixo para quando o usuario ESTIVER LOGADO-->
                             <a class="ui item" href="perfil.xhtml"> 
                                 <div class="column">
-                                    <i class="user icon"></i>
+                                    <i class="fa fa-user"></i>
                                 </div>
                             </a>
                         </c:when>
@@ -168,18 +168,18 @@
 
                             <a class="ui item" href="login.xhtml">
                                 <div class="column">
-                                    <i class="sign in icon"></i>
+                                    <i class="fa fa-sign-in"></i>
                                 </div>
                             </a>
                         </c:otherwise>
                     </c:choose>
 
-<!--                    <div class="item" id="pesquisaMenu">
-                        <i class="search icon"></i>
-                    </div>-->
+                    <!--                    <div class="item" id="pesquisaMenu">
+                                            <i class="search icon"></i>
+                                        </div>-->
 
                     <h:outputLink value="carrinho.xhtml" id="linkCarrinho2" class="ui item">
-                        <i class="cart icon" style="color: white"></i>
+                        <i class="fa fa-cart-arrow-down"></i>
                         <!--Icone do carrinho-->
 
                         <!--Texto do carrinho-->
@@ -192,17 +192,17 @@
                     </h:outputLink>
 
                 </div>
-<!--                <div class="ui top demo vertical inverted sidebar labeled icon pesquisa">
-                    <div class="ui segment ">
-                        <div class="ui category search">
-                            <div class="ui icon input fluid">
-                                <input class="prompt" type="text" placeholder="Pesquisar produto"/>
-                                <i class="search icon"></i>
-                            </div>
-                            <div class="results"></div>
-                        </div>
-                    </div>
-                </div>-->
+                <!--                <div class="ui top demo vertical inverted sidebar labeled icon pesquisa">
+                                    <div class="ui segment ">
+                                        <div class="ui category search">
+                                            <div class="ui icon input fluid">
+                                                <input class="prompt" type="text" placeholder="Pesquisar produto"/>
+                                                <i class="search icon"></i>
+                                            </div>
+                                            <div class="results"></div>
+                                        </div>
+                                    </div>
+                                </div>-->
                 <div class="ui left demo vertical inverted sidebar labeled icon menu">
                     <nav class="ui labeled small icon borderless menu centered grid inverted grey secondary">
                         <ui:repeat value="#{categoriaBean.categorias}" var="categoria" varStatus="status">
