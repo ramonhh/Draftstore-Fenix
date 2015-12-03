@@ -82,12 +82,12 @@ public class Produto implements Serializable {
     private BigDecimal percentualLucro;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 200)
     @Column(name = "MODELO")
     private String modelo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 200)
     @Column(name = "MARCA")
     private String marca;
     @Basic(optional = false)
@@ -98,7 +98,7 @@ public class Produto implements Serializable {
     @NotNull
     @Column(name = "QUANTIDADE")
     private int quantidade;
-    @Size(max = 250)
+    @Size(max = 1000)
     @Column(name = "CAMINHO_IMAGEM")
     private String caminhoImagem;
     @Size(max = 3000)
