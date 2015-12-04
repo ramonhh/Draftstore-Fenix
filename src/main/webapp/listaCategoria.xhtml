@@ -89,12 +89,15 @@ class="ui primary button">Ver mais detalhes</div>
                                                     </div>
                                                 </h:panelGrid>
                                                 <h:panelGrid rendered="#{not item.dataValida}">
+                                                    <br/>
+                                                    <br/>
                                                     Por
                                                     <div class="label">
                                                         R$
                                                     </div>
                                                     <div class="value">
                                                         <h:outputText value="#{item.precoVenda}">
+                                                            <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
                                                         </h:outputText>
                                                     </div>
                                                 </h:panelGrid>

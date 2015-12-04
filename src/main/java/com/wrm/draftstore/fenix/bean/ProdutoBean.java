@@ -7,12 +7,10 @@ package com.wrm.draftstore.fenix.bean;
 
 import com.wrm.draftstore.common.entidades.Categoria;
 import com.wrm.draftstore.common.entidades.Produto;
-import com.wrm.draftstore.common.entidades.ProdutoBusca;
 import com.wrm.draftstore.common.service.ProdutoService;
 import com.wrm.draftstore.common.service.jpaimpl.ProdutoServiceJPAImpl;
 import java.io.IOException;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
@@ -41,7 +40,7 @@ public class ProdutoBean implements Serializable {
 //  private List<Produto> ofertasSemana = new ProdutoServiceFakeImpl().listar(0, 10);
     // Produtos JPA
     private ProdutoService produtoService = new ProdutoServiceJPAImpl();
-    private List<Produto> ofertasSemana = produtoService.listar(0, 10);
+    private List<Produto> ofertasSemana;
     private String textoDeBusca = "";
     private Map<String, Produto> mapaProdutosBusca;
 
@@ -53,19 +52,19 @@ public class ProdutoBean implements Serializable {
         System.out.println("PRODUTO DETALHE: " + this.produtoDetalhe.getModelo());
         return "detalhe?faces-redirect=true";
     }
-    
+
     public void carregarDetalhesBusca(Produto p) {
         this.produtoDetalhe = p;
         System.out.println("PRODUTO DETALHE: " + this.produtoDetalhe.getModelo());
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("detalhe?id="+this.produtoDetalhe.getIdProduto());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("detalhe?id=" + this.produtoDetalhe.getIdProduto());
         } catch (IOException ex) {
             Logger.getLogger(ProdutoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-
     public List<Produto> getOfertasSemana() {
+        this.ofertasSemana = produtoService.listar(0, 10);
         return ofertasSemana;
     }
 
@@ -107,25 +106,25 @@ public class ProdutoBean implements Serializable {
     public void setTextoDeBusca(String textoDeBusca) {
         this.textoDeBusca = textoDeBusca;
     }
-    
-    public List<String> completeText(String textoDeBusca){
+
+    public List<String> completeText(String textoDeBusca) {
         List<Produto> listaProdutos = produtoService.obterPorParteDoNome(textoDeBusca, 0, 5);
         List<String> listaString = new ArrayList<>();
         this.mapaProdutosBusca = new HashMap<>();
-        
+
         for (Produto p : listaProdutos) {
-            String str = p.getMarca()+" "+p.getModelo();
+            String str = p.getMarca() + " " + p.getModelo();
             listaString.add(str);
             this.mapaProdutosBusca.put(str, p);
         }
-        
+
         return listaString;
-        
+
     }
-    
+
     public void onItemSelect(SelectEvent event) {
         String stringProdutoSelecionado = event.getObject().toString();
-        System.out.println("Um produto foi selecionado: "+stringProdutoSelecionado);
+        System.out.println("Um produto foi selecionado: " + stringProdutoSelecionado);
         Produto produtoSelecionado = this.mapaProdutosBusca.get(stringProdutoSelecionado);
         this.produtoDetalhe = produtoSelecionado;
         try {

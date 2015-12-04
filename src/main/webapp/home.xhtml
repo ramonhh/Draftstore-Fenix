@@ -91,12 +91,15 @@ class="ui primary button">Ver mais detalhes</div>
                                                     </div>
                                                 </h:panelGrid>
                                                 <h:panelGrid rendered="#{not item.dataValida}">
+                                                    <br/>
+                                                    <br/>
                                                     Por
                                                     <div class="label">
                                                         R$
                                                     </div>
                                                     <div class="value">
                                                         <h:outputText value="#{item.precoVenda}">
+                                                            <f:convertNumber type="currency" locale="pt_BR" currencySymbol=""/>
                                                         </h:outputText>
                                                     </div>
                                                 </h:panelGrid>
@@ -106,7 +109,7 @@ class="ui primary button">Ver mais detalhes</div>
                                     <p:commandButton id="teste" styleClass="ui bottom blue attached button addCarrinho"
                                                      value="Adicionar ao carrinho"
                                                      actionListener="#{carrinhoBean.adicionar(item)}"
-                                                     update="labelCarrinho"
+                                                     update="labelCarrinho labelCarrinho2"
                                                      icon="fa fa-fw fa-shopping-cart">
                                     </p:commandButton>
 
