@@ -217,7 +217,7 @@
                                         <div class="header">Cadastrar Endereço</div>
                                         <div class="ui basic segment">
                                             <h:form class="ui form " id="formEndereco" >
-                                                <div class="iu field">
+                                                <div class="ui field">
                                                     <label>CEP</label>
                                                     <div class="ui input">
                                                         <!--<input type="text" />-->
@@ -293,7 +293,12 @@
                                         <div class="ui basic segment">
                                             <h:form class="ui form" id="formAlterarEndereco">  
                                                 <div class="iu field">
-                                                    <label>CEP</label>                                                    <div class="ui input">                                                        <h:inputText id="cep" value="#{enderecoBean.enderecoSelecionado.cep}"/>
+                                                    <label>CEP</label>                                                    
+                                                    <div class="ui input">                                                        
+                                                      <p:inputText id="cep" value="#{enderecoBean.enderecoSelecionado.cep}" 
+                                                                   onchange="alterarEndereco()">
+                                                        <p:ajax event="change" update="formAlterarEndereco" process="@this" partialSubmit="true"/>
+                                                      </p:inputText>
                                                     </div>
                                                 </div>
                                                 <div class="ui two fields">      
